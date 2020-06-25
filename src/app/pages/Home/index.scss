@@ -1,0 +1,9 @@
+.Home {
+  display: flex;
+  border-left: 1px solid var(--grey);
+  border-right: 1px solid var(--grey);
+  width: 975px;
+  height: 100%;
+  margin: auto;
+  flex-grow: 1;
+}

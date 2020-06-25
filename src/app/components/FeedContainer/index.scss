@@ -1,0 +1,11 @@
+.FeedContainer {
+  position: relative;
+  width: 618px;
+  margin-right: 24px;
+  height: 100%;
+  // background-color: blue;
+  display: flex;
+  flex-direction: column;
+  top: 56px;
+  border: 1px solid var(--grey);
+}

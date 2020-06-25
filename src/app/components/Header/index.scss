@@ -1,0 +1,46 @@
+.Header {
+  height: 70px;
+  width: 100%;
+  background-color: var(--white);
+  border-bottom: 1px solid rgb(200, 200, 200);
+  .Navbar {
+    margin: auto;
+    // background-color: green;
+    width: 975px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    //Temp
+    border-left: 1px solid rgb(200, 200, 200);
+    border-right: 1px solid rgb(200, 200, 200);
+    .Logo {
+      text-decoration: none;
+      font-weight: 600;
+      color: var(--black);
+      margin: 0;
+      padding: 0;
+      font-size: 24px;
+      line-height: 100%;
+    }
+    .NavigationLinks {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .NavIcon {
+        margin-left: 20px;
+        height: 24px;
+        width: 24px;
+      }
+    }
+  }
+}
+
+#userPictureNavbar {
+  box-sizing: border-box;
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  border: 1px solid rgba(19, 19, 19, 0.856);
+  cursor: pointer;
+}

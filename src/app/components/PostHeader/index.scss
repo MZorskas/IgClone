@@ -1,0 +1,40 @@
+.PostHeader {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 60px;
+  border-bottom: solid 1px rgb(200, 200, 200);
+  .PostAvatar {
+    margin-left: 12px;
+    padding: 0;
+    height: 45px;
+    width: 45px;
+    img {
+      height: 100%;
+      width: 100%;
+      box-sizing: border-box;
+      border-radius: 50%;
+      border: solid 1px rgb(200, 200, 200);
+    }
+  }
+  .PostUsername {
+    font-size: 14px;
+    text-decoration: none;
+    color: black;
+    font-weight: 600;
+    padding-left: 10px;
+  }
+}
+.postFileContainer {
+  width: 100%;
+
+  img {
+    width: 100%;
+  }
+  // display: flex;
+  // align-items: center;
+  // justify-content: center;
+  // font-weight: bold;
+  // color: #cccccc;
+}
