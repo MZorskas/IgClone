@@ -2,9 +2,6 @@ import React, { useEffect, useState, useCallback } from 'react';
 import './index.scss';
 import { Link, useHistory } from 'react-router-dom';
 
-//Components
-import FeedContainer from '../../components/FeedContainer';
-
 function Home() {
   const [token, setToken] = useState(localStorage.getItem('x-auth-IG'));
   const history = useHistory();
@@ -17,7 +14,9 @@ function Home() {
 
   return (
     <React.Fragment>
-      <div className="Home">{/* <FeedContainer /> */}</div>
+      <div className="Home">
+        <h1>HOME</h1>
+      </div>
     </React.Fragment>
   );
 }
