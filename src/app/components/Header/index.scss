@@ -1,12 +1,12 @@
 .Header {
-  height: 70px;
+  height: 54px;
   width: 100%;
   background-color: var(--white);
   border-bottom: 1px solid rgb(200, 200, 200);
   .Navbar {
     margin: auto;
     // background-color: green;
-    width: 975px;
+    max-width: 975px;
     height: 100%;
     display: flex;
     align-items: center;
@@ -22,6 +22,16 @@
       padding: 0;
       font-size: 24px;
       line-height: 100%;
+    }
+    input {
+      background-color: rgba(232, 230, 230, 0.3);
+      border: 1px solid rgb(200, 200, 200);
+      border-radius: 4px;
+      height: 24px;
+      text-align: center;
+      &:focus {
+        outline: 1px solid rgb(0, 149, 246);
+      }
     }
     .NavigationLinks {
       display: flex;

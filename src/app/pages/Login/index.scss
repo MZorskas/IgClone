@@ -10,46 +10,38 @@
     width: 350px;
     height: 380px;
     background-color: var(--white);
-    justify-content: center;
     display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     margin-bottom: 10px;
     border: 1px solid rgb(200, 200, 200);
     form {
       position: relative;
-      width: 250px;
+      width: 100%;
       display: flex;
       flex-direction: column;
-      margin: auto;
+      text-align: center;
+      padding: 6px 40px;
+      height: 170px;
       .passwordVisibility {
         position: absolute;
-        right: 10px;
+        right: 50px;
         top: 55px;
         font-size: 14px;
+        cursor: pointer;
       }
       input {
-        background-color: rgb(235, 235, 235);
+        background-color: rgba(232, 230, 230, 0.3);
         border: 1px solid rgb(200, 200, 200);
         border-radius: 4px;
         margin-bottom: 6px;
         height: 36px;
+        padding-left: 10px;
         &:focus {
           outline: 1px solid rgb(0, 149, 246);
         }
       }
-      .btn {
-        margin-bottom: 12px;
-        margin-top: 12px;
-        background-color: rgba(0, 149, 246, 0.3);
-        color: white;
-        border: none;
-      }
     }
-  }
-  .LinkBox {
-    text-align: center;
-    width: 350px;
-    height: 100%;
-    background-color: var(--white);
-    border: 1px solid rgb(200, 200, 200);
   }
 }

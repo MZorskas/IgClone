@@ -1,13 +1,12 @@
 import React from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import './index.scss';
 import Header from '../Header';
 import Footer from '../Footer';
 
 function PageLayout({ children }) {
-  const history = useHistory();
   const location = useLocation();
-  console.log('PageLayout', location);
+  // console.log('PageLayout', location);
   return (
     <React.Fragment>
       <div className="App">

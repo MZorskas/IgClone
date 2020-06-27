@@ -7,6 +7,17 @@
   --modal: rgba(34, 34, 34, 0.7);
 }
 
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+*:focus {
+  outline: none;
+  outline: 1px solid rgb(0, 149, 246);
+}
+
 .App {
   display: flex;
   flex-direction: column;
@@ -25,10 +36,31 @@
 p {
   font-size: 14px;
 }
+
 .link {
   text-decoration: none;
   color: rgb(0, 149, 246);
   font-weight: 600;
   font-size: 14px;
   padding: 0px 5px;
+}
+
+.btn {
+  border: 1px solid var(--grey);
+  border-radius: 4px;
+  margin: 6px 0px;
+  height: 36px;
+  transition: border-color 0.5s ease-out;
+  background-color: var(--blue);
+  color: white;
+  border: none;
+  cursor: pointer;
+  &:focus {
+    outline: none;
+  }
+}
+
+.btn-light {
+  opacity: 0.4;
+  cursor: not-allowed;
 }

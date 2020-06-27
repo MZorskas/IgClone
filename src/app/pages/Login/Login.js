@@ -1,61 +1,69 @@
-import React, { useEffect, useState, useCallback } from 'react';
-import './index.scss';
+import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import './index.scss';
+
+// Redux
+import { bindActionCreators } from 'redux';
+import { useSelector, useDispatch } from 'react-redux';
+
+//State Modules
+import authentication from '../../../authentication';
 
 function Login() {
-  const [token, setToken] = useState(localStorage.getItem('x-auth-IG'));
-  const [email, setEmail] = useState('');
+  const history = useHistory();
+
+  // Dispatch
+  const dispatch = useDispatch();
+  const loginUser = bindActionCreators(
+    authentication.actions.loginUser,
+    dispatch
+  );
+
+  // Selectors
+  const isAuthorized = useSelector(authentication.selectors.isAuthorized);
+  const error = useSelector(authentication.selectors.getLoginError);
+  const loading = useSelector(authentication.selectors.isLoginLoading);
+
+  // Login State
+  const [UniqueValue, setUniqueValue] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  console.log('login', { password, email });
-  const history = useHistory();
+
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
   const handleSubmit = (e) => {
+    let body = {};
     e.preventDefault();
-    if (!email || !password) {
+    if (!UniqueValue || !password) {
       return console.log('Please fill in both the fields');
     }
 
-    login(email, password);
+    if (UniqueValue.includes('@')) {
+      console.log('this is email ' + UniqueValue);
+      body.email = UniqueValue;
+      body.password = password;
+    } else if (parseFloat(UniqueValue)) {
+      console.log('this is phoneNumer ' + UniqueValue);
+      body.phoneNumber = UniqueValue;
+      body.password = password;
+    } else {
+      console.log('this is username ' + UniqueValue);
+      body.username = UniqueValue;
+      body.password = password;
+    }
+
+    loginUser(body);
   };
 
   useEffect(() => {
-    if (token) {
-      history.replace('/');
+    if (isAuthorized) {
+      history.replace(
+        history.location.state ? history.location.state.referrer.pathname : '/'
+      );
     }
-  }, [token]);
-
-  const login = useCallback(() => {
-    fetch('http://localhost:3001/v1/user/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email: email,
-        password: password,
-      }),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw console.log('Wrong credentials!');
-        }
-        console.log(response.headers.get('x-auth-IG'));
-        setToken(response.headers.get('x-auth-IG'));
-        localStorage.setItem('x-auth-IG', response.headers.get('x-auth-IG'));
-        return response.json();
-      })
-      .then((response) => {
-        console.log('loginFetch', response);
-        history.replace('/');
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }, [email, password]);
+  }, [isAuthorized, history]);
 
   return (
     <React.Fragment>
@@ -63,11 +71,11 @@ function Login() {
         <div className="LoginBox">
           <form onSubmit={handleSubmit}>
             <input
-              type="email"
-              placeholder="Email"
-              value={email}
+              type="text"
+              placeholder="Email, phone number or username"
+              value={UniqueValue}
               onChange={(event) => {
-                setEmail(event.target.value);
+                setUniqueValue(event.target.value);
               }}
               autoFocus
               required
@@ -82,13 +90,19 @@ function Login() {
               }}
               required
             />
-            <input type="submit" value="Log in" className="btn" />
+            <button
+              type="submit"
+              className={!UniqueValue || !password ? 'btn btn-light' : 'btn'}
+            >
+              {loading ? 'Loading...' : 'Login'}
+            </button>
             <span
               className="passwordVisibility"
               onClick={togglePasswordVisibility}
             >
               {showPassword ? 'Hide' : 'Show'}
             </span>
+            {!!error && <p style={{ color: 'red' }}>{error}</p>}
           </form>
         </div>
         <div className="LinkBox">

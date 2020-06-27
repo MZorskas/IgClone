@@ -1,16 +1,20 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect } from 'react';
 import './index.scss';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import authentication from '../../../authentication';
 
 function Home() {
-  const [token, setToken] = useState(localStorage.getItem('x-auth-IG'));
+  const isAuthorized = useSelector(authentication.selectors.isAuthorized);
+
+  // const [token, setToken] = useState(localStorage.getItem('x-auth-IG'));
   const history = useHistory();
 
   useEffect(() => {
-    if (!token) {
+    if (!isAuthorized) {
       history.replace('/login');
     }
-  }, [token]);
+  }, [isAuthorized, history]);
 
   return (
     <React.Fragment>

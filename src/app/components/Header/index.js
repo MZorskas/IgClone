@@ -1,32 +1,30 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React from 'react';
 import './index.scss';
-import { Link, useHistory, useLocation } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+import { Link, useLocation } from 'react-router-dom';
 import { HomeIcon, HomeFilledIcon, NewPost } from '../icons';
+import { useSelector, useDispatch } from 'react-redux';
+import authentication from '../../../authentication';
 
 function Header() {
   const location = useLocation();
-  const history = useHistory();
+  // Dispatch
+  const dispatch = useDispatch();
+  const logoutUser = bindActionCreators(
+    authentication.actions.logoutUser,
+    dispatch
+  );
 
-  const logout = useCallback(() => {
-    fetch('http://localhost:3001/v1/user/logout', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-auth-IG': localStorage.getItem('x-auth-IG'),
-      },
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw response;
-        }
-        localStorage.clear();
-        console.log('token removed');
-        history.replace('/login');
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }, [history]);
+  // Selectors
+  const isAuthorized = useSelector(authentication.selectors.isAuthorized);
+  // const error = useSelector(authentication.selectors.getLogoutError);
+  // const loading = useSelector(authentication.selectors.isLogoutLoading);
+
+  console.log('Header', isAuthorized);
+
+  const handleLogout = () => {
+    logoutUser(isAuthorized);
+  };
 
   return (
     <header className="Header">
@@ -34,6 +32,14 @@ function Header() {
         <Link to="/" className="Logo">
           INSTAGRAM CLONE
         </Link>
+        <input
+          type="text"
+          placeholder="Search"
+          defaultValue=""
+          onChange={() => {
+            alert('not Working');
+          }}
+        />
         <div className="NavigationLinks">
           <Link to="/" className="NavIcon">
             {location.pathname === '/' ? <HomeFilledIcon /> : <HomeIcon />}
@@ -42,9 +48,13 @@ function Header() {
             <NewPost />
           </Link>
           <Link to="/profile" className="NavIcon">
-            <img className="profilePicture" id="userPictureNavbar" />
+            <img
+              className="profilePicture"
+              alt="profilePicture"
+              id="userPictureNavbar"
+            />
           </Link>
-          <Link to="/" className="NavIcon" onClick={logout}>
+          <Link to="/" className="NavIcon" onClick={handleLogout}>
             <NewPost />
           </Link>
         </div>

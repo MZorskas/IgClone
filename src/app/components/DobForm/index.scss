@@ -1,0 +1,51 @@
+.DateOfBirthFormBox {
+  width: 350px;
+  height: 380px;
+  background-color: var(--white);
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  border: 1px solid var(--grey);
+  text-align: center;
+  h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 10px;
+  }
+  h6 {
+    font-size: 14px;
+    font-weight: 400;
+  }
+  span {
+    color: var(--blue);
+    font-size: 14px;
+    font-weight: 600;
+    margin: 10px;
+  }
+  .DateOfBirthForm {
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    margin: 0px 40px;
+    .dateContainer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 80px;
+      margin: 6px 40px;
+      .dateSelect {
+        width: 60px;
+        background-color: var(--white);
+        border: 1px solid var(--grey);
+        height: 30px;
+        border-radius: 5px;
+        color: rgb(100, 100, 100);
+        margin: 5px;
+        &:focus {
+          outline: 1px solid var(--blue);
+        }
+      }
+    }
+  }
+}
