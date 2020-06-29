@@ -12,6 +12,8 @@ import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
 import Home from './pages/Home/Home';
 import NotFound from './pages/NotFound/NotFound';
+import Profile from './pages/Profile/Profile';
+import Explore from './pages/Explore/Explore';
 
 function App() {
   return (
@@ -26,6 +28,15 @@ function App() {
           </Route>
           <Route exact path="/register">
             <Register />
+          </Route>
+          <Route exact path="/explore">
+            <Explore />
+          </Route>
+          <Route exact path="/:username">
+            <Profile />
+          </Route>
+          <Route exact path="/:username/saved/">
+            <Profile />
           </Route>
           <Route exact path="*">
             <NotFound />

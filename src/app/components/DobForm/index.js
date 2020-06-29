@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import './index.scss';
 import DropdownDate from 'react-dropdown-date';
 
+// Component
+import Button from '../../components/Button';
+
 // Date formatting
 const formatDate = (date) => {
   var d = new Date(date),
@@ -101,11 +104,16 @@ function DateOfBirthForm({ prevStep, body, setBody, handleSubmit, error }) {
               }
             }
           />
-          <input
+
+          <Button
             type="submit"
-            value="Register"
-            className={!day || !month || !year ? 'btn btn-light' : 'btn'}
-          />
+            buttonStyle={
+              !day || !month || !year ? 'btn--light--solid' : 'btn--blue--solid'
+            }
+            required={!day || !month || (!year && true)}
+          >
+            Register
+          </Button>
           <span
             onClick={() => {
               prevStep();

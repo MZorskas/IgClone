@@ -5,6 +5,9 @@ import './index.scss';
 // Regular expressions
 import { emailRegex, fullNameRegEx, usernameRegEx } from '../../utils/regex';
 
+//Components
+import Button from '../Button';
+
 function RegisterForm({ nextStep, setBody, body, error, handleSubmit }) {
   // RegisterForm state
   const [email, setEmail] = useState(body.email);
@@ -129,16 +132,24 @@ function RegisterForm({ nextStep, setBody, body, error, handleSubmit }) {
               setRepeatPassword(event.target.value);
             }}
           />
-          <button
+          <Button
             type="submit"
-            className={
+            buttonStyle={
               !email || !username || !fullName || !password || !repeatPassword
-                ? 'btn btn-light'
-                : 'btn'
+                ? 'btn--light--solid'
+                : 'btn--blue--solid'
+            }
+            required={
+              !email ||
+              !username ||
+              !fullName ||
+              !password ||
+              (!repeatPassword && true)
             }
           >
             Next
-          </button>
+          </Button>
+
           {validationError && <p style={{ color: 'red' }}>{error}</p>}
         </form>
       </div>

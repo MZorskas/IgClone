@@ -1,0 +1,47 @@
+.ProfileHeader {
+  box-sizing: border-box;
+  width: 935px;
+  height: 160px;
+  border: 1px solid rgb(200, 200, 200);
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 40px;
+  .ProfileUser {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    .ProfileAvatarContainer {
+      box-sizing: border-box;
+      width: 300px;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      border-right: 1px solid rgb(200, 200, 200);
+      margin-right: 25px;
+      input {
+        display: none;
+      }
+      #ProfilePictureInput {
+        width: 200px;
+        height: 50px;
+      }
+      label {
+        height: 100%;
+        width: 150px;
+        cursor: pointer;
+      }
+      img {
+        border-radius: 50%;
+        height: 150px;
+        width: 150px;
+        border: 1px solid var(--grey);
+      }
+    }
+    .ProfileInfo {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+  }
+}

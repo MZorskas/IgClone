@@ -9,6 +9,8 @@ import { useSelector, useDispatch } from 'react-redux';
 //State Modules
 import authentication from '../../../authentication';
 
+//Components
+import Button from '../../components/Button';
 function Login() {
   const history = useHistory();
 
@@ -90,12 +92,17 @@ function Login() {
               }}
               required
             />
-            <button
+            <Button
               type="submit"
-              className={!UniqueValue || !password ? 'btn btn-light' : 'btn'}
+              buttonStyle={
+                !UniqueValue || !password
+                  ? 'btn--light--solid'
+                  : 'btn--blue--solid'
+              }
+              required={!UniqueValue || (!password && true)}
             >
               {loading ? 'Loading...' : 'Login'}
-            </button>
+            </Button>
             <span
               className="passwordVisibility"
               onClick={togglePasswordVisibility}

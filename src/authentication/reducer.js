@@ -2,6 +2,18 @@ import * as types from './types';
 
 const DEFAULT_AUTHENTICATION_STATE = {
   token: localStorage.getItem('x-auth-IG'),
+  activeUser: {
+    _id: '',
+    email: '',
+    username: '',
+    fullName: '',
+    phoneNumber: '',
+    dateOfBirth: '',
+    createdAt: '',
+    profilePicture: '',
+    following: [],
+    followers: [],
+  },
   login: {
     error: null,
     loading: false,
@@ -30,6 +42,18 @@ function authentication(state = DEFAULT_AUTHENTICATION_STATE, action) {
     case types.USER_LOGIN_SUCCESS: {
       return {
         ...state,
+        activeUser: {
+          _id: action.payload._id,
+          email: action.payload.email,
+          username: action.payload.username,
+          fullName: action.payload.fullName,
+          phoneNumber: action.payload.phoneNumber,
+          dateOfBirth: action.payload.dateOfBirth,
+          createdAt: action.payload.createdAt,
+          profilePicture: action.payload.profilePicture,
+          following: action.payload.following,
+          followers: action.payload.followers,
+        },
         token: action.payload.tokens.slice(-1)[0].token,
         login: {
           ...state.login,
@@ -69,6 +93,18 @@ function authentication(state = DEFAULT_AUTHENTICATION_STATE, action) {
       return {
         ...state,
         token: null,
+        activeUser: {
+          _id: null,
+          email: null,
+          username: null,
+          fullName: null,
+          phoneNumber: null,
+          dateOfBirth: null,
+          createdAt: null,
+          profilePicture: null,
+          following: [],
+          followers: [],
+        },
         logout: {
           ...state.logout,
           loading: false,
@@ -78,6 +114,7 @@ function authentication(state = DEFAULT_AUTHENTICATION_STATE, action) {
     case types.USER_REGISTER_REQUEST: {
       return {
         ...state,
+        activeUser: null,
         register: {
           error: null,
           loading: true,
@@ -96,10 +133,28 @@ function authentication(state = DEFAULT_AUTHENTICATION_STATE, action) {
     case types.USER_REGISTER_SUCCESS: {
       return {
         ...state,
+        activeUser: action.payload,
         token: action.payload.tokens.slice(-1)[0].token,
         register: {
           ...state.register,
           loading: false,
+        },
+      };
+    }
+    case types.USER_AVATAR_REQUEST: {
+      return { ...state };
+    }
+    case types.USER_AVATAR_FAILURE: {
+      return {
+        ...state,
+      };
+    }
+    case types.USER_AVATAR_SUCCESS: {
+      return {
+        ...state,
+        activeUser: {
+          ...state.activeUser,
+          profilePicture: action.payload.profilePicture,
         },
       };
     }

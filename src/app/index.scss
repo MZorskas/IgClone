@@ -4,7 +4,7 @@
   --white: #fafafa;
   --blue: #0095f6;
   --grey: #c8c8c8;
-  --modal: rgba(34, 34, 34, 0.7);
+  // --modal: rgba(34, 34, 34, 0.7);
 }
 
 * {
@@ -15,7 +15,6 @@
 
 *:focus {
   outline: none;
-  outline: 1px solid rgb(0, 149, 246);
 }
 
 .App {
@@ -27,7 +26,7 @@
     display: flex;
     flex-direction: column;
     flex: 1;
-    background-color: var(--white);
+    background-color: var(--background);
     // background-color: #464646;
     // background-image: linear-gradient(19deg, #464646 0%, #cecece 100%);
   }
@@ -45,22 +44,17 @@ p {
   padding: 0px 5px;
 }
 
-.btn {
-  border: 1px solid var(--grey);
-  border-radius: 4px;
-  margin: 6px 0px;
-  height: 36px;
-  transition: border-color 0.5s ease-out;
-  background-color: var(--blue);
-  color: white;
-  border: none;
-  cursor: pointer;
-  &:focus {
-    outline: none;
-  }
-}
-
-.btn-light {
-  opacity: 0.4;
-  cursor: not-allowed;
-}
+// .btn {
+//   border: 1px solid var(--grey);
+//   border-radius: 4px;
+//   margin: 6px 0px;
+//   height: 36px;
+//   transition: border-color 0.5s ease-out;
+//   background-color: var(--blue);
+//   color: white;
+//   border: none;
+//   cursor: pointer;
+//   &:focus {
+//     outline: none;
+//   }
+// }

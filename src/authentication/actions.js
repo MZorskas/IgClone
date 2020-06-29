@@ -45,3 +45,18 @@ export const registerUser = (body) =>
       types.USER_REGISTER_FAILURE,
     ],
   });
+
+export const uploadProfilePicture = (formData, token) =>
+  createAction({
+    endpoint: 'http://localhost:3001/v1/user/changeProfilePicture',
+    method: 'POST',
+    headers: {
+      'x-auth-IG': token,
+    },
+    body: formData,
+    types: [
+      types.USER_AVATAR_REQUEST,
+      types.USER_AVATAR_SUCCESS,
+      types.USER_AVATAR_FAILURE,
+    ],
+  });

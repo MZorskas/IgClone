@@ -15,7 +15,8 @@ function PageLayout({ children }) {
         <main className="main">{children}</main>
         {location.pathname !== '/login' &&
           location.pathname !== '/register' &&
-          location.pathname !== '/' && <Footer />}
+          location.pathname !== '/' &&
+          location.pathname !== '/explore' && <Footer />}
       </div>
     </React.Fragment>
   );

@@ -1,0 +1,30 @@
+.ProfileNavigation {
+  width: 100%;
+  height: 50px;
+  border-top: 1px solid var(--grey);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  .Tab {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    height: 50px;
+    vertical-align: baseline;
+    margin: 0 25px;
+    margin-top: -1px;
+    align-items: center;
+    text-decoration: none;
+    color: var(--grey);
+    font-size: 12px;
+    text-transform: uppercase;
+    cursor: pointer;
+    .Icon {
+      margin-right: 10px;
+    }
+  }
+  .Tab--Active {
+    color: var(--black);
+    border-top: 1px solid var(--black);
+  }
+}

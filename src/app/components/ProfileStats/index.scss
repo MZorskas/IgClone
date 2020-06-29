@@ -1,0 +1,16 @@
+.ProfileStats {
+  margin-bottom: 20px;
+  ul {
+    list-style: none;
+    justify-content: flex-start;
+    padding: 0;
+    display: flex;
+    li {
+      font-size: 16px;
+      margin-right: 40px;
+    }
+    .StatsLink {
+      cursor: pointer;
+    }
+  }
+}

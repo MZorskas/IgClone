@@ -1,4 +1,6 @@
 import authentication from '../../../authentication';
+import users from '../../../users';
+import feed from '../../../feed';
 import history from '../../components/history';
 
 const authHandling = ({ dispatch, getState }) => (next) => (action) => {
