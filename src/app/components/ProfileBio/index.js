@@ -1,9 +1,6 @@
 import React from 'react';
 import './index.scss';
-import { bindActionCreators } from 'redux';
 import { Link, useLocation } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import authentication from '../../../authentication';
 
 function ProfileBio({ fullName }) {
   const location = useLocation();

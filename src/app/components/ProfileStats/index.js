@@ -1,10 +1,6 @@
 import React from 'react';
 import './index.scss';
-import { bindActionCreators } from 'redux';
-import { Link, useLocation } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
 import authentication from '../../../authentication';
-import Button from '../Button';
 
 function ProfileStats({ followers, following }) {
   console.log('ProfileStats', { followers, following });

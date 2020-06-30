@@ -3,7 +3,7 @@ import * as types from './types';
 const DEFAULT_AUTHENTICATION_STATE = {
   token: localStorage.getItem('x-auth-IG'),
   activeUser: {
-    _id: '',
+    _id: null,
     email: '',
     username: '',
     fullName: '',
@@ -71,6 +71,47 @@ function authentication(state = DEFAULT_AUTHENTICATION_STATE, action) {
         },
       };
     }
+    case types.USER_LOGIN_STORAGE_REQUEST: {
+      return {
+        ...state,
+        login: {
+          error: null,
+          loading: true,
+        },
+      };
+    }
+    case types.USER_LOGIN_STORAGE_SUCCESS: {
+      return {
+        ...state,
+        activeUser: {
+          _id: action.payload._id,
+          email: action.payload.email,
+          username: action.payload.username,
+          fullName: action.payload.fullName,
+          phoneNumber: action.payload.phoneNumber,
+          dateOfBirth: action.payload.dateOfBirth,
+          createdAt: action.payload.createdAt,
+          profilePicture: action.payload.profilePicture,
+          following: action.payload.following,
+          followers: action.payload.followers,
+        },
+        token: action.payload.tokens.slice(-1)[0].token,
+        login: {
+          ...state.login,
+          loading: false,
+        },
+      };
+    }
+    case types.USER_LOGIN_STORAGE_FAILURE: {
+      console.log(action);
+      return {
+        ...state,
+        login: {
+          loading: false,
+          error: action.payload.response,
+        },
+      };
+    }
     case types.USER_LOGOUT_REQUEST: {
       return {
         ...state,
@@ -95,13 +136,13 @@ function authentication(state = DEFAULT_AUTHENTICATION_STATE, action) {
         token: null,
         activeUser: {
           _id: null,
-          email: null,
-          username: null,
-          fullName: null,
-          phoneNumber: null,
-          dateOfBirth: null,
-          createdAt: null,
-          profilePicture: null,
+          email: '',
+          username: '',
+          fullName: '',
+          phoneNumber: '',
+          dateOfBirth: '',
+          createdAt: '',
+          profilePicture: '',
           following: [],
           followers: [],
         },
@@ -114,7 +155,6 @@ function authentication(state = DEFAULT_AUTHENTICATION_STATE, action) {
     case types.USER_REGISTER_REQUEST: {
       return {
         ...state,
-        activeUser: null,
         register: {
           error: null,
           loading: true,
@@ -133,7 +173,18 @@ function authentication(state = DEFAULT_AUTHENTICATION_STATE, action) {
     case types.USER_REGISTER_SUCCESS: {
       return {
         ...state,
-        activeUser: action.payload,
+        activeUser: {
+          _id: action.payload._id,
+          email: action.payload.email,
+          username: action.payload.username,
+          fullName: action.payload.fullName,
+          phoneNumber: action.payload.phoneNumber,
+          dateOfBirth: action.payload.dateOfBirth,
+          createdAt: action.payload.createdAt,
+          profilePicture: action.payload.profilePicture,
+          following: action.payload.following,
+          followers: action.payload.followers,
+        },
         token: action.payload.tokens.slice(-1)[0].token,
         register: {
           ...state.register,

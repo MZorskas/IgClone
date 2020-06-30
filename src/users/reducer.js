@@ -25,7 +25,6 @@ function users(state = DEFAULT_USERS_STATE, action) {
     }
 
     case types.SINGLE_USER_FAILURE: {
-      console.log(action);
       return {
         ...state,
         loading: false,

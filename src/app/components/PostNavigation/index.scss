@@ -1,0 +1,35 @@
+.PostNavigation {
+  border-bottom: 1px solid var(--grey);
+  height: 90px;
+  padding: 0px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  a {
+    text-decoration: none;
+  }
+  .PostActions {
+    width: 100%;
+    display: flex;
+
+    .PostIcon {
+      padding: 0px 5px;
+      &:last-child {
+        margin-left: auto;
+      }
+    }
+  }
+  .PostLikes {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 18px;
+  }
+  .PostDate {
+    .Date {
+      font-size: 12px;
+      color: var(--grey);
+      text-transform: uppercase;
+    }
+  }
+}

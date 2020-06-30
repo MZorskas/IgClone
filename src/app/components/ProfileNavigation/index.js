@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import './index.scss';
-import { bindActionCreators } from 'redux';
 import { Link, useLocation } from 'react-router-dom';
 import {
-  SavedIcon,
+  SavedIcon12,
   PostsIcon,
-  SavedIconActive,
+  SavedIconActive12,
   PostsIconActive,
 } from '../icons';
 import { useSelector, useDispatch } from 'react-redux';
@@ -15,7 +14,12 @@ import Modal from '../Modal';
 
 function ProfileNavigation({ username }) {
   const location = useLocation();
-  console.log('ProfileNavigation', location);
+  // console.log('ProfileNavigation', location);
+
+  //Selectors
+  const activeUser = useSelector(authentication.selectors.getActiveUser);
+
+  //Modal
   const [showModal, setShowModal] = useState(false);
 
   const openModal = () => {
@@ -25,7 +29,6 @@ function ProfileNavigation({ username }) {
     setShowModal(false);
   };
 
-  //   const checkButtonSize = SIZES.includes(buttonSize) ? buttonSize : SIZES[0];
   return (
     <div className="ProfileNavigation">
       <Link
@@ -41,43 +44,23 @@ function ProfileNavigation({ username }) {
         )}
         Posts
       </Link>
-      <Link
-        className={
-          location.pathname === `/${username}/saved` ? 'Tab Tab--Active' : 'Tab'
-        }
-        to={{ pathname: `/${username}/saved` }}
-      >
-        {location.pathname === `/${username}` ? (
-          <SavedIconActive />
-        ) : (
-          <SavedIcon />
-        )}
-        Saved
-      </Link>
-      {/* <button
-        onClick={() => {
-          openModal();
-        }}
-      >
-        Show Modal
-      </button>
-      <Modal closeModal={closeModal} showModal={showModal}>
-        <Button buttonStyle={'btn--white--solid'} modal>
-          Change Profile Picture
-        </Button>
-        <Button buttonStyle={'btn--white--solid'} modal>
-          Change Password
-        </Button>
-        <Button buttonStyle={'btn--white--solid'} modal>
-          Edit Bio
-        </Button>
-        <Button buttonStyle={'btn--white--solid'} modal>
-          Log Out
-        </Button>
-        <Button buttonStyle={'btn--white--solid'} onClick={closeModal} modal>
-          Cancel
-        </Button>
-      </Modal> */}
+      {username === activeUser.username && (
+        <Link
+          className={
+            location.pathname === `/${username}/saved`
+              ? 'Tab Tab--Active'
+              : 'Tab'
+          }
+          to={{ pathname: `/${username}/saved` }}
+        >
+          {location.pathname === `/${username}` ? (
+            <SavedIconActive12 />
+          ) : (
+            <SavedIcon12 />
+          )}
+          Saved
+        </Link>
+      )}
     </div>
   );
 }

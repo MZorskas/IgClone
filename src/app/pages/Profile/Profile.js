@@ -23,6 +23,8 @@ function Profile() {
   const user = useSelector((state) =>
     users.selectors.isUserFetched(state, username)
   );
+  const isAuthorized = useSelector(authentication.selectors.isAuthorized);
+  const token = useSelector(authentication.selectors.token);
   const error = useSelector(users.selectors.getSingleUserError);
   const [profileUser, setprofileUser] = useState({});
 
@@ -31,6 +33,11 @@ function Profile() {
   //     fetchUser(username);
   //   }
   // }, []);
+  useEffect(() => {
+    if (!isAuthorized) {
+      dispatch(authentication.actions.loginUserWithStorage(token));
+    }
+  }, [isAuthorized, authentication, token]);
 
   useEffect(() => {
     if (username === activeUser.username) {
@@ -42,10 +49,10 @@ function Profile() {
     }
   }, [user, fetchUser, username, error, activeUser]);
 
-  console.log('Profile page username', username);
-  console.log('Profile page activeUser', activeUser);
-  console.log('Profile page profileUser', profileUser);
-  console.log('Profile page user', user);
+  // console.log('Profile page username', username);
+  // console.log('Profile page activeUser', activeUser);
+  // console.log('Profile page profileUser', profileUser);
+  // console.log('Profile page user', user);
   // console.log('Profile page profileUser', profileUser);
 
   return (
@@ -55,13 +62,7 @@ function Profile() {
           <NotFound />
         ) : (
           <>
-            <ProfileHeader
-              username={profileUser.username}
-              fullName={profileUser.fullName}
-              following={profileUser.following}
-              followers={profileUser.followers}
-              profilePicture={profileUser.profilePicture}
-            />
+            <ProfileHeader profileUser={profileUser} />
             <ProfileNavigation username={username} />
             <Switch>
               <Route exact path="/:username">

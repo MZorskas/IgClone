@@ -15,26 +15,14 @@ import ProfileStats from '../ProfileStats';
 import ProfileBio from '../ProfileBio';
 import Button from '../Button';
 import Modal from '../Modal';
-function ProfileHeader({
-  username,
-  fullName,
-  followers,
-  following,
-  profilePicture,
-}) {
+
+function ProfileHeader({ profileUser }) {
   // Dispatch
   const dispatch = useDispatch();
-  const updateProfilePicture = bindActionCreators(
-    authentication.actions.uploadProfilePicture,
-    dispatch
-  );
 
   // Selectors
   const activeUser = useSelector(authentication.selectors.getActiveUser);
-  const user = useSelector((state) =>
-    users.selectors.isUserFetched(state, username)
-  );
-  const token = useSelector(authentication.selectors.isAuthorized);
+  const token = useSelector(authentication.selectors.token);
 
   // Modal State
   const [showModal, setShowModal] = useState(false);
@@ -49,12 +37,6 @@ function ProfileHeader({
 
   const selectProfilePicture = (e) => {
     document.getElementById('ProfilePictureInput').click();
-    // if (e.target.files.length == 0 || e.target.files.length > 1) return;
-    // const picture = e.target.files[0];
-    // const formData = new FormData();
-    // formData.append('profilePicture', picture);
-    // console.log(formData);
-    // updateProfilePicture(formData, token);
   };
 
   const changeProfilePicture = (e) => {
@@ -64,22 +46,22 @@ function ProfileHeader({
     const formData = new FormData();
     formData.append('profilePicture', picture);
     console.log(formData);
-    updateProfilePicture(formData, token);
+    dispatch(authentication.actions.uploadProfilePicture(formData, token));
     closePictureModal();
   };
 
   return (
     <header className="ProfileHeader">
-      {!!user && !!activeUser && (
+      {!!profileUser.username && (
         <div className="ProfileUser">
           <div className="ProfileAvatarContainer">
-            {username === activeUser.username ? (
+            {profileUser.username === activeUser.username ? (
               <img
                 className="ProfileAvatar"
                 id="ProfileAvatar"
                 src={
-                  profilePicture
-                    ? profilePicture
+                  profileUser.profilePicture
+                    ? profileUser.profilePicture
                     : 'https://pngimage.net/wp-content/uploads/2018/06/no-user-image-png.png'
                 }
                 onClick={openPictureModal}
@@ -91,19 +73,7 @@ function ProfileHeader({
                 src="https://pngimage.net/wp-content/uploads/2018/06/no-user-image-png.png"
               />
             )}
-            {/* <input
-              id="ProfilePictureInput"
-              type="file"
-              name="profilePicture"
-              onChange={changeProfilePicture}
-            /> */}
             <Modal closeModal={closePictureModal} showModal={showModal}>
-              {/* <label
-                className="btn btn--modal btn--white--solid"
-                htmlFor="ProfilePictureInput"
-              >
-                {' '}
-              </label> */}
               <input
                 id="ProfilePictureInput"
                 type="file"
@@ -133,30 +103,17 @@ function ProfileHeader({
             </Modal>
           </div>
           <div className="ProfileInfo">
-            <ProfileSettings username={username} />
-            <ProfileStats followers={followers} following={following} />
-            <ProfileBio fullName={fullName} />
+            <ProfileSettings username={profileUser.username} />
+            <ProfileStats
+              followers={profileUser.followers}
+              following={profileUser.following}
+            />
+            <ProfileBio fullName={profileUser.fullName} />
           </div>
         </div>
       )}
     </header>
   );
 }
-
-// const enhance = connect(
-//   (state, { username }) => {
-//     console.log('ProfileHeader', state, username);
-//     return {
-//       user: users.selectors.isUserFetched(state, username),
-//     };
-//   },
-//   (dispatch) => {
-//     return {
-//       fetchUser: bindActionCreators(users.actions.fetchSingleUser, dispatch),
-//     };
-//   }
-// );
-
-// export default enhance(ProfileHeader);
 
 export default ProfileHeader;

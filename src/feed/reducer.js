@@ -6,7 +6,7 @@ const DEFAULT_FEED_STATE = {
   error: false,
 };
 
-function users(state = DEFAULT_FEED_STATE, action) {
+function feed(state = DEFAULT_FEED_STATE, action) {
   switch (action.type) {
     case types.CREATE_POST_REQUEST: {
       return {
@@ -33,8 +33,33 @@ function users(state = DEFAULT_FEED_STATE, action) {
       };
     }
 
+    case types.SINGLE_USER_POSTS_REQUEST: {
+      return {
+        ...state,
+        error: null,
+        loading: true,
+      };
+    }
+
+    case types.SINGLE_USER_POSTS_SUCCESS: {
+      return {
+        ...state,
+        loading: false,
+        data: action.payload,
+      };
+    }
+
+    case types.SINGLE_USER_POSTS_FAILURE: {
+      console.log(action);
+      return {
+        ...state,
+        loading: false,
+        error: action.payload.response,
+      };
+    }
+
     default:
       return state;
   }
 }
-export default users;
+export default feed;

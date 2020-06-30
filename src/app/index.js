@@ -14,6 +14,7 @@ import Home from './pages/Home/Home';
 import NotFound from './pages/NotFound/NotFound';
 import Profile from './pages/Profile/Profile';
 import Explore from './pages/Explore/Explore';
+import Post from './pages/Post/Post';
 
 function App() {
   return (
@@ -37,6 +38,9 @@ function App() {
           </Route>
           <Route exact path="/:username/saved/">
             <Profile />
+          </Route>
+          <Route exact path="/p/:postId">
+            <Post />
           </Route>
           <Route exact path="*">
             <NotFound />

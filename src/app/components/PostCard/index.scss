@@ -11,11 +11,11 @@
   //   color: #fff;
   //   cursor: pointer;
   &:hover {
-    background-color: var(--grey);
+    opacity: 0.5;
   }
-  &:last-child {
-    margin-right: auto;
-  }
+  // &:last-child {
+  //   margin-right: (auto);
+  // }
   img {
     object-fit: cover;
     width: 100%;

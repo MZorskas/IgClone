@@ -26,13 +26,14 @@ function Header() {
 
   // Dispatch
   const dispatch = useDispatch();
-  const logoutUser = bindActionCreators(
-    authentication.actions.logoutUser,
-    dispatch
-  );
+  // const logoutUser = bindActionCreators(
+  //   authentication.actions.logoutUser,
+  //   dispatch
+  // );
   const createPost = bindActionCreators(feed.actions.createPost, dispatch);
 
   // Selectors
+  const token = useSelector(authentication.selectors.token);
   const isAuthorized = useSelector(authentication.selectors.isAuthorized);
   // const error = useSelector(authentication.selectors.getLogoutError);
   // const loading = useSelector(authentication.selectors.isLogoutLoading);
@@ -44,6 +45,7 @@ function Header() {
   // Modal State
   const [showModal, setShowModal] = useState(false);
   const [file, setFile] = useState(null);
+  const [description, setDescription] = useState('');
 
   // Modal functions
   const openNewPostModal = () => {
@@ -53,17 +55,32 @@ function Header() {
     setShowModal(false);
   };
 
-  const uploadPicture = (event) => {
-    console.log(URL.createObjectURL(event.target.files[0]));
-    setFile();
-    console.log(file);
+  const selectDescription = (e) => {
+    setDescription(e.target.value);
+  };
+
+  const selectPicture = (e) => {
+    console.log(e.target.files[0]);
+    if (e.target.files.length == 0 || e.target.files.length > 1) return;
+    setFile(e.target.files[0]);
+  };
+
+  const handleCreatePost = () => {
+    if (!file) return console.log('Select FILE!');
+    const formData = new FormData();
+    formData.append('postFile', file);
+    formData.append('description', description);
+    console.log(formData);
+    createPost(formData, token);
+    setShowModal(false);
   };
 
   console.log('Header username', username);
   console.log('Header profilePicture', profilePicture);
 
   const handleLogout = () => {
-    logoutUser(isAuthorized);
+    // logoutUser(token);
+    dispatch(authentication.actions.logoutUser(token));
   };
 
   return (
@@ -81,94 +98,100 @@ function Header() {
           }}
         />
         <div className="NavigationLinks">
-          <Link to="/" className="NavIcon">
-            {location.pathname === '/' ? <HomeFilledIcon /> : <HomeIcon />}
-          </Link>
-          <a
-            className="NavIcon"
-            onClick={() => {
-              openNewPostModal();
-            }}
-          >
-            <NewPost />
-          </a>
-          <Modal post closeModal={closeNewPostModal} showModal={showModal}>
-            {/* <label
-                className="btn btn--modal btn--white--solid"
-                htmlFor="ProfilePictureInput"
+          {!isAuthorized ? (
+            <>
+              <Button
+                to={{ pathname: '/login', state: { referrer: location } }}
+                buttonStyle={'btn--blue--solid'}
               >
-                {' '}
-              </label> */}
-            {/* <input
-              id="ProfilePictureInput"
-              type="file"
-              name="profilePicture"
-              onChange={changeProfilePicture}
-            />
+                Log In
+              </Button>
 
-            <Button
-              type={'file'}
-              buttonStyle={'btn--white--solid'}
-              onClick={selectProfilePicture}
-              modal
-            >
-              Change Profile Picture
-            </Button> */}
-            <h1>New Post</h1>
-            <div className="ImagePreview" id="ImagePreview">
-              <img
-                src=""
-                alt="Image Preview"
-                className="ImagePreviewContainer"
-              />
-              <span className="image-preview-default-text">Image Preview</span>
-            </div>
-            <input type="file" onChange={uploadPicture} />
-            <form className="NewPostForm">
-              <h4>Description</h4>
-              <textarea className="FormTextarea"></textarea>
-            </form>
-
-            <Button buttonStyle={'btn--white--solid'} modal>
-              Create Post
-            </Button>
-            <Button
-              buttonStyle={'btn--white--solid'}
-              onClick={closeNewPostModal}
-              modal
-            >
-              Cancel
-            </Button>
-          </Modal>
-          <Link to="/explore" className="NavIcon">
-            {location.pathname === '/explore' ? (
-              <ExploreFilledIcon />
-            ) : (
-              <ExploreIcon />
-            )}
-          </Link>
-          <Link
-            to={{ pathname: `/${username}`, state: { username } }}
-            className="NavIcon"
-          >
-            <img
-              src={
-                profilePicture
-                  ? profilePicture
-                  : 'https://pngimage.net/wp-content/uploads/2018/06/no-user-image-png.png '
-              }
-              alt="userAvatar"
-              className={
-                location.pathname === `/${username}`
-                  ? 'userAvatarNavbar userAvatarNavbar--active'
-                  : 'userAvatarNavbar'
-              }
-              id="userAvatarNavbar"
-            />
-          </Link>
-          <Link to="/" className="NavIcon" onClick={handleLogout}>
-            <NewPost />
-          </Link>
+              <Button to={'/register'} buttonStyle={'btn--white--solid'}>
+                Sign Up
+              </Button>
+            </>
+          ) : (
+            <>
+              <Link to="/" className="NavIcon">
+                {location.pathname === '/' ? <HomeFilledIcon /> : <HomeIcon />}
+              </Link>
+              <a
+                className="NavIcon"
+                onClick={() => {
+                  openNewPostModal();
+                }}
+              >
+                <NewPost />
+              </a>
+              <Modal post closeModal={closeNewPostModal} showModal={showModal}>
+                <h1>New Post</h1>
+                <div className="ImagePreview" id="ImagePreview">
+                  <img
+                    src=""
+                    alt="Image Preview"
+                    className="ImagePreviewContainer"
+                  />
+                  <span className="image-preview-default-text">
+                    Image Preview
+                  </span>
+                </div>
+                <input type="file" onChange={selectPicture} />
+                <form className="NewPostForm">
+                  <h4>Description</h4>
+                  <textarea
+                    className="FormTextarea"
+                    value={description}
+                    onChange={selectDescription}
+                  ></textarea>
+                </form>
+                <div className=""></div>
+                <Button
+                  onClick={handleCreatePost}
+                  buttonStyle={'btn--white--solid'}
+                  modal
+                >
+                  Create Post
+                </Button>
+                <Button
+                  buttonStyle={'btn--white--solid'}
+                  onClick={closeNewPostModal}
+                  modal
+                >
+                  Cancel
+                </Button>
+              </Modal>
+              <Link to="/explore" className="NavIcon">
+                {location.pathname === '/explore' ? (
+                  <ExploreFilledIcon />
+                ) : (
+                  <ExploreIcon />
+                )}
+              </Link>
+              <Link
+                to={{ pathname: `/${username}`, state: { username } }}
+                className="NavIcon"
+              >
+                <img
+                  src={
+                    profilePicture
+                      ? profilePicture
+                      : 'https://pngimage.net/wp-content/uploads/2018/06/no-user-image-png.png '
+                  }
+                  alt="userAvatar"
+                  className={
+                    location.pathname === `/${username}`
+                      ? 'userAvatarNavbar userAvatarNavbar--active'
+                      : 'userAvatarNavbar'
+                  }
+                  id="userAvatarNavbar"
+                />
+              </Link>
+              <Link to="/" className="NavIcon" onClick={handleLogout}>
+                <NewPost />
+              </Link>
+            </>
+          )}
         </div>
       </nav>
     </header>

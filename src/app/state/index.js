@@ -1,7 +1,7 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import authentication from '../../authentication';
-import feed from '../../users';
+import feed from '../../feed';
 import middleware from './middleware';
 import users from '../../users';
 

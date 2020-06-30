@@ -1,0 +1,32 @@
+.PostHeader {
+  height: 75px;
+  border-bottom: 1px solid var(--grey);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px 5px;
+
+  .PostAvatar {
+    display: flex;
+    justify-content: center;
+    width: 64px;
+    height: 32px;
+  }
+  .PostUser {
+    font-weight: 600;
+  }
+  .Options {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    &:last-child {
+      margin-left: auto;
+    }
+  }
+  img {
+    border-radius: 50%;
+    height: 32px;
+    width: 32px;
+    border: 1px solid var(--grey);
+  }
+}

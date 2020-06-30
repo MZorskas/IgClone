@@ -16,6 +16,21 @@ export const loginUser = (body) =>
     ],
   });
 
+export const loginUserWithStorage = (token) =>
+  createAction({
+    endpoint: 'http://localhost:3001/v1/user/loginWithStorage',
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-auth-IG': token,
+    },
+    types: [
+      types.USER_LOGIN_STORAGE_REQUEST,
+      types.USER_LOGIN_STORAGE_SUCCESS,
+      types.USER_LOGIN_STORAGE_FAILURE,
+    ],
+  });
+
 export const logoutUser = (token) =>
   createAction({
     endpoint: 'http://localhost:3001/v1/user/logout',

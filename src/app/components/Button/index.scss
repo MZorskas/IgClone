@@ -27,6 +27,7 @@
 .btn--white--solid {
   border: 1px solid var(--white);
   background-color: var(--white);
+  color: var(--blue);
 }
 .btn--white--outline {
   border: 1px solid var(--grey);
@@ -76,6 +77,10 @@
   &:focus {
     background-color: var(--grey);
   }
+}
+
+.btn--danger {
+  color: red;
 }
 
 //   .btn--large {

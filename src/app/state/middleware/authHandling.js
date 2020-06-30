@@ -8,9 +8,17 @@ const authHandling = ({ dispatch, getState }) => (next) => (action) => {
   //   console.log('authHandling', action.error);
   if (action.type === authentication.types.USER_LOGIN_SUCCESS) {
     localStorage.setItem('x-auth-IG', action.payload.tokens.slice(-1)[0].token);
+    //Laikinai, paskui bus su tokenu
+    localStorage.setItem('token', action.payload.token);
     history.replace(
       history.location.state ? history.location.state.referrer.pathname : '/'
     );
+  }
+
+  if (action.type === authentication.types.USER_LOGIN_STORAGE_SUCCESS) {
+    localStorage.setItem('x-auth-IG', action.payload.tokens.slice(-1)[0].token);
+    //Laikinai, paskui bus su tokenu
+    localStorage.setItem('token', action.payload.token);
   }
   if (action.type === authentication.types.USER_LOGOUT_SUCCESS) {
     localStorage.removeItem('x-auth-IG');

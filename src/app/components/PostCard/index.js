@@ -1,13 +1,14 @@
 import React from 'react';
 import './index.scss';
+import { Link } from 'react-router-dom';
 
-function PostCard() {
+function PostCard({ placeHolder, postId, likes, comments }) {
+  // console.log('PostCard', placeHolder, postId, likes, key, comments);
   return (
-    <div class="PostCard">
-      <img
-        src="http://localhost:3001/uploads/15934473885333resized.jpg"
-        alt=""
-      />
+    <div className="PostCard">
+      <Link to={{ pathname: `/p/${postId}`, state: { postId } }}>
+        <img src={placeHolder} alt="Post Image" />
+      </Link>
     </div>
   );
 }

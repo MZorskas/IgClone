@@ -21,6 +21,7 @@ function Button({
   to,
   required,
   modal,
+  danger,
   id,
 }) {
   const Tag = to ? Link : 'button';
@@ -31,9 +32,10 @@ function Button({
   const checkButtonSize = SIZES.includes(buttonSize) ? buttonSize : SIZES[0];
   const notAllowed = required ? 'btn--required' : '';
   const modalButton = modal ? 'btn--modal' : '';
+  const dangerButton = danger ? 'btn--danger' : '';
   return (
     <Tag
-      className={`btn ${checkButtonStyle} ${checkButtonSize} ${notAllowed} ${modalButton}`}
+      className={`btn ${checkButtonStyle} ${checkButtonSize} ${notAllowed} ${modalButton} ${dangerButton}`}
       onClick={onClick}
       type={type}
       to={to}

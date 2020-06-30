@@ -17,6 +17,14 @@ import Modal from '../Modal';
 
 function ProfileSettings({ username }) {
   const activeUser = useSelector(authentication.selectors.getActiveUser);
+  // Dispatch
+  const dispatch = useDispatch();
+  const logoutUser = bindActionCreators(
+    authentication.actions.logoutUser,
+    dispatch
+  );
+  // Selectors
+  const token = useSelector(authentication.selectors.token);
 
   const [showModal, setShowModal] = useState(false);
 
@@ -56,7 +64,13 @@ function ProfileSettings({ username }) {
             <Button buttonStyle={'btn--white--solid'} modal>
               Edit Bio
             </Button>
-            <Button buttonStyle={'btn--white--solid'} modal>
+            <Button
+              onClick={() => {
+                logoutUser(token);
+              }}
+              buttonStyle={'btn--white--solid'}
+              modal
+            >
               Log Out
             </Button>
             <Button
