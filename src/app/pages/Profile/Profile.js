@@ -17,7 +17,7 @@ function Profile() {
 
   // Dispatch
   const dispatch = useDispatch();
-  const fetchUser = bindActionCreators(users.actions.fetchSingleUser, dispatch);
+  // const fetchUser = bindActionCreators(users.actions.fetchSingleUser, dispatch);
   // Selectors
   const activeUser = useSelector(authentication.selectors.getActiveUser);
   const user = useSelector((state) =>
@@ -45,9 +45,9 @@ function Profile() {
     } else if (user) {
       setprofileUser(user);
     } else if (!error) {
-      fetchUser(username);
+      dispatch(users.actions.fetchSingleUser(username));
     }
-  }, [user, fetchUser, username, error, activeUser]);
+  }, [user, username, error, activeUser, users]);
 
   // console.log('Profile page username', username);
   // console.log('Profile page activeUser', activeUser);

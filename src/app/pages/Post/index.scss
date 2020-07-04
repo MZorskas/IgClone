@@ -17,7 +17,6 @@
     display: flex;
     // width: 816px;
     width: 100%;
-    background-color: var(--grey);
     .PostFileContainer {
       width: calc(100% - 335px);
       height: 100%;
@@ -33,40 +32,23 @@
       height: 100%;
       display: flex;
       flex-direction: column;
-
+      border-left: 1px solid var(--grey);
       .PostComments {
+        width: 334px;
+        display: flex;
+        flex-direction: column;
+        &::-webkit-scrollbar {
+          width: 0px;
+        }
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+        scrollbar-width: thin;
         height: calc(100% - 220px);
         border-bottom: 1px solid var(--grey);
         padding: 10px 5px;
-        .CommentContainer {
-          display: flex;
-          width: 100%;
-          padding: 10px 0px;
-          .CommentAvatar {
-            display: flex;
-            justify-content: center;
-            width: 64px;
-          }
-          .Comment {
-            width: calc(100% - 64px);
-            span {
-              padding-right: 5px;
-              font-weight: 600;
-            }
-            p {
-              display: inline;
-            }
-          }
-          img {
-            border-radius: 50%;
-            height: 32px;
-            width: 32px;
-            border: 1px solid var(--grey);
-          }
-        }
-      }
-      .PostNewComment {
-        height: 55px;
+        overflow: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
       }
     }
   }

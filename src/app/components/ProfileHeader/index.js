@@ -49,7 +49,6 @@ function ProfileHeader({ profileUser }) {
     dispatch(authentication.actions.uploadProfilePicture(formData, token));
     closePictureModal();
   };
-
   return (
     <header className="ProfileHeader">
       {!!profileUser.username && (
@@ -105,8 +104,9 @@ function ProfileHeader({ profileUser }) {
           <div className="ProfileInfo">
             <ProfileSettings username={profileUser.username} />
             <ProfileStats
-              followers={profileUser.followers}
-              following={profileUser.following}
+              followers={profileUser.followersCount}
+              following={profileUser.followingCount}
+              posts={profileUser.postCount}
             />
             <ProfileBio fullName={profileUser.fullName} />
           </div>

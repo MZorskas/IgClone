@@ -1,0 +1,35 @@
+.CommentContainer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  padding: 10px 0px;
+  .CommentAvatar {
+    display: flex;
+    justify-content: center;
+    width: 64px;
+  }
+  .Comment {
+    width: 100%;
+    overflow: hidden;
+
+    span {
+      padding-right: 5px;
+      font-weight: 600;
+    }
+    .CommentText {
+      display: inline;
+      word-break: break-all;
+    }
+  }
+  img {
+    border-radius: 50%;
+    height: 32px;
+    width: 32px;
+    border: 1px solid var(--grey);
+  }
+  .CommentOptions {
+    padding: 0px 10px;
+    cursor: pointer;
+  }
+}

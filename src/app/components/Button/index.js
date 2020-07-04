@@ -7,6 +7,7 @@ const STYLES = [
   'btn--light--solid',
   'btn--white--solid',
   'btn--white--outline',
+  'btn--white--solid--required',
 ];
 
 const SIZES = ['btn--small', 'btn--medium', 'btn--large'];

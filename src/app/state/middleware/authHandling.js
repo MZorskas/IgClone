@@ -29,6 +29,16 @@ const authHandling = ({ dispatch, getState }) => (next) => (action) => {
     history.replace('/');
   }
 
+  if (action.type === feed.types.CREATE_POST_SUCCESS) {
+    history.location.pathname !== `/${action.payload.user}` &&
+      history.push(`/${action.payload.user}`);
+  }
+
+  if (action.type === feed.types.DELETE_POST_SUCCESS) {
+    // history.goBack();
+    // console.log(history.referrer)
+    history.replace(`/${action.payload.user}`);
+  }
   //   if (action === 401) {
   //     dispatch(authentication.actions.logout());
   //   }

@@ -1,18 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './index.scss';
-import { Link, useParams } from 'react-router-dom';
-import { Options } from '../icons';
+import { Link, useLocation } from 'react-router-dom';
+import { CommentOptions } from '../icons';
 import { useSelector, useDispatch } from 'react-redux';
 import authentication from '../../../authentication';
 import feed from '../../../feed';
 import Button from '../Button';
 import Modal from '../Modal';
 
-function PostHeader({ children, placeHolder }) {
-  const { postId } = useParams();
-
-  const [url, setUrl] = useState(window.location.href);
-
+function Comment({ placeHolder, username, commentId, children }) {
   // Dispatch
   const dispatch = useDispatch();
 
@@ -30,38 +26,38 @@ function PostHeader({ children, placeHolder }) {
     setShowModal(false);
   };
 
-  const deletePost = () => {
-    dispatch(feed.actions.deletePost(postId, token));
+  const deleteComment = () => {
+    dispatch(feed.actions.deleteComment(commentId, token));
     setShowModal(false);
   };
 
   return (
-    <div className="PostHeader">
-      <div className="PostAvatar">
+    <div className="CommentContainer">
+      <div className="CommentAvatar">
         <Link to="/">
-          <img className="AuthorAvatar" id="ProfileAvatar" src={placeHolder} />
+          <img className="AuthorProfilePicture" src={placeHolder} />
         </Link>
       </div>
-      <span className="PostUser">{children}</span>
+      <div className="Comment">
+        <span>{username}</span>
+        <p className="CommentText">{children}</p>
+      </div>
       <a
-        className="Options"
+        className="CommentOptions"
         onClick={() => {
           openOptionsModal();
         }}
       >
-        <Options />
+        <CommentOptions />
       </a>
       <Modal closeModal={closeOptionsModal} showModal={showModal}>
-        <Button buttonStyle={'btn--white--solid'} modal>
-          Go To Post
-        </Button>
         <Button
-          onClick={deletePost}
           buttonStyle={'btn--white--solid'}
+          onClick={deleteComment}
           modal
           danger
         >
-          Delete Post
+          Delete Comment
         </Button>
         <Button
           buttonStyle={'btn--white--solid'}
@@ -75,4 +71,15 @@ function PostHeader({ children, placeHolder }) {
   );
 }
 
-export default PostHeader;
+export default Comment;
+
+{
+  /* <Comment
+username={comment.username}
+key={comment._id}
+placeHolder={comment.profilePicture}
+commentId={comment._id}
+>
+<p>{comment.text}</p>
+</Comment> */
+}

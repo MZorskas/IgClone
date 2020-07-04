@@ -52,7 +52,11 @@ function authentication(state = DEFAULT_AUTHENTICATION_STATE, action) {
           createdAt: action.payload.createdAt,
           profilePicture: action.payload.profilePicture,
           following: action.payload.following,
+          followingCount: action.payload.followingCount,
           followers: action.payload.followers,
+          followersCount: action.payload.followersCount,
+          posts: action.payload.posts,
+          postCount: action.payload.postCount,
         },
         token: action.payload.tokens.slice(-1)[0].token,
         login: {
@@ -93,7 +97,11 @@ function authentication(state = DEFAULT_AUTHENTICATION_STATE, action) {
           createdAt: action.payload.createdAt,
           profilePicture: action.payload.profilePicture,
           following: action.payload.following,
+          followingCount: action.payload.followingCount,
           followers: action.payload.followers,
+          followersCount: action.payload.followersCount,
+          posts: action.payload.posts,
+          postCount: action.payload.postCount,
         },
         token: action.payload.tokens.slice(-1)[0].token,
         login: {

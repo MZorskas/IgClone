@@ -8,9 +8,12 @@ import feed from '../../../feed';
 import NotFound from '../../pages/NotFound/NotFound';
 import PostHeader from '../../components/PostHeader';
 import PostNavigation from '../../components/PostNavigation';
+import Comment from '../../components/Comment';
+import Button from '../../components/Button';
+import PostNewComment from '../../components/PostNewComment';
 
 function Post() {
-  const { username } = useParams();
+  const { postId } = useParams();
   const location = useLocation();
   const dispatch = useDispatch();
 
@@ -18,7 +21,16 @@ function Post() {
   const isAuthorized = useSelector(authentication.selectors.isAuthorized);
   const token = useSelector(authentication.selectors.token);
   const error = useSelector(users.selectors.getSingleUserError);
-  const [profileUser, setprofileUser] = useState({});
+  const post = useSelector((state) =>
+    feed.selectors.isPostFetched(state, postId)
+  );
+
+  const comments = useSelector((state) =>
+    feed.selectors.getComments(state, postId)
+  );
+
+  const [description, setDescription] = useState('');
+  // const [post, setPost] = useState(null);
 
   useEffect(() => {
     if (!isAuthorized) {
@@ -26,90 +38,50 @@ function Post() {
     }
   }, [isAuthorized, authentication, token]);
 
-  // console.log('Profile page username', username);
-  // console.log('Profile page activeUser', activeUser);
-  // console.log('Profile page profileUser', profileUser);
-  // console.log('Profile page user', user);
-  // console.log('Profile page profileUser', profileUser);
+  useEffect(() => {
+    dispatch(feed.actions.fetchSinglePost(postId));
+  }, [feed, postId]);
 
+  // const comments = useSelector((state) =>
+  //   feed.selectors.getComments(state, postId)
+  // );
+
+  // useEffect(() => {
+  //   console.log(comments);
+  // }, [comments]);
   return (
     <React.Fragment>
-      <div className="Post">
-        <div className="PostContainer">
-          <div className="PostFileContainer">
-            <img
-              src="http://localhost:3001/uploads\159352284868111resized.jpg"
-              alt="Post Image"
-            />
-          </div>
-          <div className="PostInfoContainer">
-            <PostHeader>
-              <span>Username</span>
-            </PostHeader>
-            <div className="PostComments">
-              <div className="CommentContainer">
-                <div className="CommentAvatar">
-                  <Link>
-                    <img
-                      className="AuthorAvatar"
-                      id="ProfileAvatar"
-                      src="https://pngimage.net/wp-content/uploads/2018/06/no-user-image-png.png"
-                    />
-                  </Link>
-                </div>
-                <div className="Comment">
-                  <span>Username</span>
-                  <p>
-                    Lorem ipsum dolor sit, amet consectetur adipisicing
-                    elitLorem ipsum dolor sitLorem ipsum dolor sit, amet
-                    consectetur adipisicing elit
-                  </p>
-                </div>
-              </div>
-              <div className="CommentContainer">
-                <div className="CommentAvatar">
-                  <Link>
-                    <img
-                      className="AuthorAvatar"
-                      id="ProfileAvatar"
-                      src="https://pngimage.net/wp-content/uploads/2018/06/no-user-image-png.png"
-                    />
-                  </Link>
-                </div>
-                <div className="Comment">
-                  <span>Username</span>
-                  <p>
-                    Lorem ipsum dolor sit, amet consectetur adipisicing
-                    elitLorem ipsum dolor sitLorem ipsum dolor sit, amet
-                    consectetur adipisicing elit
-                  </p>
-                </div>
-              </div>
-              <div className="CommentContainer">
-                <div className="CommentAvatar">
-                  <Link>
-                    <img
-                      className="AuthorAvatar"
-                      id="ProfileAvatar"
-                      src="https://pngimage.net/wp-content/uploads/2018/06/no-user-image-png.png"
-                    />
-                  </Link>
-                </div>
-                <div className="Comment">
-                  <span>Username</span>
-                  <p>
-                    Lorem ipsum dolor sit, amet consectetur adipisicing
-                    elitLorem ipsum dolor sitLorem ipsum dolor sit, amet
-                    consectetur adipisicing elit
-                  </p>
-                </div>
-              </div>
+      {post && (
+        <div className="Post">
+          <div className="PostContainer">
+            <div className="PostFileContainer">
+              <img src={post.image ? post.image : ''} alt="Post Image" />
             </div>
-            <PostNavigation />
-            <div className="PostNewComment"></div>
+            <div className="PostInfoContainer">
+              <PostHeader placeHolder={post.user.profilePicture}>
+                <span>{post.user.username}</span>
+              </PostHeader>
+              <div className="PostComments">
+                {!!post.comments &&
+                  post.comments.map((comment) => {
+                    return (
+                      <Comment
+                        username={comment.user.username}
+                        key={comment._id}
+                        placeHolder={comment.user.profilePicture}
+                        commentId={comment._id}
+                      >
+                        {comment.text}
+                      </Comment>
+                    );
+                  })}
+              </div>
+              <PostNavigation />
+              <PostNewComment />
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </React.Fragment>
   );
 }

@@ -29,6 +29,15 @@
   background-color: var(--white);
   color: var(--blue);
 }
+
+.btn--white--solid--required {
+  border: 1px solid var(--white);
+  background-color: var(--white);
+  color: var(--blue);
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
 .btn--white--outline {
   border: 1px solid var(--grey);
   background-color: var(--white);
@@ -38,6 +47,7 @@
     color: var(--grey);
   }
 }
+
 .btn--required {
   cursor: not-allowed;
 }

@@ -2,19 +2,18 @@ import React from 'react';
 import './index.scss';
 import authentication from '../../../authentication';
 
-function ProfileStats({ followers, following }) {
-  console.log('ProfileStats', { followers, following });
+function ProfileStats({ followers, following, posts }) {
   return (
     <div className="ProfileStats">
       <ul>
         <li>
-          <span>0</span> posts
+          <span>{posts}</span> {posts === 1 ? 'post' : 'posts'}
         </li>
         <li className="StatsLink">
-          <span>{followers.length}</span> followers
+          <span>{followers}</span> {followers ? 'followers' : 'followers'}
         </li>
         <li className="StatsLink">
-          <span>{following.length}</span> following
+          <span>{following}</span> following
         </li>
       </ul>
     </div>

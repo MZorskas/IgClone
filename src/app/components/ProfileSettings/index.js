@@ -17,6 +17,7 @@ import Modal from '../Modal';
 
 function ProfileSettings({ username }) {
   const activeUser = useSelector(authentication.selectors.getActiveUser);
+
   // Dispatch
   const dispatch = useDispatch();
   const logoutUser = bindActionCreators(
