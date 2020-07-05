@@ -57,6 +57,7 @@ function authentication(state = DEFAULT_AUTHENTICATION_STATE, action) {
           followersCount: action.payload.followersCount,
           posts: action.payload.posts,
           postCount: action.payload.postCount,
+          savedPosts: [],
         },
         token: action.payload.tokens.slice(-1)[0].token,
         login: {
@@ -102,6 +103,7 @@ function authentication(state = DEFAULT_AUTHENTICATION_STATE, action) {
           followersCount: action.payload.followersCount,
           posts: action.payload.posts,
           postCount: action.payload.postCount,
+          savedPosts: action.payload.savedPosts,
         },
         token: action.payload.tokens.slice(-1)[0].token,
         login: {
@@ -153,6 +155,7 @@ function authentication(state = DEFAULT_AUTHENTICATION_STATE, action) {
           profilePicture: '',
           following: [],
           followers: [],
+          savedPosts: [],
         },
         logout: {
           ...state.logout,

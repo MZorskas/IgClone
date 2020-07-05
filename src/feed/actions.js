@@ -30,9 +30,9 @@ export const fetchAllUserPosts = (username) =>
     ],
   });
 
-export const fetchAllUsersPosts = (token, currentPage, postsPerPage) =>
+export const fetchAllUsersPosts = (token, currentPage) =>
   createAction({
-    endpoint: `http://localhost:3001/v1/post/getAllPosts/${currentPage}/${postsPerPage}`,
+    endpoint: `http://localhost:3001/v1/post/getAllPosts/${currentPage}`,
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -115,5 +115,19 @@ export const deletePost = (postId, token) =>
       types.DELETE_POST_REQUEST,
       types.DELETE_POST_SUCCESS,
       types.DELETE_POST_FAILURE,
+    ],
+  });
+
+export const toggleSavePost = (postId, token) =>
+  createAction({
+    endpoint: `http://localhost:3001/v1/post/toggleSave/${postId}`,
+    method: 'POST',
+    headers: {
+      'x-auth-IG': token,
+    },
+    types: [
+      types.TOGGLE_SAVE_POST_REQUEST,
+      types.TOGGLE_SAVE_POST_SUCCESS,
+      types.TOGGLE_SAVE_POST_FAILURE,
     ],
   });

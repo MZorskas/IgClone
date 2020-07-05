@@ -35,10 +35,9 @@ const authHandling = ({ dispatch, getState }) => (next) => (action) => {
   }
 
   if (action.type === feed.types.DELETE_POST_SUCCESS) {
-    // history.goBack();
-    // console.log(history.referrer)
     history.replace(`/${action.payload.user}`);
   }
+
   //   if (action === 401) {
   //     dispatch(authentication.actions.logout());
   //   }

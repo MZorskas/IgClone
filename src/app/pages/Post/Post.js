@@ -25,12 +25,9 @@ function Post() {
     feed.selectors.isPostFetched(state, postId)
   );
 
-  const comments = useSelector((state) =>
-    feed.selectors.getComments(state, postId)
-  );
+  const postX = useSelector((state) => feed.selectors.getPost(state, postId));
 
   const [description, setDescription] = useState('');
-  // const [post, setPost] = useState(null);
 
   useEffect(() => {
     if (!isAuthorized) {
@@ -42,13 +39,6 @@ function Post() {
     dispatch(feed.actions.fetchSinglePost(postId));
   }, [feed, postId]);
 
-  // const comments = useSelector((state) =>
-  //   feed.selectors.getComments(state, postId)
-  // );
-
-  // useEffect(() => {
-  //   console.log(comments);
-  // }, [comments]);
   return (
     <React.Fragment>
       {post && (

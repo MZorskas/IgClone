@@ -17,7 +17,6 @@ function ExploreGallery() {
   const token = useSelector(authentication.selectors.token);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage, setpostsPerPage] = useState(10);
 
   const observer = useRef(
     new IntersectionObserver(
@@ -25,21 +24,14 @@ function ExploreGallery() {
         const first = entries[0];
         if (first.isIntersecting) {
           setCurrentPage(currentPage + 1);
-          console.log('Current Page', currentPage);
-          dispatch(
-            feed.actions.fetchAllUsersPosts(token, currentPage, postsPerPage)
-          );
+          console.log('visible', first);
         }
       },
-      { threshold: 1 }
+      { threshold: 0.1 }
     )
   );
 
   const [element, setElement] = useState(null);
-  //   const lastPostElementRef = useCallback((node) => {
-  //     console.log('NODE', node);
-  //   });
-  //   token, currentPage, postsPerPage
 
   useEffect(() => {
     const currentElement = element;
@@ -55,13 +47,14 @@ function ExploreGallery() {
   }, [element]);
 
   useEffect(() => {
-    dispatch(feed.actions.fetchAllUsersPosts(token, currentPage, postsPerPage));
-    setCurrentPage(currentPage + 1);
-  }, [feed]);
+    dispatch(feed.actions.fetchAllUsersPosts(token, currentPage));
+    console.log('Current Page', currentPage);
+  }, [feed, currentPage]);
 
   console.log('ExploreGallery', posts);
+  console.log('ExploreGallery ELEMENT', element);
   return (
-    <div className="ExploreContainer">
+    <div className="ExploreGallery">
       {posts &&
         posts.map((post, index) => {
           if (posts.length === index + 1) {

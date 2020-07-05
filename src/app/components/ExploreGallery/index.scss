@@ -1,4 +1,4 @@
-.ExploreContainer {
+.ExploreGallery {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
@@ -7,4 +7,10 @@
   width: 100%;
   //   background-color: var(--blue);
   border: 1px solid var(--grey);
+  // display: grid;
+  // grid-template-columns: repeat(3, 301px);
+  // grid-template-rows: repeat(3, 301px);
+  // border: 1px solid var(--grey);
+  // grid-gap: 15px;
+  // padding: 15px;
 }

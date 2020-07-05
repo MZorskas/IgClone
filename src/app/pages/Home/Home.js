@@ -7,14 +7,10 @@ import authentication from '../../../authentication';
 function Home() {
   // Dispatch
   const dispatch = useDispatch();
-  // const loginUserWithStorage = useDispatch(
-  //   authentication.actions.loginUserWithStorage,
-  //   dispatch
-  // );
+
   // Selectors
   const isAuthorized = useSelector(authentication.selectors.isAuthorized);
   const token = useSelector(authentication.selectors.token);
-  // const [token, setToken] = useState(localStorage.getItem('x-auth-IG'));
   const history = useHistory();
   console.log('HOME', isAuthorized);
 

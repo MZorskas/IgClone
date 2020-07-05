@@ -14,3 +14,4 @@ export const getUserAvatar = (state) =>
   state.authentication.activeUser.profilePicture;
 
 export const getActiveUser = (state) => state.authentication.activeUser;
+export const getActiveUserId = (state) => state.authentication.activeUser._id;

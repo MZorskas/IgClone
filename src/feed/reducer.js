@@ -6,44 +6,6 @@ const DEFAULT_FEED_STATE = {
   error: false,
 };
 
-const createComment = (data, action) => {
-  const postIndex = data.findIndex(
-    (post) => post._id === action.payload.data.post
-  );
-  console.log('Push comment', postIndex);
-  if (postIndex === -1) {
-    return data;
-  }
-  const newData = [...data];
-  newData[postIndex].comments = [
-    ...newData[postIndex].comments,
-    action.payload.data,
-  ];
-  console.log('Push comment newData', newData, action.payload.data);
-  // .find((post) => post._id === action.payload.data.post)
-  // .comments.concat(action.payload.data);
-  return newData;
-};
-
-// const deleteComment = (data, action) => {
-//   const post = data.filter(post => post.comments.some((comment=> comment._id === action.payload.data.commentId)))
-//   console.log('deleteComment, POST:', post);
-//   if (postIndex === -1) {
-//     return data;
-//   }
-
-//   const newData = [...data];
-
-//   newData[postIndex].comments = [
-//     ...newData[postIndex].comments,
-//     action.payload.data,
-//   ];
-//   console.log('deleteComment, POST:', newData, action.payload.data);
-//   // .find((post) => post._id === action.payload.data.post)
-//   // .comments.concat(action.payload.data);
-//   return newData;
-// };
-
 function feed(state = DEFAULT_FEED_STATE, action) {
   switch (action.type) {
     case types.CREATE_POST_REQUEST: {
@@ -80,17 +42,22 @@ function feed(state = DEFAULT_FEED_STATE, action) {
     }
 
     case types.CREATE_COMMENT_SUCCESS: {
+      const postIndex = state.data.findIndex(
+        (post) => post._id === action.payload.data.post
+      );
+      console.log('CREATE_COMMENT_SUCCESS', postIndex);
       return {
         ...state,
         loading: false,
-        //   data: state.data.some((post) => post._id === action.payload.data.post)
-        //     ? pushComment(state, action)
-        //     : state.data,
-        data: createComment(state.data, action),
+        data: [
+          ...state.data.slice(0, postIndex),
+          {
+            ...state.data[postIndex],
+            comments: [...state.data[postIndex].comments, action.payload.data],
+          },
+          ...state.data.slice(postIndex + 1),
+        ],
       };
-      // return state.data.some((post) => post._id === action.payload.data.post)
-      //   ? pushComment(state, action)
-      //   : state;
     }
 
     case types.CREATE_COMMENT_FAILURE: {
@@ -129,9 +96,6 @@ function feed(state = DEFAULT_FEED_STATE, action) {
             })
           : state.data,
       };
-      // return state.data.some((post) => post._id === action.payload.data.post)
-      //   ? pushComment(state, action)
-      //   : state;
     }
 
     case types.DELETE_COMMENT_FAILURE: {
@@ -159,9 +123,6 @@ function feed(state = DEFAULT_FEED_STATE, action) {
           ? state.data.filter((post) => post._id !== action.payload.postId)
           : state.data,
       };
-      // return state.data.some((post) => post._id === action.payload.data.post)
-      //   ? pushComment(state, action)
-      //   : state;
     }
 
     case types.DELETE_POST_FAILURE: {
@@ -210,7 +171,7 @@ function feed(state = DEFAULT_FEED_STATE, action) {
       return {
         ...state,
         loading: false,
-        data: action.payload,
+        data: [...state.data, ...action.payload],
       };
     }
 
@@ -233,8 +194,6 @@ function feed(state = DEFAULT_FEED_STATE, action) {
 
     case types.SINGLE_POST_SUCCESS: {
       console.log(action.payload);
-
-      // state.data[state.data.findIndex(post => post._id === action.payload.id)]
       return {
         ...state,
         loading: false,
@@ -243,13 +202,59 @@ function feed(state = DEFAULT_FEED_STATE, action) {
               post._id === action.payload._id ? action.payload : post
             )
           : [...state.data, action.payload],
-        // data: state.data.map((post) =>
-        //   post._id === action.payload._id ? action.payload : post
-        // ),
       };
     }
 
     case types.SINGLE_POST_FAILURE: {
+      console.log(action);
+      return {
+        ...state,
+        loading: false,
+        error: action.payload.response,
+      };
+    }
+
+    case types.TOGGLE_SAVE_POST_REQUEST: {
+      return {
+        ...state,
+        error: null,
+        loading: true,
+      };
+    }
+
+    case types.TOGGLE_SAVE_POST_SUCCESS: {
+      const postIndex = state.data.findIndex(
+        (post) => post._id === action.payload.postId
+      );
+      const post = state.data.find(
+        (post) => post._id === action.payload.postId
+      );
+      return {
+        ...state,
+        loading: false,
+        data: post.saves.includes(action.payload.userId)
+          ? [
+              ...state.data.slice(0, postIndex),
+              {
+                ...state.data[postIndex],
+                saves: state.data[postIndex].saves.filter(
+                  (user) => user !== action.payload.userId
+                ),
+              },
+              ...state.data.slice(postIndex + 1),
+            ]
+          : [
+              ...state.data.slice(0, postIndex),
+              {
+                ...state.data[postIndex],
+                saves: [...state.data[postIndex].saves, action.payload.userId],
+              },
+              ...state.data.slice(postIndex + 1),
+            ],
+      };
+    }
+
+    case types.TOGGLE_SAVE_POST_FAILURE: {
       console.log(action);
       return {
         ...state,
