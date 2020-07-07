@@ -1,10 +1,13 @@
-import React, { useEffect, useState, useRef, useCallback } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import './index.scss';
 import { useSelector, useDispatch } from 'react-redux';
-import PostCard from '../PostCard';
-import { Route, Switch, useLocation, useParams } from 'react-router-dom';
+
+// Modules
 import feed from '../../../feed';
 import authentication from '../../../authentication';
+
+//Components
+import PostCard from '../PostCard';
 
 function ExploreGallery() {
   // Dispatch

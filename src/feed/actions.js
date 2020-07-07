@@ -45,20 +45,35 @@ export const fetchAllUsersPosts = (token, currentPage) =>
     ],
   });
 
-// export const fetchAllUsersPosts = (token) =>
-// createAction({
-//   endpoint: 'http://localhost:3001/v1/post/getAllUsersPosts',
-//   method: 'GET',
-//   headers: {
-//     'Content-Type': 'application/json',
-//     'x-auth-IG': token,
-//   },
-//   types: [
-//     types.USERS_POSTS_REQUEST,
-//     types.USERS_POSTS_SUCCESS,
-//     types.USERS_POSTS_FAILURE,
-//   ],
-// });
+export const fetchFollowingUsersPosts = (token, currentPage) =>
+  createAction({
+    endpoint: `http://localhost:3001/v1/post/getAllFollowingUsersPosts/${currentPage}`,
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-auth-IG': token,
+    },
+    types: [
+      types.FOLLOWING_USERS_POSTS_REQUEST,
+      types.FOLLOWING_USERS_POSTS_SUCCESS,
+      types.FOLLOWING_USERS_POSTS_FAILURE,
+    ],
+  });
+
+export const fetchSavedPosts = (token, currentPage) =>
+  createAction({
+    endpoint: `http://localhost:3001/v1/post/getSavedPosts/${currentPage}`,
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-auth-IG': token,
+    },
+    types: [
+      types.SAVED_POSTS_REQUEST,
+      types.SAVED_POSTS_SUCCESS,
+      types.SAVED_POSTS_FAILURE,
+    ],
+  });
 
 export const fetchSinglePost = (postId) =>
   createAction({
@@ -129,5 +144,19 @@ export const toggleSavePost = (postId, token) =>
       types.TOGGLE_SAVE_POST_REQUEST,
       types.TOGGLE_SAVE_POST_SUCCESS,
       types.TOGGLE_SAVE_POST_FAILURE,
+    ],
+  });
+
+export const toggleLikePost = (postId, token) =>
+  createAction({
+    endpoint: `http://localhost:3001/v1/post/toggleLike/${postId}`,
+    method: 'POST',
+    headers: {
+      'x-auth-IG': token,
+    },
+    types: [
+      types.TOGGLE_LIKE_POST_REQUEST,
+      types.TOGGLE_LIKE_POST_SUCCESS,
+      types.TOGGLE_LIKE_POST_FAILURE,
     ],
   });

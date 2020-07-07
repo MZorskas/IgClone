@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 import './index.scss';
 import { useSelector, useDispatch } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import PostCard from '../PostCard';
-import { Route, Switch, useLocation, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import feed from '../../../feed';
 
 function PostsContainer() {

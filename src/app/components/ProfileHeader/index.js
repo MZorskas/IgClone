@@ -16,14 +16,17 @@ import ProfileBio from '../ProfileBio';
 import Button from '../Button';
 import Modal from '../Modal';
 
-function ProfileHeader({ profileUser }) {
+function ProfileHeader() {
+  const { username } = useParams();
   // Dispatch
   const dispatch = useDispatch();
 
   // Selectors
   const activeUser = useSelector(authentication.selectors.getActiveUser);
   const token = useSelector(authentication.selectors.token);
-
+  const profileUser = useSelector((state) =>
+    users.selectors.getProfileUser(state, username)
+  );
   // Modal State
   const [showModal, setShowModal] = useState(false);
 
@@ -49,9 +52,10 @@ function ProfileHeader({ profileUser }) {
     dispatch(authentication.actions.uploadProfilePicture(formData, token));
     closePictureModal();
   };
+
   return (
     <header className="ProfileHeader">
-      {!!profileUser.username && (
+      {!!profileUser && (
         <div className="ProfileUser">
           <div className="ProfileAvatarContainer">
             {profileUser.username === activeUser.username ? (
@@ -102,12 +106,8 @@ function ProfileHeader({ profileUser }) {
             </Modal>
           </div>
           <div className="ProfileInfo">
-            <ProfileSettings username={profileUser.username} />
-            <ProfileStats
-              followers={profileUser.followersCount}
-              following={profileUser.followingCount}
-              posts={profileUser.postCount}
-            />
+            <ProfileSettings />
+            <ProfileStats username={profileUser.username} />
             <ProfileBio fullName={profileUser.fullName} />
           </div>
         </div>

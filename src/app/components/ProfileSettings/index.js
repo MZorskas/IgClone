@@ -1,31 +1,29 @@
 import React, { useState } from 'react';
 import './index.scss';
-import { bindActionCreators } from 'redux';
-import { Link, useLocation } from 'react-router-dom';
-import {
-  HomeIcon,
-  HomeFilledIcon,
-  NewPost,
-  ExploreFilledIcon,
-  ExploreIcon,
-  SettingsIcon,
-} from '../icons';
+import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+
+import { SettingsIcon } from '../icons';
+
+//Modules
 import authentication from '../../../authentication';
+
+//Components
+import users from '../../../users';
 import Button from '../Button';
 import Modal from '../Modal';
 
-function ProfileSettings({ username }) {
-  const activeUser = useSelector(authentication.selectors.getActiveUser);
+function ProfileSettings() {
+  const { username } = useParams();
 
   // Dispatch
   const dispatch = useDispatch();
-  const logoutUser = bindActionCreators(
-    authentication.actions.logoutUser,
-    dispatch
-  );
   // Selectors
   const token = useSelector(authentication.selectors.token);
+  const activeUser = useSelector(authentication.selectors.getActiveUser);
+  const { _id, followers } = useSelector((state) =>
+    users.selectors.getProfileUser(state, username)
+  );
 
   const [showModal, setShowModal] = useState(false);
 
@@ -36,7 +34,10 @@ function ProfileSettings({ username }) {
     setShowModal(false);
   };
 
-  console.log('ProfileSettings', username);
+  const toggleUserFollow = () => {
+    dispatch(users.actions.toggleFollowUser(_id, token));
+  };
+
   return (
     <div className="ProfileSettings">
       <h1 className="ProfileUsername" id="ProfileUsername">
@@ -67,7 +68,7 @@ function ProfileSettings({ username }) {
             </Button>
             <Button
               onClick={() => {
-                logoutUser(token);
+                dispatch(authentication.actions.logoutUser(token));
               }}
               buttonStyle={'btn--white--solid'}
               modal
@@ -83,13 +84,23 @@ function ProfileSettings({ username }) {
             </Button>
           </Modal>
         </>
-      ) : (
+      ) : followers.includes(activeUser._id) ? (
         <>
-          <Button buttonStyle="btn--blue--outline">Follow</Button>
-          <Link to="/">
-            <SettingsIcon />
-          </Link>
+          <Button marginRight buttonStyle="btn--white--outline">
+            Message
+          </Button>
+          <Button
+            onClick={toggleUserFollow}
+            marginRight
+            buttonStyle="btn--white--outline"
+          >
+            Unfollow
+          </Button>
         </>
+      ) : (
+        <Button onClick={toggleUserFollow} buttonStyle="btn--blue--outline">
+          Follow
+        </Button>
       )}
     </div>
   );

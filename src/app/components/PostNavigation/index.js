@@ -1,17 +1,14 @@
 import React, { useState } from 'react';
 import './index.scss';
-import { bindActionCreators } from 'redux';
-import { Link, useLocation, useParams } from 'react-router-dom';
-import { Like, Comment, SaveIcon24, SaveIconActive24 } from '../icons';
+import { Link } from 'react-router-dom';
+import { Like, Unlike, Comment, SaveIcon24, SaveIconActive24 } from '../icons';
 import { useSelector, useDispatch } from 'react-redux';
+
+//Modules
 import authentication from '../../../authentication';
 import feed from '../../../feed';
-import Button from '../Button';
-import Modal from '../Modal';
 
-function PostNavigation() {
-  const { postId } = useParams();
-
+function PostNavigation({ postId }) {
   // Dispatch
   const dispatch = useDispatch();
 
@@ -22,7 +19,9 @@ function PostNavigation() {
 
   const [showModal, setShowModal] = useState(false);
 
-  const togglePostLike = () => {};
+  const togglePostLike = () => {
+    dispatch(feed.actions.toggleLikePost(postId, token));
+  };
 
   const togglePostSaved = () => {
     dispatch(feed.actions.toggleSavePost(postId, token));
@@ -30,9 +29,6 @@ function PostNavigation() {
 
   const focusCommentInput = () => {};
 
-  console.log('PostNavigation saved', !!post.saves.includes(userId));
-  console.log('PostNavigation liked ');
-  console.log('PostNavigation post ', userId);
   return (
     <div className="PostNavigation">
       <div className="PostActions">
@@ -42,7 +38,7 @@ function PostNavigation() {
             togglePostLike();
           }}
         >
-          <Like />
+          {post.likes.includes(userId) ? <Unlike /> : <Like />}
         </a>
         <a
           className="PostIcon"
@@ -63,7 +59,8 @@ function PostNavigation() {
       </div>
       <div className="PostLikes">
         <Link to="/p/:postId" className="Likes">
-          Likes count
+          <span>{post.likeCount}</span>{' '}
+          {post.likeCount === 1 ? 'like' : 'likes'}
         </Link>
       </div>
       <div className="PostDate">

@@ -1,15 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import './index.scss';
 import { Route, Switch, useLocation, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { bindActionCreators } from 'redux';
+
+//Modules
 import authentication from '../../../authentication';
+import users from '../../../users';
+
+//Pages
+import NotFound from '../../pages/NotFound/NotFound';
+
+// Components
 import ProfileHeader from '../../components/ProfileHeader';
 import ProfileNavigation from '../../components/ProfileNavigation';
 import PostsContainer from '../../components/PostsContainer';
-import users from '../../../users';
-import feed from '../../../feed';
-import NotFound from '../../pages/NotFound/NotFound';
+import SavedPostsContainer from '../../components/SavedPostsContainer';
 
 function Profile() {
   const { username } = useParams();
@@ -17,22 +22,15 @@ function Profile() {
 
   // Dispatch
   const dispatch = useDispatch();
-  // const fetchUser = bindActionCreators(users.actions.fetchSingleUser, dispatch);
   // Selectors
   const activeUser = useSelector(authentication.selectors.getActiveUser);
-  const user = useSelector((state) =>
-    users.selectors.isUserFetched(state, username)
-  );
+  // const profileUser = useSelector((state) =>
+  //   users.selectors.getProfileUser(state, username)
+  // );
   const isAuthorized = useSelector(authentication.selectors.isAuthorized);
   const token = useSelector(authentication.selectors.token);
   const error = useSelector(users.selectors.getSingleUserError);
-  const [profileUser, setprofileUser] = useState({});
 
-  // useEffect(() => {
-  //   if (error) {
-  //     fetchUser(username);
-  //   }
-  // }, []);
   useEffect(() => {
     if (!isAuthorized) {
       dispatch(authentication.actions.loginUserWithStorage(token));
@@ -40,20 +38,8 @@ function Profile() {
   }, [isAuthorized, authentication, token]);
 
   useEffect(() => {
-    if (username === activeUser.username) {
-      setprofileUser(activeUser);
-    } else if (user) {
-      setprofileUser(user);
-    } else if (!error) {
-      dispatch(users.actions.fetchSingleUser(username));
-    }
-  }, [user, username, error, activeUser, users]);
-
-  // console.log('Profile page username', username);
-  // console.log('Profile page activeUser', activeUser);
-  // console.log('Profile page profileUser', profileUser);
-  // console.log('Profile page user', user);
-  // console.log('Profile page profileUser', profileUser);
+    dispatch(users.actions.fetchSingleUser(username));
+  }, [username, users, activeUser]);
 
   return (
     <React.Fragment>
@@ -62,14 +48,14 @@ function Profile() {
           <NotFound />
         ) : (
           <>
-            <ProfileHeader profileUser={profileUser} />
-            <ProfileNavigation username={username} />
+            <ProfileHeader />
+            <ProfileNavigation />
             <Switch>
               <Route exact path="/:username">
                 <PostsContainer />
               </Route>
               <Route exact path="/:username/saved/">
-                <h1>Saved Gallery</h1>
+                <SavedPostsContainer />
               </Route>
             </Switch>
           </>

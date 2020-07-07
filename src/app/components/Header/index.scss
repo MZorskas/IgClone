@@ -1,8 +1,10 @@
 .Header {
+  position: fixed;
   height: 54px;
   width: 100%;
   background-color: var(--white);
   border-bottom: 1px solid rgb(200, 200, 200);
+  z-index: 2;
   .Navbar {
     margin: auto;
     // background-color: green;
@@ -12,8 +14,8 @@
     align-items: center;
     justify-content: space-between;
     //Temp
-    border-left: 1px solid rgb(200, 200, 200);
-    border-right: 1px solid rgb(200, 200, 200);
+    // border-left: 1px solid rgb(200, 200, 200);
+    // border-right: 1px solid rgb(200, 200, 200);
     .Logo {
       text-decoration: none;
       font-weight: 600;

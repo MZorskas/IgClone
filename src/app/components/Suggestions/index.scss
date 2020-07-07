@@ -1,0 +1,12 @@
+.Suggestions {
+  .SuggestionsTitle {
+    font-size: 14px;
+    font-weight: 600;
+    color: grey;
+    padding: 0px 16px;
+  }
+  display: flex;
+  flex-direction: column;
+  //   border: 1px solid var(--grey);
+  max-height: 400px;
+}

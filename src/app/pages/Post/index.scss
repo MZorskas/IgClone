@@ -1,8 +1,8 @@
 .Post {
   display: flex;
   flex-direction: column;
-  border-left: 1px solid var(--grey);
-  border-right: 1px solid var(--grey);
+  // border-left: 1px solid var(--grey);
+  // border-right: 1px solid var(--grey);
   justify-content: flex-start;
   align-items: center;
   width: 975px;
@@ -10,46 +10,20 @@
   margin: auto;
   padding: 40px 20px;
   flex-grow: 1;
+  margin-top: 56px;
   .PostContainer {
     height: 600px;
     //TEMP HEIGHT
-    border: 1px solid var(--grey);
     display: flex;
     // width: 816px;
     width: 100%;
-    .PostFileContainer {
-      width: calc(100% - 335px);
-      height: 100%;
-      img {
-        object-fit: contain;
-        width: 100%;
-        height: 100%;
-      }
-    }
     .PostInfoContainer {
       background-color: var(--white);
-      width: 335px;
+      min-width: 335px;
       height: 100%;
       display: flex;
       flex-direction: column;
-      border-left: 1px solid var(--grey);
-      .PostComments {
-        width: 334px;
-        display: flex;
-        flex-direction: column;
-        &::-webkit-scrollbar {
-          width: 0px;
-        }
-        -ms-overflow-style: none; /* IE and Edge */
-        scrollbar-width: none; /* Firefox */
-        scrollbar-width: thin;
-        height: calc(100% - 220px);
-        border-bottom: 1px solid var(--grey);
-        padding: 10px 5px;
-        overflow: auto;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
-      }
+      border: 1px solid var(--grey);
     }
   }
 }

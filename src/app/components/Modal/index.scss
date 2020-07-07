@@ -29,7 +29,7 @@
 }
 
 .ModalMain {
-  position: fixed;
+  position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -39,11 +39,21 @@
   top: 50%;
   left: 50%;
   border-radius: 8px;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50.1%);
+
+  // transform: perspective(1px) translateZ(0);
   .content {
     display: flex;
     flex-direction: column;
     width: 100%;
+    justify-content: center;
+    text-align: center;
+    .ModalTitle {
+      font-weight: 600;
+      font-size: 16px;
+      padding: 15px;
+      border-bottom: 1px solid var(--grey);
+    }
     .NewPostForm {
       border-bottom: 1px solid var(--grey);
       display: flex;

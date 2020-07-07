@@ -1,34 +1,24 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './index.scss';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import {
   SavedIcon12,
   PostsIcon,
   SavedIconActive12,
   PostsIconActive,
 } from '../icons';
-import { useSelector, useDispatch } from 'react-redux';
-import authentication from '../../../authentication';
-import Button from '../Button';
-import Modal from '../Modal';
+import { useSelector } from 'react-redux';
 
-function ProfileNavigation({ username }) {
+//Modules
+import authentication from '../../../authentication';
+
+function ProfileNavigation() {
   const location = useLocation();
+  const { username } = useParams();
   // console.log('ProfileNavigation', location);
 
   //Selectors
   const activeUser = useSelector(authentication.selectors.getActiveUser);
-
-  //Modal
-  const [showModal, setShowModal] = useState(false);
-
-  const openModal = () => {
-    setShowModal(true);
-  };
-  const closeModal = () => {
-    setShowModal(false);
-  };
-
   return (
     <div className="ProfileNavigation">
       <Link

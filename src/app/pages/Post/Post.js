@@ -1,16 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import './index.scss';
-import { Link, useLocation, useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+
+// Modules
 import authentication from '../../../authentication';
 import users from '../../../users';
 import feed from '../../../feed';
-import NotFound from '../../pages/NotFound/NotFound';
+
+// Components
 import PostHeader from '../../components/PostHeader';
 import PostNavigation from '../../components/PostNavigation';
-import Comment from '../../components/Comment';
-import Button from '../../components/Button';
 import PostNewComment from '../../components/PostNewComment';
+import PostComments from '../../components/PostComments';
+import PostFileContainer from '../../components/PostFileContainer';
 
 function Post() {
   const { postId } = useParams();
@@ -24,10 +27,6 @@ function Post() {
   const post = useSelector((state) =>
     feed.selectors.isPostFetched(state, postId)
   );
-
-  const postX = useSelector((state) => feed.selectors.getPost(state, postId));
-
-  const [description, setDescription] = useState('');
 
   useEffect(() => {
     if (!isAuthorized) {
@@ -44,30 +43,12 @@ function Post() {
       {post && (
         <div className="Post">
           <div className="PostContainer">
-            <div className="PostFileContainer">
-              <img src={post.image ? post.image : ''} alt="Post Image" />
-            </div>
+            <PostFileContainer postId={postId} placeholder={post.image} />
             <div className="PostInfoContainer">
-              <PostHeader placeHolder={post.user.profilePicture}>
-                <span>{post.user.username}</span>
-              </PostHeader>
-              <div className="PostComments">
-                {!!post.comments &&
-                  post.comments.map((comment) => {
-                    return (
-                      <Comment
-                        username={comment.user.username}
-                        key={comment._id}
-                        placeHolder={comment.user.profilePicture}
-                        commentId={comment._id}
-                      >
-                        {comment.text}
-                      </Comment>
-                    );
-                  })}
-              </div>
-              <PostNavigation />
-              <PostNewComment />
+              <PostHeader postId={postId} />
+              <PostComments postId={postId} />
+              <PostNavigation postId={postId} />
+              <PostNewComment postId={postId} />
             </div>
           </div>
         </div>

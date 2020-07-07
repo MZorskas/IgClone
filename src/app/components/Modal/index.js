@@ -1,10 +1,7 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
 import './index.scss';
-import Header from '../Header';
-import Footer from '../Footer';
-import Button from '../Button';
-function Modal({ showModal, children, post }) {
+
+function Modal({ showModal, children, post, title }) {
   const modalClass = post ? 'content ModalPost' : 'content';
   return (
     <React.Fragment>
@@ -12,7 +9,10 @@ function Modal({ showModal, children, post }) {
         <>
           <div className="modal" id="modal">
             <div className="ModalMain">
-              <div className={modalClass}>{children}</div>
+              <div className={modalClass}>
+                {title ? <h2 className="ModalTitle">{title}</h2> : null}
+                {children}
+              </div>
             </div>
           </div>
         </>

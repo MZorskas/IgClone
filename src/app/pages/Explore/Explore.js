@@ -2,11 +2,14 @@ import React, { useEffect, useD } from 'react';
 import './index.scss';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+
+//Modules
 import authentication from '../../../authentication';
+
+//Components
 import ExploreGallery from '../../components/ExploreGallery';
 
 function Explore() {
-  // const [token, setToken] = useState(localStorage.getItem('x-auth-IG'));
   const history = useHistory();
 
   //Dispatch

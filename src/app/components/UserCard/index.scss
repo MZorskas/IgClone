@@ -1,0 +1,41 @@
+.UserCard {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 63px;
+  width: 100%;
+  //   border-bottom: 1px solid var(--grey);
+  padding: 8px 16px;
+  .AvatarContainer {
+    margin-right: 12px;
+    img {
+      border-radius: 50%;
+      height: 44px;
+      width: 44px;
+      border: 1px solid var(--grey);
+    }
+  }
+  .UserInfoContainer {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    align-items: flex-start;
+    .UserUsername {
+      font-weight: 600;
+      font-size: 14px;
+      text-decoration: none;
+      color: var(--black);
+    }
+    .UserFullName {
+      font-size: 14px;
+      color: grey;
+    }
+  }
+  Button {
+    margin-left: auto;
+  }
+}
+
+.UserCard--modal {
+  border-bottom: 1px solid var(--grey);
+}

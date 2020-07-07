@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './index.scss';
-import { Link, useLocation, useParams } from 'react-router-dom';
-import { Options } from '../icons';
 import { useSelector, useDispatch } from 'react-redux';
+
+//Modules
 import authentication from '../../../authentication';
+
+//Components
 import feed from '../../../feed';
 import Button from '../Button';
 
-function PostNewComment() {
-  const { postId } = useParams();
-
+function PostNewComment({ postId }) {
   // Dispatch
   const dispatch = useDispatch();
 

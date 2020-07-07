@@ -6,6 +6,7 @@
   font-size: 14px;
   line-height: 18px;
   height: auto;
+  background-color: var(--white);
   .CommentForm {
     width: 100%;
     display: flex;
@@ -22,6 +23,7 @@
       height: 100%;
       // height: auto;
       overflow: auto;
+
       &::-webkit-scrollbar {
         width: 20px;
         background: transparent;

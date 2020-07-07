@@ -6,6 +6,17 @@ const DEFAULT_FEED_STATE = {
   error: false,
 };
 
+const addWithoutDuplicates = (data, action) => {
+  // console.log('addWithoutDuplicates data:', data);
+  const newData = action.payload;
+  // console.log('addWithoutDuplicates newData:', newData);
+  const ids = new Set(newData.map((e) => e._id));
+  // console.log('addWithoutDuplicates ids', ids);
+  const newState = data.filter((a) => !ids.has(a._id)).concat(newData);
+  // console.log('addWithoutDuplicates', newState);
+  return newState;
+};
+
 function feed(state = DEFAULT_FEED_STATE, action) {
   switch (action.type) {
     case types.CREATE_POST_REQUEST: {
@@ -33,6 +44,32 @@ function feed(state = DEFAULT_FEED_STATE, action) {
       };
     }
 
+    case types.SAVED_POSTS_REQUEST: {
+      return {
+        ...state,
+        error: null,
+        loading: true,
+      };
+    }
+
+    case types.SAVED_POSTS_SUCCESS: {
+      return {
+        ...state,
+        loading: false,
+        data: addWithoutDuplicates(state.data, action),
+      };
+    }
+
+    case types.SAVED_POSTS_FAILURE: {
+      console.log(action);
+      return {
+        ...state,
+        loading: false,
+        error: action.payload.response,
+      };
+    }
+
+    ///////////////////
     case types.CREATE_COMMENT_REQUEST: {
       return {
         ...state,
@@ -45,7 +82,6 @@ function feed(state = DEFAULT_FEED_STATE, action) {
       const postIndex = state.data.findIndex(
         (post) => post._id === action.payload.data.post
       );
-      console.log('CREATE_COMMENT_SUCCESS', postIndex);
       return {
         ...state,
         loading: false,
@@ -99,7 +135,6 @@ function feed(state = DEFAULT_FEED_STATE, action) {
     }
 
     case types.DELETE_COMMENT_FAILURE: {
-      console.log(action);
       return {
         ...state,
         loading: false,
@@ -126,7 +161,6 @@ function feed(state = DEFAULT_FEED_STATE, action) {
     }
 
     case types.DELETE_POST_FAILURE: {
-      console.log(action);
       return {
         ...state,
         loading: false,
@@ -151,7 +185,6 @@ function feed(state = DEFAULT_FEED_STATE, action) {
     }
 
     case types.SINGLE_USER_POSTS_FAILURE: {
-      console.log(action);
       return {
         ...state,
         loading: false,
@@ -171,18 +204,43 @@ function feed(state = DEFAULT_FEED_STATE, action) {
       return {
         ...state,
         loading: false,
-        data: [...state.data, ...action.payload],
+        data: addWithoutDuplicates(state.data, action),
       };
     }
 
     case types.USERS_POSTS_FAILURE: {
-      console.log(action);
       return {
         ...state,
         loading: false,
         error: action.payload.response,
       };
     }
+
+    //
+    case types.FOLLOWING_USERS_POSTS_REQUEST: {
+      return {
+        ...state,
+        error: null,
+        loading: true,
+      };
+    }
+
+    case types.FOLLOWING_USERS_POSTS_SUCCESS: {
+      return {
+        ...state,
+        loading: false,
+        data: addWithoutDuplicates(state.data, action),
+      };
+    }
+
+    case types.FOLLOWING_USERS_POSTS_FAILURE: {
+      return {
+        ...state,
+        loading: false,
+        error: action.payload.response,
+      };
+    }
+    //
 
     case types.SINGLE_POST_REQUEST: {
       return {
@@ -193,7 +251,6 @@ function feed(state = DEFAULT_FEED_STATE, action) {
     }
 
     case types.SINGLE_POST_SUCCESS: {
-      console.log(action.payload);
       return {
         ...state,
         loading: false,
@@ -206,7 +263,6 @@ function feed(state = DEFAULT_FEED_STATE, action) {
     }
 
     case types.SINGLE_POST_FAILURE: {
-      console.log(action);
       return {
         ...state,
         loading: false,
@@ -255,7 +311,56 @@ function feed(state = DEFAULT_FEED_STATE, action) {
     }
 
     case types.TOGGLE_SAVE_POST_FAILURE: {
-      console.log(action);
+      return {
+        ...state,
+        loading: false,
+        error: action.payload.response,
+      };
+    }
+
+    case types.TOGGLE_LIKE_POST_REQUEST: {
+      return {
+        ...state,
+        error: null,
+        loading: true,
+      };
+    }
+
+    case types.TOGGLE_LIKE_POST_SUCCESS: {
+      const postIndex = state.data.findIndex(
+        (post) => post._id === action.payload.postId
+      );
+      const post = state.data.find(
+        (post) => post._id === action.payload.postId
+      );
+      return {
+        ...state,
+        loading: false,
+        data: post.likes.includes(action.payload.userId)
+          ? [
+              ...state.data.slice(0, postIndex),
+              {
+                ...state.data[postIndex],
+                likes: state.data[postIndex].likes.filter(
+                  (user) => user !== action.payload.userId
+                ),
+                likeCount: state.data[postIndex].likeCount - 1,
+              },
+              ...state.data.slice(postIndex + 1),
+            ]
+          : [
+              ...state.data.slice(0, postIndex),
+              {
+                ...state.data[postIndex],
+                likes: [...state.data[postIndex].likes, action.payload.userId],
+                likeCount: state.data[postIndex].likeCount + 1,
+              },
+              ...state.data.slice(postIndex + 1),
+            ],
+      };
+    }
+
+    case types.TOGGLE_LIKE_POST_FAILURE: {
       return {
         ...state,
         loading: false,

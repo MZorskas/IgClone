@@ -12,7 +12,12 @@ const DEFAULT_AUTHENTICATION_STATE = {
     createdAt: '',
     profilePicture: '',
     following: [],
+    followingCount: 0,
     followers: [],
+    followersCount: 0,
+    savedPosts: [],
+    posts: [],
+    postCount: 0,
   },
   login: {
     error: null,

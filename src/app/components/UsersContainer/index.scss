@@ -1,0 +1,15 @@
+.UserContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  max-height: 500px;
+  &::-webkit-scrollbar {
+    width: 0px;
+  }
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  scrollbar-width: thin;
+  overflow: auto;
+  scrollbar-width: none;
+}

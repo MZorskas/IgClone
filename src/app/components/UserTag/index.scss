@@ -1,0 +1,44 @@
+.UserTag {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: auto;
+  width: 100%;
+  //   border-bottom: 1px solid var(--grey);
+  padding: 8px 16px;
+  .UserAvatar {
+    margin-right: 12px;
+    .Avatar {
+      border-radius: 50%;
+      border: 1px solid var(--grey);
+    }
+    .Avatar--small {
+      height: 32px;
+      width: 32px;
+    }
+    .Avatar--medium {
+      height: 44px;
+      width: 44px;
+    }
+    .Avatar--large {
+      height: 56px;
+      width: 56px;
+    }
+  }
+  .UserInfo {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    align-items: flex-start;
+    .Username {
+      font-weight: 600;
+      font-size: 14px;
+      text-decoration: none;
+      color: var(--black);
+    }
+    .FullName {
+      font-size: 14px;
+      color: grey;
+    }
+  }
+}

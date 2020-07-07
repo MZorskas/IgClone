@@ -4,18 +4,9 @@
   width: 301px;
   margin-bottom: 15px;
   box-sizing: border-box;
-  border: 1px solid var(--grey);
-  //   position: relative;
-  //   flex: 1 0 22rem;
-  //   margin: 1rem;
-  //   color: #fff;
-  //   cursor: pointer;
   &:hover {
     opacity: 0.5;
   }
-  // &:last-child {
-  //   margin-right: (auto);
-  // }
   img {
     object-fit: cover;
     width: 100%;

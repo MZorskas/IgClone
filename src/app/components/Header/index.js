@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './index.scss';
-import { bindActionCreators } from 'redux';
 import { Link, useLocation } from 'react-router-dom';
 import {
   HomeIcon,
@@ -10,8 +9,9 @@ import {
   ExploreIcon,
 } from '../icons';
 import { useSelector, useDispatch } from 'react-redux';
+
+//Modules
 import authentication from '../../../authentication';
-import users from '../../../users';
 import feed from '../../../feed';
 
 //image
@@ -26,11 +26,6 @@ function Header() {
 
   // Dispatch
   const dispatch = useDispatch();
-  // const logoutUser = bindActionCreators(
-  //   authentication.actions.logoutUser,
-  //   dispatch
-  // );
-  const createPost = bindActionCreators(feed.actions.createPost, dispatch);
 
   // Selectors
   const token = useSelector(authentication.selectors.token);
@@ -71,7 +66,7 @@ function Header() {
     formData.append('postFile', file);
     formData.append('description', description);
     console.log(formData);
-    createPost(formData, token);
+    dispatch(feed.actions.createPost(formData, token));
     setShowModal(false);
   };
 

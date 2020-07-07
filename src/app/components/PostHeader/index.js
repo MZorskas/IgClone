@@ -3,14 +3,16 @@ import './index.scss';
 import { Link, useParams } from 'react-router-dom';
 import { Options } from '../icons';
 import { useSelector, useDispatch } from 'react-redux';
+
+//Modules
 import authentication from '../../../authentication';
+
+//Components
 import feed from '../../../feed';
 import Button from '../Button';
 import Modal from '../Modal';
 
-function PostHeader({ children, placeHolder }) {
-  const { postId } = useParams();
-
+function PostHeader({ children, placeHolder, postId }) {
   const [url, setUrl] = useState(window.location.href);
 
   // Dispatch
@@ -19,6 +21,7 @@ function PostHeader({ children, placeHolder }) {
   // Selectors
   const activeUser = useSelector(authentication.selectors.getActiveUser);
   const token = useSelector(authentication.selectors.token);
+  const post = useSelector((state) => feed.selectors.getPost(state, postId));
 
   // Modal
   const [showModal, setShowModal] = useState(false);
@@ -35,14 +38,19 @@ function PostHeader({ children, placeHolder }) {
     setShowModal(false);
   };
 
+  console.log('POSTHEADER', post);
   return (
     <div className="PostHeader">
       <div className="PostAvatar">
         <Link to="/">
-          <img className="AuthorAvatar" id="ProfileAvatar" src={placeHolder} />
+          <img
+            className="AuthorAvatar"
+            id="ProfileAvatar"
+            src={post.user.profilePicture}
+          />
         </Link>
       </div>
-      <span className="PostUser">{children}</span>
+      <span className="PostUser">{post.user.username}</span>
       <a
         className="Options"
         onClick={() => {

@@ -1,10 +1,9 @@
-import React, { useEffect, useState, useRef, useCallback } from 'react';
+import React from 'react';
 
 import './index.scss';
 import { Link } from 'react-router-dom';
 
-function PostCard({ placeHolder, postId, likes, comments, elementRef, grid }) {
-  // console.log('PostCard', placeHolder, postId, likes, key, comments);
+function PostCard({ placeHolder, postId, elementRef, grid }) {
   const layout = grid ? 'PostCardGrid' : 'PostCard';
   return (
     <div ref={elementRef} className={layout}>

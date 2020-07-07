@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import './index.scss';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { CommentOptions } from '../icons';
 import { useSelector, useDispatch } from 'react-redux';
+
+// Modules
 import authentication from '../../../authentication';
 import feed from '../../../feed';
+
+// Components
 import Button from '../Button';
 import Modal from '../Modal';
 
@@ -72,14 +76,3 @@ function Comment({ placeHolder, username, commentId, children }) {
 }
 
 export default Comment;
-
-{
-  /* <Comment
-username={comment.username}
-key={comment._id}
-placeHolder={comment.profilePicture}
-commentId={comment._id}
->
-<p>{comment.text}</p>
-</Comment> */
-}

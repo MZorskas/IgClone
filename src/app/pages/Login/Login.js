@@ -6,7 +6,7 @@ import './index.scss';
 import { bindActionCreators } from 'redux';
 import { useSelector, useDispatch } from 'react-redux';
 
-//State Modules
+//Modules
 import authentication from '../../../authentication';
 
 //Components
