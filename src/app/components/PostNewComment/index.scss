@@ -23,7 +23,7 @@
       height: 100%;
       // height: auto;
       overflow: auto;
-
+      background-color: var(--white);
       &::-webkit-scrollbar {
         width: 20px;
         background: transparent;

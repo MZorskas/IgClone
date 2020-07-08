@@ -28,12 +28,12 @@ function UserCard({ userId, username, fullName, placeHolder, modal }) {
   return (
     <div className={`UserCard ${modal ? 'UserCard--modal' : null}`}>
       <div className="AvatarContainer">
-        <Link to="/">
+        <Link to={`/${username}`}>
           <img src={placeHolder} alt="User Image" />
         </Link>
       </div>
       <div className="UserInfoContainer">
-        <Link className="UserUsername" to="/">
+        <Link className="UserUsername" to={`/${username}`}>
           {username}
         </Link>
         <span className="UserFullName">{fullName}</span>

@@ -4,7 +4,7 @@ import { Route, Switch, useLocation, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 //Modules
-import authentication from '../../../authentication';
+// import authentication from '../../../authentication';
 import users from '../../../users';
 
 //Pages
@@ -23,23 +23,23 @@ function Profile() {
   // Dispatch
   const dispatch = useDispatch();
   // Selectors
-  const activeUser = useSelector(authentication.selectors.getActiveUser);
+  // const activeUser = useSelector(authentication.selectors.getActiveUser);
   // const profileUser = useSelector((state) =>
   //   users.selectors.getProfileUser(state, username)
   // );
-  const isAuthorized = useSelector(authentication.selectors.isAuthorized);
-  const token = useSelector(authentication.selectors.token);
+  // const isAuthorized = useSelector(authentication.selectors.isAuthorized);
+  // const token = useSelector(authentication.selectors.token);
   const error = useSelector(users.selectors.getSingleUserError);
 
-  useEffect(() => {
-    if (!isAuthorized) {
-      dispatch(authentication.actions.loginUserWithStorage(token));
-    }
-  }, [isAuthorized, authentication, token]);
+  // useEffect(() => {
+  //   if (!isAuthorized) {
+  //     dispatch(authentication.actions.loginUserWithStorage(token));
+  //   }
+  // }, [isAuthorized, authentication, token]);
 
   useEffect(() => {
     dispatch(users.actions.fetchSingleUser(username));
-  }, [username, users, activeUser]);
+  }, [username, users]);
 
   return (
     <React.Fragment>

@@ -3,7 +3,6 @@ import { Link, useHistory } from 'react-router-dom';
 import './index.scss';
 
 // Redux
-import { bindActionCreators } from 'redux';
 import { useSelector, useDispatch } from 'react-redux';
 
 //Modules
@@ -16,15 +15,12 @@ function Login() {
 
   // Dispatch
   const dispatch = useDispatch();
-  const loginUser = bindActionCreators(
-    authentication.actions.loginUser,
-    dispatch
-  );
 
   // Selectors
   const isAuthorized = useSelector(authentication.selectors.isAuthorized);
   const error = useSelector(authentication.selectors.getLoginError);
   const loading = useSelector(authentication.selectors.isLoginLoading);
+  const storageLoading = useSelector(authentication.selectors.isStorageLoading);
 
   // Login State
   const [UniqueValue, setUniqueValue] = useState('');
@@ -56,7 +52,7 @@ function Login() {
       body.password = password;
     }
 
-    loginUser(body);
+    dispatch(authentication.actions.loginUser(body));
   };
 
   useEffect(() => {
@@ -69,58 +65,60 @@ function Login() {
 
   return (
     <React.Fragment>
-      <div className="Login">
-        <div className="LoginBox">
-          <form onSubmit={handleSubmit}>
-            <input
-              type="text"
-              placeholder="Email, phone number or username"
-              value={UniqueValue}
-              onChange={(event) => {
-                setUniqueValue(event.target.value);
-              }}
-              autoFocus
-              required
-            />
+      {!storageLoading && (
+        <div className="Login">
+          <div className="LoginBox">
+            <form onSubmit={handleSubmit}>
+              <input
+                type="text"
+                placeholder="Email, phone number or username"
+                value={UniqueValue}
+                onChange={(event) => {
+                  setUniqueValue(event.target.value);
+                }}
+                autoFocus
+                required
+              />
 
-            <input
-              type={showPassword ? 'text' : 'password'}
-              placeholder="Password"
-              value={password}
-              onChange={(event) => {
-                setPassword(event.target.value);
-              }}
-              required
-            />
-            <Button
-              type="submit"
-              buttonStyle={
-                !UniqueValue || !password
-                  ? 'btn--light--solid'
-                  : 'btn--blue--solid'
-              }
-              required={!UniqueValue || (!password && true)}
-            >
-              {loading ? 'Loading...' : 'Login'}
-            </Button>
-            <span
-              className="passwordVisibility"
-              onClick={togglePasswordVisibility}
-            >
-              {showPassword ? 'Hide' : 'Show'}
-            </span>
-            {!!error && <p style={{ color: 'red' }}>{error}</p>}
-          </form>
+              <input
+                type={showPassword ? 'text' : 'password'}
+                placeholder="Password"
+                value={password}
+                onChange={(event) => {
+                  setPassword(event.target.value);
+                }}
+                required
+              />
+              <Button
+                type="submit"
+                buttonStyle={
+                  !UniqueValue || !password
+                    ? 'btn--light--solid'
+                    : 'btn--blue--solid'
+                }
+                required={!UniqueValue || (!password && true)}
+              >
+                {loading ? 'Loading...' : 'Login'}
+              </Button>
+              <span
+                className="passwordVisibility"
+                onClick={togglePasswordVisibility}
+              >
+                {showPassword ? 'Hide' : 'Show'}
+              </span>
+              {!!error && <p style={{ color: 'red' }}>{error}</p>}
+            </form>
+          </div>
+          <div className="LinkBox">
+            <p>
+              Don't have an account?{' '}
+              <Link className="link" to="/register">
+                Sign up
+              </Link>
+            </p>
+          </div>
         </div>
-        <div className="LinkBox">
-          <p>
-            Don't have an account?{' '}
-            <Link className="link" to="/register">
-              Sign up
-            </Link>
-          </p>
-        </div>
-      </div>
+      )}
     </React.Fragment>
   );
 }

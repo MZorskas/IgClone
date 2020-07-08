@@ -17,9 +17,11 @@ export const getComments = (state, postId) => {
   return data ? data.comments : [];
 };
 
-export const getFollowingUsersPosts = (state, activeUser) => {
-  const data = state.feed.data.filter((post) =>
-    activeUser.following.includes(post.user._id)
+export const getUserPosts = (state, username) => {
+  console.log(username);
+  console.log(state.feed.data);
+  const data = state.feed.data.filter(
+    (post) => post.user.username === username
   );
   return data ? data : [];
 };
@@ -31,6 +33,24 @@ export const getSavedPosts = (state, activeUserId) => {
   const data = state.feed.data.filter((post) =>
     post.saves.includes(activeUserId)
   );
+  return data ? data : [];
+};
+
+export const getFollowingUsersPosts = (state, activeUserId) => {
+  const data = state.feed.data.filter((post) =>
+    post.user.followers.includes(activeUserId)
+  );
+  return data ? data : [];
+};
+
+export const getExploreData = (state, activeUserId) => {
+  console.log('getExploreData', activeUserId);
+  const data = state.feed.data.filter(
+    (post) =>
+      !post.user.followers.includes(activeUserId) &&
+      post.user._id != activeUserId
+  );
+
   return data ? data : [];
 };
 

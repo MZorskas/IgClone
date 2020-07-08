@@ -17,9 +17,9 @@ function Feed() {
   // Selectors
   const error = useSelector(feed.selectors.getFeedError);
   const loading = useSelector(feed.selectors.isFeedLoading);
-  const activeUser = useSelector(authentication.selectors.getActiveUser);
+  const { _id } = useSelector(authentication.selectors.getActiveUser);
   const posts = useSelector((state) =>
-    feed.selectors.getFollowingUsersPosts(state, activeUser)
+    feed.selectors.getFollowingUsersPosts(state, _id)
   );
   const token = useSelector(authentication.selectors.token);
 

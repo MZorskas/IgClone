@@ -80,7 +80,7 @@ function feed(state = DEFAULT_FEED_STATE, action) {
 
     case types.CREATE_COMMENT_SUCCESS: {
       const postIndex = state.data.findIndex(
-        (post) => post._id === action.payload.data.post
+        (post) => post._id === action.payload.post
       );
       return {
         ...state,
@@ -89,7 +89,7 @@ function feed(state = DEFAULT_FEED_STATE, action) {
           ...state.data.slice(0, postIndex),
           {
             ...state.data[postIndex],
-            comments: [...state.data[postIndex].comments, action.payload.data],
+            comments: [...state.data[postIndex].comments, action.payload],
           },
           ...state.data.slice(postIndex + 1),
         ],
@@ -180,7 +180,7 @@ function feed(state = DEFAULT_FEED_STATE, action) {
       return {
         ...state,
         loading: false,
-        data: action.payload,
+        data: addWithoutDuplicates(state.data, action),
       };
     }
 
@@ -333,6 +333,7 @@ function feed(state = DEFAULT_FEED_STATE, action) {
       const post = state.data.find(
         (post) => post._id === action.payload.postId
       );
+
       return {
         ...state,
         loading: false,

@@ -22,6 +22,7 @@ const DEFAULT_AUTHENTICATION_STATE = {
   login: {
     error: null,
     loading: false,
+    storageLoading: false,
   },
   logout: {
     error: null,
@@ -86,7 +87,7 @@ function authentication(state = DEFAULT_AUTHENTICATION_STATE, action) {
         ...state,
         login: {
           error: null,
-          loading: true,
+          storageLoading: true,
         },
       };
     }
@@ -113,7 +114,7 @@ function authentication(state = DEFAULT_AUTHENTICATION_STATE, action) {
         token: action.payload.tokens.slice(-1)[0].token,
         login: {
           ...state.login,
-          loading: false,
+          storageLoading: false,
         },
       };
     }
@@ -123,7 +124,6 @@ function authentication(state = DEFAULT_AUTHENTICATION_STATE, action) {
         ...state,
         login: {
           loading: false,
-          error: action.payload.response,
         },
       };
     }

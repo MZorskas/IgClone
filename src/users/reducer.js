@@ -67,13 +67,13 @@ function users(state = DEFAULT_USERS_STATE, action) {
       return {
         ...state,
         loading: false,
-        data: user.followers.includes(action.payload.userId)
+        data: user.followers.includes(action.payload.reqUserId)
           ? [
               ...state.data.slice(0, userIndex),
               {
                 ...state.data[userIndex],
                 followers: state.data[userIndex].followers.filter(
-                  (user) => user !== action.payload.userId
+                  (user) => user !== action.payload.reqUserId
                 ),
                 followersCount: state.data[userIndex].followersCount - 1,
               },
@@ -85,7 +85,7 @@ function users(state = DEFAULT_USERS_STATE, action) {
                 ...state.data[userIndex],
                 followers: [
                   ...state.data[userIndex].followers,
-                  action.payload.userId,
+                  action.payload.reqUserId,
                 ],
                 followersCount: state.data[userIndex].followersCount + 1,
               },

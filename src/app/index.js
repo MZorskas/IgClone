@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import './index.scss';
 import { Route, Switch } from 'react-router-dom';
 
-//Redux State
-import { Provider } from 'react-redux';
-import store from './state';
+//Modules
+import authentication from '../authentication';
 
 //Components
+import PrivateRoute from './components/PrivateRoute';
 import PageLayout from './components/PageLayout/index';
 import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
@@ -17,37 +18,45 @@ import Explore from './pages/Explore/Explore';
 import Post from './pages/Post/Post';
 
 function App() {
+  const dispatch = useDispatch();
+  const isAuthorized = useSelector(authentication.selectors.isAuthorized);
+  const token = useSelector(authentication.selectors.token);
+
+  useEffect(() => {
+    if (!isAuthorized) {
+      dispatch(authentication.actions.loginUserWithStorage(token));
+    }
+  }, [isAuthorized, authentication, token]);
+
   return (
-    <Provider store={store}>
-      <PageLayout>
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route exact path="/login">
-            <Login />
-          </Route>
-          <Route exact path="/register">
-            <Register />
-          </Route>
-          <Route exact path="/explore">
-            <Explore />
-          </Route>
-          <Route exact path="/:username">
-            <Profile />
-          </Route>
-          <Route exact path="/:username/saved/">
-            <Profile />
-          </Route>
-          <Route exact path="/p/:postId">
-            <Post />
-          </Route>
-          <Route exact path="*">
-            <NotFound />
-          </Route>
-        </Switch>
-      </PageLayout>
-    </Provider>
+    <PageLayout>
+      <Switch>
+        <PrivateRoute exact path="/">
+          <Home />
+        </PrivateRoute>
+        <Route exact path="/login">
+          <Login />
+        </Route>
+        <Route exact path="/register">
+          <Register />
+        </Route>
+        <PrivateRoute exact path="/explore">
+          <Explore />
+        </PrivateRoute>
+        <Route exact path="/:username">
+          <Profile />
+        </Route>
+        <PrivateRoute exact path="/:username/saved/">
+          <Profile />
+        </PrivateRoute>
+        <Route exact path="/p/:postId">
+          <Post />
+        </Route>
+        <Route exact path="*">
+          <NotFound />
+        </Route>
+      </Switch>
+    </PageLayout>
   );
 }
 

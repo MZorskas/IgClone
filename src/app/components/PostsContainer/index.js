@@ -13,7 +13,9 @@ function PostsContainer() {
   // Selectors
   const error = useSelector(feed.selectors.getFeedError);
   const loading = useSelector(feed.selectors.isFeedLoading);
-  const posts = useSelector(feed.selectors.getFeedData);
+  const posts = useSelector((state) =>
+    feed.selectors.getUserPosts(state, username)
+  );
 
   useEffect(() => {
     dispatch(feed.actions.fetchAllUserPosts(username));

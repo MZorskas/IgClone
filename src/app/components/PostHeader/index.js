@@ -42,7 +42,7 @@ function PostHeader({ children, placeHolder, postId }) {
   return (
     <div className="PostHeader">
       <div className="PostAvatar">
-        <Link to="/">
+        <Link to={`/${post.user.username}`}>
           <img
             className="AuthorAvatar"
             id="ProfileAvatar"

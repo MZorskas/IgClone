@@ -11,6 +11,7 @@
     .Avatar {
       border-radius: 50%;
       border: 1px solid var(--grey);
+      object-fit: cover;
     }
     .Avatar--small {
       height: 32px;

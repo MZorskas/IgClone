@@ -30,9 +30,9 @@ export const fetchAllUserPosts = (username) =>
     ],
   });
 
-export const fetchAllUsersPosts = (token, currentPage) =>
+export const fetchAllExplorePosts = (token, currentPage) =>
   createAction({
-    endpoint: `http://localhost:3001/v1/post/getAllPosts/${currentPage}`,
+    endpoint: `http://localhost:3001/v1/post/getAllExplorePosts/${currentPage}`,
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

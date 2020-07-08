@@ -1,5 +1,8 @@
 export const token = (state) => state.authentication.token;
 export const isLoginLoading = (state) => state.authentication.login.loading;
+export const isStorageLoading = (state) =>
+  state.authentication.login.storageLoading;
+
 export const getLoginError = (state) => state.authentication.login.error;
 export const isAuthorized = (state) => state.authentication.activeUser._id;
 

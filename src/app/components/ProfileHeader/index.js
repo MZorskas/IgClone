@@ -73,7 +73,11 @@ function ProfileHeader() {
               <img
                 className="ProfileAvatar"
                 id="ProfileAvatar"
-                src="https://pngimage.net/wp-content/uploads/2018/06/no-user-image-png.png"
+                src={
+                  profileUser.profilePicture
+                    ? profileUser.profilePicture
+                    : 'https://pngimage.net/wp-content/uploads/2018/06/no-user-image-png.png'
+                }
               />
             )}
             <Modal closeModal={closePictureModal} showModal={showModal}>

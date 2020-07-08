@@ -23,13 +23,13 @@ function Home() {
   const history = useHistory();
   console.log('HOME', isAuthorized);
 
-  useEffect(() => {
-    if (!token) {
-      history.replace('/login');
-    } else if (!isAuthorized) {
-      dispatch(authentication.actions.loginUserWithStorage(token));
-    }
-  }, [isAuthorized, authentication, token, history]);
+  // useEffect(() => {
+  //   if (!token) {
+  //     history.replace('/login');
+  //   } else if (!isAuthorized) {
+  //     dispatch(authentication.actions.loginUserWithStorage(token));
+  //   }
+  // }, [isAuthorized, authentication, token, history]);
 
   return (
     <React.Fragment>

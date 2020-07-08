@@ -16,7 +16,10 @@ function ExploreGallery() {
   // Selectors
   const error = useSelector(feed.selectors.getFeedError);
   const loading = useSelector(feed.selectors.isFeedLoading);
-  const posts = useSelector(feed.selectors.getFeedData);
+  const { _id } = useSelector(authentication.selectors.getActiveUser);
+  const posts = useSelector((state) =>
+    feed.selectors.getExploreData(state, _id)
+  );
   const token = useSelector(authentication.selectors.token);
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -50,7 +53,7 @@ function ExploreGallery() {
   }, [element]);
 
   useEffect(() => {
-    dispatch(feed.actions.fetchAllUsersPosts(token, currentPage));
+    dispatch(feed.actions.fetchAllExplorePosts(token, currentPage));
     console.log('Current Page', currentPage);
   }, [feed, currentPage]);
 

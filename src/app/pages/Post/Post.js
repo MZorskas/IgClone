@@ -4,7 +4,7 @@ import { useLocation, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 // Modules
-import authentication from '../../../authentication';
+// import authentication from '../../../authentication';
 import users from '../../../users';
 import feed from '../../../feed';
 
@@ -17,22 +17,21 @@ import PostFileContainer from '../../components/PostFileContainer';
 
 function Post() {
   const { postId } = useParams();
-  const location = useLocation();
   const dispatch = useDispatch();
 
   // Selectors
-  const isAuthorized = useSelector(authentication.selectors.isAuthorized);
-  const token = useSelector(authentication.selectors.token);
+  // const isAuthorized = useSelector(authentication.selectors.isAuthorized);
+  // const token = useSelector(authentication.selectors.token);
   const error = useSelector(users.selectors.getSingleUserError);
   const post = useSelector((state) =>
     feed.selectors.isPostFetched(state, postId)
   );
 
-  useEffect(() => {
-    if (!isAuthorized) {
-      dispatch(authentication.actions.loginUserWithStorage(token));
-    }
-  }, [isAuthorized, authentication, token]);
+  // useEffect(() => {
+  //   if (!isAuthorized) {
+  //     dispatch(authentication.actions.loginUserWithStorage(token));
+  //   }
+  // }, [isAuthorized, authentication, token]);
 
   useEffect(() => {
     dispatch(feed.actions.fetchSinglePost(postId));

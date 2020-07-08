@@ -10,4 +10,9 @@
   margin: auto;
   padding: 40px 20px;
   flex-grow: 1;
+  margin-top: 56px;
+  h1 {
+    font-weight: 400;
+    border-bottom: 1px solid var(--grey);
+  }
 }
