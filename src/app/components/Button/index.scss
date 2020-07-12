@@ -1,12 +1,15 @@
 .btn {
   color: var(--white);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   font-weight: 400;
   box-sizing: border-box;
   border-radius: 4px;
   cursor: pointer;
   font-size: 14px;
   line-height: 18px;
-  z-index: 2;
+  // z-index: 2;
   text-decoration: none;
   &:focus {
     outline: none;

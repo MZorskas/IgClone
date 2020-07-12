@@ -45,7 +45,7 @@ function ProfileSettings() {
       </h1>
       {username === activeUser.username ? (
         <>
-          <Button to="/profile/edit" buttonStyle="btn--white--outline">
+          <Button to="/Accounts/edit/" buttonStyle="btn--white--outline">
             Edit Profile
           </Button>
           <a

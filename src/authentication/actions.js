@@ -61,6 +61,38 @@ export const registerUser = (body) =>
     ],
   });
 
+export const editInfo = (body, token) =>
+  createAction({
+    endpoint: 'http://localhost:3001/v1/user/editInfo',
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-auth-IG': token,
+    },
+    body: JSON.stringify(body),
+    types: [
+      types.USER_EDIT_INFO_REQUEST,
+      types.USER_EDIT_INFO_SUCCESS,
+      types.USER_EDIT_INFO_FAILURE,
+    ],
+  });
+
+export const changePassword = (body, token) =>
+  createAction({
+    endpoint: 'http://localhost:3001/v1/user/changePassword',
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-auth-IG': token,
+    },
+    body: JSON.stringify(body),
+    types: [
+      types.USER_CHANGE_PASSWORD_REQUEST,
+      types.USER_CHANGE_PASSWORD_SUCCESS,
+      types.USER_CHANGE_PASSWORD_FAILURE,
+    ],
+  });
+
 export const uploadProfilePicture = (formData, token) =>
   createAction({
     endpoint: 'http://localhost:3001/v1/user/changeProfilePicture',

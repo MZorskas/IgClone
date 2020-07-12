@@ -1,0 +1,57 @@
+.Accounts {
+  display: flex;
+  flex-direction: column;
+  // border-left: 1px solid var(--grey);
+  // border-right: 1px solid var(--grey);
+  justify-content: flex-start;
+  align-items: center;
+  width: 975px;
+  height: 100%;
+  margin: auto;
+  padding: 40px 20px;
+  flex-grow: 1;
+  margin-top: 56px;
+  .AccountsContainer {
+    border: 1px solid var(--grey);
+    width: 935px;
+    height: 750px;
+    display: flex;
+    .AccountsNavigation {
+      width: 25%;
+      height: 100%;
+      border-right: 1px solid var(--grey);
+      .NavigationList {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        overflow: auto;
+        li {
+          display: block;
+          padding: 16px 16px 16px 30px;
+          text-decoration: none;
+          border-bottom: 1px solid var(--grey);
+          //   &:hover {
+          //     border-left: 2px solid var(--grey);
+          //     padding-left: 28px;
+          //   }
+
+          a {
+            text-decoration: none;
+            font-size: 16px;
+            color: var(--black);
+          }
+        }
+        .active {
+          border-left: 3px solid var(--black);
+          padding-left: 27px;
+        }
+      }
+    }
+    .AccountsInfo {
+      width: 75%;
+      height: 100%;
+      border-right: 1px solid var(--grey);
+    }
+  }
+}

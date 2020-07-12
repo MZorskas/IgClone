@@ -10,8 +10,18 @@ function PostComments({ postId, block }) {
     feed.selectors.isPostFetched(state, postId)
   );
   const postBlock = block ? 'PostCommentsBlock' : 'PostComments';
+  console.log('Post Comments', post);
   return (
     <div className={postBlock}>
+      {!!post.description && (
+        <Comment
+          description
+          username={post.user.username}
+          placeHolder={post.user.profilePicture}
+        >
+          {post.description}
+        </Comment>
+      )}
       {!!post.comments &&
         post.comments.map((comment) => {
           return (
@@ -20,6 +30,7 @@ function PostComments({ postId, block }) {
               key={comment._id}
               placeHolder={comment.user.profilePicture}
               commentId={comment._id}
+              postUserId={comment.post.user}
             >
               {comment.text}
             </Comment>

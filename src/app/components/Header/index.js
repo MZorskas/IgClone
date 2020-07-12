@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import './index.scss';
 import { Link, useLocation } from 'react-router-dom';
 import {
@@ -23,7 +23,7 @@ import Button from '../../components/Button';
 
 function Header() {
   const location = useLocation();
-
+  const inputRef = useRef();
   // Dispatch
   const dispatch = useDispatch();
 
@@ -40,6 +40,7 @@ function Header() {
   // Modal State
   const [showModal, setShowModal] = useState(false);
   const [file, setFile] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
   const [description, setDescription] = useState('');
 
   // Modal functions
@@ -55,9 +56,10 @@ function Header() {
   };
 
   const selectPicture = (e) => {
-    console.log(e.target.files[0]);
     if (e.target.files.length == 0 || e.target.files.length > 1) return;
     setFile(e.target.files[0]);
+    setImagePreview(URL.createObjectURL(e.target.files[0]));
+    console.log(URL.createObjectURL(e.target.files[0]));
   };
 
   const handleCreatePost = () => {
@@ -67,6 +69,8 @@ function Header() {
     formData.append('description', description);
     console.log(formData);
     dispatch(feed.actions.createPost(formData, token));
+    setFile(null);
+    setDescription('');
     setShowModal(false);
   };
 
@@ -76,6 +80,11 @@ function Header() {
   const handleLogout = () => {
     // logoutUser(token);
     dispatch(authentication.actions.logoutUser(token));
+  };
+
+  const selectInput = () => {
+    // document.getElementById('fileSelect').click();
+    inputRef.current.click();
   };
 
   return (
@@ -122,16 +131,26 @@ function Header() {
               <Modal post closeModal={closeNewPostModal} showModal={showModal}>
                 <h1>New Post</h1>
                 <div className="ImagePreview" id="ImagePreview">
-                  <img
-                    src=""
-                    alt="Image Preview"
-                    className="ImagePreviewContainer"
-                  />
-                  <span className="image-preview-default-text">
-                    Image Preview
-                  </span>
+                  {imagePreview ? (
+                    <img
+                      src={imagePreview}
+                      alt="Image Preview"
+                      className="ImagePreviewContainer"
+                    />
+                  ) : (
+                    <h3>Select your image</h3>
+                  )}
                 </div>
-                <input type="file" onChange={selectPicture} />
+                <input
+                  type="file"
+                  id="fileSelect"
+                  style={{ display: 'none' }}
+                  onChange={selectPicture}
+                  ref={inputRef}
+                />
+                <Button buttonStyle={'btn--white--solid'} onClick={selectInput}>
+                  Choose File
+                </Button>
                 <form className="NewPostForm">
                   <h4>Description</h4>
                   <textarea

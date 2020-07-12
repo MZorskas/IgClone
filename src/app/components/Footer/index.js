@@ -1,14 +1,11 @@
 import React from 'react';
 import './index.scss';
-
-function Footer({ children }) {
+import FooterNav from '../FooterNav';
+function Footer() {
   return (
-    <React.Fragment>
-      <div className="Footer">
-        <h3>Footer</h3>
-      </div>
-    </React.Fragment>
+    <footer className="Footer">
+      <FooterNav />
+    </footer>
   );
 }
-
 export default Footer;

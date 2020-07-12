@@ -80,7 +80,7 @@ function feed(state = DEFAULT_FEED_STATE, action) {
 
     case types.CREATE_COMMENT_SUCCESS: {
       const postIndex = state.data.findIndex(
-        (post) => post._id === action.payload.post
+        (post) => post._id === action.payload.post._id
       );
       return {
         ...state,
@@ -154,8 +154,8 @@ function feed(state = DEFAULT_FEED_STATE, action) {
       return {
         ...state,
         loading: false,
-        data: state.data.some(({ _id }) => _id === action.payload._id)
-          ? state.data.filter((post) => post._id !== action.payload.postId)
+        data: state.data.some((post) => post._id === action.payload.post)
+          ? state.data.filter((post) => post._id !== action.payload.post)
           : state.data,
       };
     }

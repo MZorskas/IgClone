@@ -60,17 +60,19 @@ function PostHeader({ children, placeHolder, postId }) {
         <Options />
       </a>
       <Modal closeModal={closeOptionsModal} showModal={showModal}>
-        <Button buttonStyle={'btn--white--solid'} modal>
+        <Button to={`/p/${post._id}`} buttonStyle={'btn--white--solid'} modal>
           Go To Post
         </Button>
-        <Button
-          onClick={deletePost}
-          buttonStyle={'btn--white--solid'}
-          modal
-          danger
-        >
-          Delete Post
-        </Button>
+        {post.user._id === activeUser._id && (
+          <Button
+            onClick={deletePost}
+            buttonStyle={'btn--white--solid'}
+            modal
+            danger
+          >
+            Delete Post
+          </Button>
+        )}
         <Button
           buttonStyle={'btn--white--solid'}
           onClick={closeOptionsModal}

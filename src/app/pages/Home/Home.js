@@ -10,6 +10,7 @@ import authentication from '../../../authentication';
 import Feed from '../../components/Feed';
 import Suggestions from '../../components/Suggestions';
 import UserTag from '../../components/UserTag';
+import FooterNav from '../../components/FooterNav';
 
 function Home() {
   // Dispatch
@@ -43,6 +44,7 @@ function Home() {
             size={'Avatar--large'}
           />
           <Suggestions />
+          <FooterNav HomeNav />
         </div>
       </div>
     </React.Fragment>

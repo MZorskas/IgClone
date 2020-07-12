@@ -11,6 +11,7 @@ const DEFAULT_AUTHENTICATION_STATE = {
     dateOfBirth: '',
     createdAt: '',
     profilePicture: '',
+    bio: '',
     following: [],
     followingCount: 0,
     followers: [],
@@ -31,6 +32,16 @@ const DEFAULT_AUTHENTICATION_STATE = {
   register: {
     error: null,
     loading: false,
+  },
+  editInfo: {
+    error: null,
+    loading: false,
+    success: null,
+  },
+  changePassword: {
+    error: null,
+    loading: false,
+    success: null,
   },
 };
 
@@ -57,6 +68,7 @@ function authentication(state = DEFAULT_AUTHENTICATION_STATE, action) {
           dateOfBirth: action.payload.dateOfBirth,
           createdAt: action.payload.createdAt,
           profilePicture: action.payload.profilePicture,
+          bio: action.payload.bio ? action.payload.bio : '',
           following: action.payload.following,
           followingCount: action.payload.followingCount,
           followers: action.payload.followers,
@@ -103,6 +115,7 @@ function authentication(state = DEFAULT_AUTHENTICATION_STATE, action) {
           dateOfBirth: action.payload.dateOfBirth,
           createdAt: action.payload.createdAt,
           profilePicture: action.payload.profilePicture,
+          bio: action.payload.bio ? action.payload.bio : '',
           following: action.payload.following,
           followingCount: action.payload.followingCount,
           followers: action.payload.followers,
@@ -156,6 +169,7 @@ function authentication(state = DEFAULT_AUTHENTICATION_STATE, action) {
           fullName: '',
           phoneNumber: '',
           dateOfBirth: '',
+          bio: '',
           createdAt: '',
           profilePicture: '',
           following: [],
@@ -190,6 +204,7 @@ function authentication(state = DEFAULT_AUTHENTICATION_STATE, action) {
       return {
         ...state,
         activeUser: {
+          ...state.activeUser,
           _id: action.payload._id,
           email: action.payload.email,
           username: action.payload.username,
@@ -208,6 +223,72 @@ function authentication(state = DEFAULT_AUTHENTICATION_STATE, action) {
         },
       };
     }
+
+    case types.USER_CHANGE_PASSWORD_REQUEST: {
+      return {
+        ...state,
+        changePassword: {
+          error: null,
+          loading: true,
+          success: null,
+        },
+      };
+    }
+    case types.USER_CHANGE_PASSWORD_FAILURE: {
+      return {
+        ...state,
+        changePassword: {
+          error: action.payload.response,
+          loading: false,
+        },
+      };
+    }
+    case types.USER_CHANGE_PASSWORD_SUCCESS: {
+      return {
+        ...state,
+        changePassword: {
+          ...state.changePassword,
+          loading: false,
+          success: action.payload.success,
+        },
+      };
+    }
+
+    case types.USER_EDIT_INFO_REQUEST: {
+      return {
+        ...state,
+        editInfo: {
+          error: null,
+          loading: true,
+          success: null,
+        },
+      };
+    }
+    case types.USER_EDIT_INFO_FAILURE: {
+      return {
+        ...state,
+        editInfo: {
+          error: action.payload.response,
+          loading: false,
+        },
+      };
+    }
+    case types.USER_EDIT_INFO_SUCCESS: {
+      return {
+        ...state,
+        activeUser: {
+          ...state.activeUser,
+          fullName: action.payload.fullName,
+          bio: action.payload.bio ? action.payload.bio : '',
+        },
+        editInfo: {
+          ...state.editInfo,
+          loading: false,
+          success: action.payload.success,
+        },
+      };
+    }
+
     case types.USER_AVATAR_REQUEST: {
       return { ...state };
     }

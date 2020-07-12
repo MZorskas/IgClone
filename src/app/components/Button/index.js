@@ -32,10 +32,10 @@ function Button({
     : STYLES[0];
 
   const checkButtonSize = SIZES.includes(buttonSize) ? buttonSize : SIZES[0];
-  const notAllowed = required ? 'btn--required' : null;
-  const modalButton = modal ? 'btn--modal' : null;
-  const dangerButton = danger ? 'btn--danger' : null;
-  const marginRightButton = marginRight ? 'btn--margin--right' : null;
+  const notAllowed = required ? 'btn--required' : '';
+  const modalButton = modal ? 'btn--modal' : '';
+  const dangerButton = danger ? 'btn--danger' : '';
+  const marginRightButton = marginRight ? 'btn--margin--right' : '';
 
   return (
     <Tag

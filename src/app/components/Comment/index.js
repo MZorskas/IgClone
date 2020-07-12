@@ -12,13 +12,21 @@ import feed from '../../../feed';
 import Button from '../Button';
 import Modal from '../Modal';
 
-function Comment({ placeHolder, username, commentId, children }) {
+function Comment({
+  placeHolder,
+  username,
+  commentId,
+  children,
+  postUserId,
+  description,
+}) {
   // Dispatch
   const dispatch = useDispatch();
 
   // Selectors
   const activeUser = useSelector(authentication.selectors.getActiveUser);
   const token = useSelector(authentication.selectors.token);
+  // const post = useSelector((state) => feed.selectors.getPost(state, postId));
 
   // Modal
   const [showModal, setShowModal] = useState(false);
@@ -35,10 +43,11 @@ function Comment({ placeHolder, username, commentId, children }) {
     setShowModal(false);
   };
 
+  console.log('Comment', username);
   return (
     <div className="CommentContainer">
       <div className="CommentAvatar">
-        <Link to="/">
+        <Link to={`/${username}`}>
           <img className="AuthorProfilePicture" src={placeHolder} />
         </Link>
       </div>
@@ -46,14 +55,18 @@ function Comment({ placeHolder, username, commentId, children }) {
         <span>{username}</span>
         <p className="CommentText">{children}</p>
       </div>
-      <a
-        className="CommentOptions"
-        onClick={() => {
-          openOptionsModal();
-        }}
-      >
-        <CommentOptions />
-      </a>
+      {(activeUser.username === username || activeUser._id === postUserId) &&
+      !description ? (
+        <a
+          className="CommentOptions"
+          onClick={() => {
+            openOptionsModal();
+          }}
+        >
+          <CommentOptions />
+        </a>
+      ) : null}
+
       <Modal closeModal={closeOptionsModal} showModal={showModal}>
         <Button
           buttonStyle={'btn--white--solid'}
@@ -63,6 +76,7 @@ function Comment({ placeHolder, username, commentId, children }) {
         >
           Delete Comment
         </Button>
+
         <Button
           buttonStyle={'btn--white--solid'}
           onClick={closeOptionsModal}

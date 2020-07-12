@@ -16,6 +16,7 @@ import NotFound from './pages/NotFound/NotFound';
 import Profile from './pages/Profile/Profile';
 import Explore from './pages/Explore/Explore';
 import Post from './pages/Post/Post';
+import Accounts from './pages/Accounts/Accounts';
 
 function App() {
   const dispatch = useDispatch();
@@ -48,6 +49,12 @@ function App() {
         </Route>
         <PrivateRoute exact path="/:username/saved/">
           <Profile />
+        </PrivateRoute>
+        <PrivateRoute exact path="/accounts/edit">
+          <Accounts />
+        </PrivateRoute>
+        <PrivateRoute exact path="/accounts/password/change">
+          <Accounts />
         </PrivateRoute>
         <Route exact path="/p/:postId">
           <Post />
