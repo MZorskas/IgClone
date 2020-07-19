@@ -10,7 +10,14 @@ import users from '../../../users';
 //Components
 import Button from '../../components/Button';
 
-function UserCard({ userId, username, fullName, placeHolder, modal }) {
+function UserCard({
+  userId,
+  username,
+  fullName,
+  placeHolder,
+  modal,
+  closeModal,
+}) {
   // Dispatch
   const dispatch = useDispatch();
   // Selectors
@@ -25,20 +32,23 @@ function UserCard({ userId, username, fullName, placeHolder, modal }) {
     dispatch(users.actions.toggleFollowUser(userId, token));
   };
 
+  // console.log("UserCard", closeModal);
   return (
     <div className={`UserCard ${modal ? 'UserCard--modal' : null}`}>
       <div className="AvatarContainer">
-        <Link to={`/${username}`}>
+        <Link to={`/${username}`} onClick={closeModal}>
           <img src={placeHolder} alt="User Image" />
         </Link>
       </div>
       <div className="UserInfoContainer">
-        <Link className="UserUsername" to={`/${username}`}>
+        <Link className="UserUsername" to={`/${username}`} onClick={closeModal}>
           {username}
         </Link>
         <span className="UserFullName">{fullName}</span>
       </div>
-      {followers.includes(activeUser._id) ? (
+      {activeUser.username === username ? null : followers.includes(
+          activeUser._id
+        ) ? (
         <>
           <Button onClick={toggleUserFollow} buttonStyle="btn--white--outline">
             Unfollow

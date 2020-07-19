@@ -2,9 +2,12 @@ import authentication from '../../../authentication';
 import users from '../../../users';
 import feed from '../../../feed';
 import history from '../../components/history';
+import store from '../../state/index';
 
 const authHandling = ({ dispatch, getState }) => (next) => (action) => {
   console.log('authHandling', { dispatch, getState, next, action, history });
+  const activeUser = getState().authentication.activeUser;
+  const token = getState().authentication.token;
   //   console.log('authHandling', action.error);
   if (action.type === authentication.types.USER_LOGIN_SUCCESS) {
     localStorage.setItem('x-auth-IG', action.payload.tokens.slice(-1)[0].token);
@@ -38,6 +41,15 @@ const authHandling = ({ dispatch, getState }) => (next) => (action) => {
     history.replace(`/${action.payload.user}`);
   }
 
+  if (
+    action.type === users.types.TOGGLE_FOLLOW_USER_SUCCESS &&
+    action.payload.reqUserId === activeUser._id &&
+    history.location.pathname === `/${activeUser.username}`
+  ) {
+    // console.log('TOGGLE_FOLLOW_USER_SUCCESS', getState().authentication.activeUser);
+    console.log('TEISINGAI');
+    dispatch(users.actions.fetchSingleUser(activeUser.username));
+  }
   //   if (action === 401) {
   //     dispatch(authentication.actions.logout());
   //   }

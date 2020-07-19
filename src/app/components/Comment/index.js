@@ -43,7 +43,7 @@ function Comment({
     setShowModal(false);
   };
 
-  console.log('Comment', username);
+  // console.log('Comment', username);
   return (
     <div className="CommentContainer">
       <div className="CommentAvatar">

@@ -306,6 +306,57 @@ function authentication(state = DEFAULT_AUTHENTICATION_STATE, action) {
         },
       };
     }
+
+    ////////////
+
+    case types.ACTIVE_USER_REQUEST: {
+      return {
+        ...state,
+        login: {
+          error: null,
+          loading: true,
+        },
+      };
+    }
+    case types.ACTIVE_USER_SUCCESS: {
+      return {
+        ...state,
+        activeUser: {
+          _id: action.payload._id,
+          email: action.payload.email,
+          username: action.payload.username,
+          fullName: action.payload.fullName,
+          phoneNumber: action.payload.phoneNumber,
+          dateOfBirth: action.payload.dateOfBirth,
+          createdAt: action.payload.createdAt,
+          profilePicture: action.payload.profilePicture,
+          bio: action.payload.bio ? action.payload.bio : '',
+          following: action.payload.following,
+          followingCount: action.payload.followingCount,
+          followers: action.payload.followers,
+          followersCount: action.payload.followersCount,
+          posts: action.payload.posts,
+          postCount: action.payload.postCount,
+          savedPosts: [],
+        },
+        token: action.payload.tokens.slice(-1)[0].token,
+        login: {
+          ...state.login,
+          loading: false,
+        },
+      };
+    }
+    case types.ACTIVE_USER_FAILURE: {
+      console.log(action);
+      return {
+        ...state,
+        login: {
+          loading: false,
+          error: action.payload.response,
+        },
+      };
+    }
+
     default:
       return state;
   }

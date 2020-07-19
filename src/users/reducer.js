@@ -4,6 +4,11 @@ const DEFAULT_USERS_STATE = {
   data: [],
   loading: false,
   error: false,
+  search: {
+    data: [],
+    error: null,
+    loading: false,
+  },
 };
 
 const addWithoutDuplicates = (data, action) => {
@@ -181,6 +186,41 @@ function users(state = DEFAULT_USERS_STATE, action) {
         ...state,
         loading: false,
         error: action.payload.response,
+      };
+    }
+
+    ////////////
+
+    case types.SEARCH_USER_REQUEST: {
+      return {
+        ...state,
+        search: {
+          ...state.search,
+          loading: true,
+          error: null,
+        },
+      };
+    }
+
+    case types.SEARCH_USER_SUCCESS: {
+      return {
+        ...state,
+        search: {
+          ...state.search,
+          loading: false,
+          data: action.payload,
+        },
+      };
+    }
+
+    case types.SEARCH_USER_FAILURE: {
+      return {
+        ...state,
+        search: {
+          ...state.search,
+          loading: false,
+          error: action.payload,
+        },
       };
     }
 

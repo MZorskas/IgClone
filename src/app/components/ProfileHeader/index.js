@@ -53,6 +53,7 @@ function ProfileHeader() {
     closePictureModal();
   };
 
+  // console.log('ProfileHeader', profileUser);
   return (
     <header className="ProfileHeader">
       {!!profileUser && (
@@ -63,8 +64,8 @@ function ProfileHeader() {
                 className="ProfileAvatar"
                 id="ProfileAvatar"
                 src={
-                  profileUser.profilePicture
-                    ? profileUser.profilePicture
+                  activeUser.profilePicture
+                    ? activeUser.profilePicture
                     : 'https://pngimage.net/wp-content/uploads/2018/06/no-user-image-png.png'
                 }
                 onClick={openPictureModal}

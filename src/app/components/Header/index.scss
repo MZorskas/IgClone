@@ -28,16 +28,7 @@
         outline: 1px solid var(--blue);
       }
     }
-    input {
-      background-color: rgba(232, 230, 230, 0.3);
-      border: 1px solid rgb(200, 200, 200);
-      border-radius: 4px;
-      height: 24px;
-      text-align: center;
-      &:focus {
-        outline: 1px solid rgb(0, 149, 246);
-      }
-    }
+
     .NavigationLinks {
       display: flex;
       justify-content: center;

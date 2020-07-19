@@ -10,8 +10,8 @@ import users from '../../../users';
 import NotFound from '../../pages/NotFound/NotFound';
 
 // Components
-import EditInfo from '../../components/EditInfo';
-import ChangePassword from '../../components/ChangePassword';
+import EditInfoForm from '../../components/EditInfoForm';
+import ChangePasswordForm from '../../components/ChangePasswordForm';
 
 function Accounts() {
   //   const { username } = useParams();
@@ -75,10 +75,10 @@ function Accounts() {
               <div className="AccountsInfo">
                 <Switch>
                   <Route exact path="/Accounts/edit/">
-                    <EditInfo />
+                    <EditInfoForm />
                   </Route>
                   <Route exact path="/Accounts/password/change/">
-                    <ChangePassword />
+                    <ChangePasswordForm />
                   </Route>
                 </Switch>
               </div>

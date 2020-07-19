@@ -13,7 +13,7 @@ import Button from '../Button';
 import Modal from '../Modal';
 
 function PostHeader({ children, placeHolder, postId }) {
-  const [url, setUrl] = useState(window.location.href);
+  // const [url, setUrl] = useState(window.location.href);
 
   // Dispatch
   const dispatch = useDispatch();
@@ -38,7 +38,7 @@ function PostHeader({ children, placeHolder, postId }) {
     setShowModal(false);
   };
 
-  console.log('POSTHEADER', post);
+  // console.log('POSTHEADER', post);
   return (
     <div className="PostHeader">
       <div className="PostAvatar">

@@ -16,9 +16,9 @@ export const createPost = (formData, token) =>
     ],
   });
 
-export const fetchAllUserPosts = (username) =>
+export const fetchAllUserPosts = (username, currentPage) =>
   createAction({
-    endpoint: `http://localhost:3001/v1/post/getAllUserPostsByUsername/${username}`,
+    endpoint: `http://localhost:3001/v1/post/getAllUserPostsByUsername/${username}/${currentPage}`,
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

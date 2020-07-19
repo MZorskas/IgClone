@@ -1,11 +1,19 @@
+// .PostsContainer {
+//   display: flex;
+//   flex-wrap: wrap;
+//   flex-direction: row;
+//   align-items: center;
+//   justify-content: space-between;
+//   width: 100%;
+//   // background-color: var(--white);
+//   //   background-color: var(--blue);
+//   // border: 1px solid var(--grey);
+// }
+
 .PostsContainer {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  // background-color: var(--white);
-  //   background-color: var(--blue);
-  // border: 1px solid var(--grey);
+  display: grid;
+  width: 935px;
+  grid-template-columns: repeat(auto-fit, 301px);
+  grid-auto-rows: 301px;
+  grid-gap: 16px;
 }

@@ -9,7 +9,7 @@ import Button from '../Button';
 // Modules
 import authentication from '../../../authentication';
 
-function ChangePassword() {
+function ChangePasswordForm() {
   // Dispatch
   const dispatch = useDispatch();
 
@@ -144,4 +144,4 @@ function ChangePassword() {
     </div>
   );
 }
-export default ChangePassword;
+export default ChangePasswordForm;

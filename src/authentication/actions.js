@@ -107,3 +107,18 @@ export const uploadProfilePicture = (formData, token) =>
       types.USER_AVATAR_FAILURE,
     ],
   });
+
+export const fetchActiveUser = (token) =>
+  createAction({
+    endpoint: `http://localhost:3001/v1/user/getActiveUser/`,
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-auth-IG': token,
+    },
+    types: [
+      types.ACTIVE_USER_REQUEST,
+      types.ACTIVE_USER_SUCCESS,
+      types.ACTIVE_USER_FAILURE,
+    ],
+  });

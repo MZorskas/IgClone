@@ -17,19 +17,20 @@ function ProfileStats({ username }) {
   //MODALS
   const [showFollowingModal, setShowFollowingModal] = useState(false);
   const [showFollowersModal, setShowFollowersModal] = useState(false);
+
   const openFollowersModal = () => {
     setShowFollowersModal(true);
   };
-  const closeFollowersModal = () => {
+  const closeModal = () => {
+    setShowFollowingModal(false);
     setShowFollowersModal(false);
   };
+
   const openFollowingModal = () => {
     setShowFollowingModal(true);
   };
-  const closeFollowingModal = () => {
-    setShowFollowingModal(false);
-  };
 
+  console.log('ProfileStats', profileUser);
   return (
     <div className="ProfileStats">
       <ul>
@@ -37,38 +38,40 @@ function ProfileStats({ username }) {
           <span>{profileUser.postCount}</span>{' '}
           {profileUser.postsCount === 1 ? 'post' : 'posts'}
         </li>
-        <li onClick={openFollowersModal} className="StatsLink">
+        <li
+          {...(profileUser.followersCount !== 0 && {
+            onClick: openFollowersModal,
+          })}
+          className="StatsLink"
+        >
           <span>{profileUser.followersCount}</span>{' '}
           {profileUser.followersCount ? 'followers' : 'followers'}
         </li>
         <Modal
           title="Followers"
-          closeModal={closeFollowersModal}
+          closeModal={closeModal}
           showModal={showFollowersModal}
         >
-          <UsersContainer fetchFollowers />
-          <Button
-            buttonStyle={'btn--white--solid'}
-            onClick={closeFollowersModal}
-            modal
-          >
+          <UsersContainer fetchFollowers closeModal={closeModal} />
+          <Button buttonStyle={'btn--white--solid'} onClick={closeModal} modal>
             Cancel
           </Button>
         </Modal>
-        <li onClick={openFollowingModal} className="StatsLink">
+        <li
+          {...(profileUser.followingCount !== 0 && {
+            onClick: openFollowingModal,
+          })}
+          className="StatsLink"
+        >
           <span>{profileUser.followingCount}</span> following
         </li>
         <Modal
-          title="Followers"
-          closeModal={closeFollowingModal}
+          title="Following"
+          closeModal={closeModal}
           showModal={showFollowingModal}
         >
-          <UsersContainer fetchFollowing />
-          <Button
-            buttonStyle={'btn--white--solid'}
-            onClick={closeFollowingModal}
-            modal
-          >
+          <UsersContainer fetchFollowing closeModal={closeModal} />
+          <Button buttonStyle={'btn--white--solid'} onClick={closeModal} modal>
             Cancel
           </Button>
         </Modal>

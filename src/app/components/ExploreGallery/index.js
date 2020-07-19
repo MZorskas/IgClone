@@ -29,7 +29,7 @@ function ExploreGallery() {
       (entries) => {
         const first = entries[0];
         if (first.isIntersecting) {
-          setCurrentPage(currentPage + 1);
+          setCurrentPage((previousPage) => previousPage + 1);
           console.log('visible', first);
         }
       },
@@ -70,6 +70,8 @@ function ExploreGallery() {
                 key={post._id}
                 placeHolder={post.image}
                 postId={post._id}
+                commentsCount={post.commentsCount}
+                likeCount={post.likeCount}
               ></PostCard>
             );
           } else {
@@ -78,6 +80,8 @@ function ExploreGallery() {
                 key={post._id}
                 placeHolder={post.image}
                 postId={post._id}
+                commentsCount={post.commentsCount}
+                likeCount={post.likeCount}
               ></PostCard>
             );
           }

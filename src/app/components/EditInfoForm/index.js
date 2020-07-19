@@ -11,7 +11,7 @@ import authentication from '../../../authentication';
 // Regular expressions
 import { fullNameRegEx } from '../../utils/regex';
 
-function EditInfo() {
+function EditInfoForm() {
   // Dispatch
   const dispatch = useDispatch();
 
@@ -48,6 +48,15 @@ function EditInfo() {
       }
       body.fullName = newFullName;
     }
+
+    // if (!!newFullName && !fullNameRegEx.exec(newFullName) === null) {
+    //   body.fullName = newFullName;
+    // } else if (fullNameRegEx.exec(newFullName) === null) {
+    //   return (
+    //     setValidationError('Invalid full name. Try again'),
+    //     console.log('Invalid full name. Try again')
+    //   );
+    // }
 
     dispatch(authentication.actions.editInfo(body, token));
   };
@@ -115,4 +124,4 @@ function EditInfo() {
     </div>
   );
 }
-export default EditInfo;
+export default EditInfoForm;

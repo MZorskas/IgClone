@@ -10,7 +10,7 @@ function PostComments({ postId, block }) {
     feed.selectors.isPostFetched(state, postId)
   );
   const postBlock = block ? 'PostCommentsBlock' : 'PostComments';
-  console.log('Post Comments', post);
+  // console.log('Post Comments', post);
   return (
     <div className={postBlock}>
       {!!post.description && (

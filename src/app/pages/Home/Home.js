@@ -13,24 +13,13 @@ import UserTag from '../../components/UserTag';
 import FooterNav from '../../components/FooterNav';
 
 function Home() {
-  // Dispatch
-  const dispatch = useDispatch();
+  // Selectors
   const { username, profilePicture, fullName } = useSelector(
     authentication.selectors.getActiveUser
   );
-  // Selectors
   const isAuthorized = useSelector(authentication.selectors.isAuthorized);
-  const token = useSelector(authentication.selectors.token);
   const history = useHistory();
   console.log('HOME', isAuthorized);
-
-  // useEffect(() => {
-  //   if (!token) {
-  //     history.replace('/login');
-  //   } else if (!isAuthorized) {
-  //     dispatch(authentication.actions.loginUserWithStorage(token));
-  //   }
-  // }, [isAuthorized, authentication, token, history]);
 
   return (
     <React.Fragment>

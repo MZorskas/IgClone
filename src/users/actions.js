@@ -70,3 +70,18 @@ export const toggleFollowUser = (profileId, token) =>
       types.TOGGLE_FOLLOW_USER_FAILURE,
     ],
   });
+
+// export const searchUser = (input) =>
+//   createAction({
+//     endpoint: `http://localhost:3001/v1/user/searchUser`,
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+//     body: JSON.stringify(input),
+//     types: [
+//       types.SEARCH_USER_REQUEST,
+//       types.SEARCH_USER_SUCCESS,
+//       types.SEARCH_USER_FAILURE,
+//     ],
+//   });

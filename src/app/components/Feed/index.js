@@ -28,7 +28,7 @@ function Feed() {
       (entries) => {
         const first = entries[0];
         if (first.isIntersecting) {
-          setCurrentPage(currentPage + 1);
+          setCurrentPage((previousPage) => previousPage + 1);
           console.log('visible', first);
         }
       },
@@ -56,6 +56,8 @@ function Feed() {
   }, [feed, currentPage]);
 
   console.log('FEEED', posts);
+  console.log('FEEED', currentPage);
+
   return (
     <div className="Feed">
       {posts &&
@@ -65,18 +67,11 @@ function Feed() {
               <PostBlock
                 elementRef={setElement}
                 key={post._id}
-                placeHolder={post.image}
                 postId={post._id}
               ></PostBlock>
             );
           } else {
-            return (
-              <PostBlock
-                key={post._id}
-                placeHolder={post.image}
-                postId={post._id}
-              ></PostBlock>
-            );
+            return <PostBlock key={post._id} postId={post._id}></PostBlock>;
           }
         })}
     </div>

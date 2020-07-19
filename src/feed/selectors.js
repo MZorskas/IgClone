@@ -18,8 +18,8 @@ export const getComments = (state, postId) => {
 };
 
 export const getUserPosts = (state, username) => {
-  console.log(username);
-  console.log(state.feed.data);
+  // console.log(username);
+  // console.log(state.feed.data);
   const data = state.feed.data.filter(
     (post) => post.user.username === username
   );

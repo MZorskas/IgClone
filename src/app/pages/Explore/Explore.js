@@ -15,15 +15,7 @@ function Explore() {
   //Dispatch
   const dispatch = useDispatch();
 
-  // //Selectors
-  // const isAuthorized = useSelector(authentication.selectors.isAuthorized);
-  // const token = useSelector(authentication.selectors.token);
-
-  // useEffect(() => {
-  //   if (!isAuthorized) {
-  //     dispatch(authentication.actions.loginUserWithStorage(token));
-  //   }
-  // }, [isAuthorized, authentication, token]);
+  // Selectors
 
   return (
     <React.Fragment>

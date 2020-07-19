@@ -12,7 +12,12 @@ import users from '../../../users';
 //Components
 import UserCard from '../UserCard';
 
-function UsersContainer({ fetchAllUsers, fetchFollowers, fetchFollowing }) {
+function UsersContainer({
+  fetchAllUsers,
+  fetchFollowers,
+  fetchFollowing,
+  closeModal,
+}) {
   const { username } = useParams();
   // Dispatch
   const dispatch = useDispatch();
@@ -23,9 +28,17 @@ function UsersContainer({ fetchAllUsers, fetchFollowers, fetchFollowing }) {
   const loading = useSelector(feed.selectors.isFeedLoading);
   const token = useSelector(authentication.selectors.token);
 
-  const { followers, following } = useSelector((state) =>
+  const profileUser = useSelector((state) =>
     users.selectors.getProfileUser(state, username)
   );
+  // const { followers, following } = useSelector((state) =>
+  //   users.selectors.getProfileUser(state, username)
+  // );
+
+  const followers = profileUser.followers;
+  const following = profileUser.following;
+  // console.log('UsersContainer', { followers, following });
+  // console.log('UsersContainer profileUser', profileUser);
 
   const allUsersList = useSelector((state) =>
     users.selectors.getNotFollowedUsers(state, activeUser)
@@ -53,11 +66,11 @@ function UsersContainer({ fetchAllUsers, fetchFollowers, fetchFollowing }) {
     }
   }, [feed, token, username, fetchAllUsers, fetchFollowers, fetchFollowing]);
 
-  console.log('UsersContainer', {
-    fetchAllUsers,
-    fetchFollowers,
-    fetchFollowing,
-  });
+  // console.log('UsersContainer', {
+  //   fetchAllUsers,
+  //   fetchFollowers,
+  //   fetchFollowing,
+  // });
   return (
     <div className="FollowersContainer">
       {fetchFollowers &&
@@ -70,6 +83,7 @@ function UsersContainer({ fetchAllUsers, fetchFollowers, fetchFollowing }) {
               placeHolder={user.profilePicture}
               fullName={user.fullName}
               userId={user._id}
+              closeModal={closeModal}
               modal
             ></UserCard>
           );
@@ -98,6 +112,7 @@ function UsersContainer({ fetchAllUsers, fetchFollowers, fetchFollowing }) {
               placeHolder={user.profilePicture}
               fullName={user.fullName}
               userId={user._id}
+              closeModal={closeModal}
               modal
             ></UserCard>
           );

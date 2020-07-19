@@ -1,0 +1,33 @@
+.searchContainer {
+  width: 250px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  input {
+    width: 200px;
+    background-color: rgba(232, 230, 230, 0.3);
+    border: 1px solid rgb(200, 200, 200);
+    border-radius: 4px;
+    height: 24px;
+    text-align: center;
+    &:focus {
+      outline: 1px solid rgb(0, 149, 246);
+    }
+  }
+  .autoCompleteContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    z-index: 9;
+    top: 50px;
+    background-color: var(--white);
+    min-height: 55px;
+    max-height: 272px;
+    width: 100%;
+    border: 1px solid var(--grey);
+    overflow: auto;
+  }
+}

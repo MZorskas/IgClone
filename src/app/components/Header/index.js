@@ -20,6 +20,7 @@ import UserAvatar from '../../images/user.png';
 //Components
 import Modal from '../../components/Modal';
 import Button from '../../components/Button';
+import Search from '../HeaderSearch';
 
 function Header() {
   const location = useLocation();
@@ -74,8 +75,8 @@ function Header() {
     setShowModal(false);
   };
 
-  console.log('Header username', username);
-  console.log('Header profilePicture', profilePicture);
+  // console.log('Header username', username);
+  // console.log('Header profilePicture', profilePicture);
 
   const handleLogout = () => {
     // logoutUser(token);
@@ -93,14 +94,7 @@ function Header() {
         <Link to="/" className="Logo">
           INSTAGRAM CLONE
         </Link>
-        <input
-          type="text"
-          placeholder="Search"
-          defaultValue=""
-          onChange={() => {
-            alert('not Working');
-          }}
-        />
+        <Search />
         <div className="NavigationLinks">
           {!isAuthorized ? (
             <>
