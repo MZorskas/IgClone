@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './index.scss';
 import { Link } from 'react-router-dom';
-import { CommentOptions } from '../icons';
+import { CommentOptions, CommentUnlike, CommentLike } from '../icons';
 import { useSelector, useDispatch } from 'react-redux';
 
 // Modules
@@ -11,6 +11,7 @@ import feed from '../../../feed';
 // Components
 import Button from '../Button';
 import Modal from '../Modal';
+import Date from '../Date';
 
 function Comment({
   placeHolder,
@@ -19,6 +20,10 @@ function Comment({
   children,
   postUserId,
   description,
+  postId,
+  creationDate,
+  likesCount,
+  likes = [],
 }) {
   // Dispatch
   const dispatch = useDispatch();
@@ -26,7 +31,17 @@ function Comment({
   // Selectors
   const activeUser = useSelector(authentication.selectors.getActiveUser);
   const token = useSelector(authentication.selectors.token);
-  // const post = useSelector((state) => feed.selectors.getPost(state, postId));
+  // const comment = useSelector((state) =>
+  //   feed.selectors.getComment(state, commentId)
+  // );
+  const toggleLikeComment = () => {
+    dispatch(feed.actions.toggleLikeComment(commentId, token));
+  };
+
+  const deleteComment = () => {
+    dispatch(feed.actions.deleteComment(commentId, token));
+    setShowModal(false);
+  };
 
   // Modal
   const [showModal, setShowModal] = useState(false);
@@ -38,35 +53,48 @@ function Comment({
     setShowModal(false);
   };
 
-  const deleteComment = () => {
-    dispatch(feed.actions.deleteComment(commentId, token));
-    setShowModal(false);
-  };
-
-  // console.log('Comment', username);
   return (
-    <div className="CommentContainer">
+    <div className="Comment">
       <div className="CommentAvatar">
         <Link to={`/${username}`}>
           <img className="AuthorProfilePicture" src={placeHolder} />
         </Link>
       </div>
-      <div className="Comment">
+      <div className="CommentContent">
         <span>{username}</span>
         <p className="CommentText">{children}</p>
+        <div className="CommentNavigation">
+          <Date postId={postId} creationDate={creationDate} comment />
+          {!!likesCount && (
+            <span className="CommentLikes">
+              {likesCount} {likes.length === 1 ? 'like' : 'likes'}
+            </span>
+          )}
+        </div>
+        {(activeUser.username === username || activeUser._id === postUserId) &&
+        !description ? (
+          <div className="CommentOptions">
+            <a
+              // className="CommentOptions"
+              onClick={() => {
+                openOptionsModal();
+              }}
+            >
+              <CommentOptions />
+            </a>
+          </div>
+        ) : null}
       </div>
-      {(activeUser.username === username || activeUser._id === postUserId) &&
-      !description ? (
+      {!description && (
         <a
-          className="CommentOptions"
+          className="CommentLike"
           onClick={() => {
-            openOptionsModal();
+            toggleLikeComment();
           }}
         >
-          <CommentOptions />
+          {likes.includes(activeUser._id) ? <CommentLike /> : <CommentUnlike />}
         </a>
-      ) : null}
-
+      )}
       <Modal closeModal={closeOptionsModal} showModal={showModal}>
         <Button
           buttonStyle={'btn--white--solid'}

@@ -1,0 +1,19 @@
+.PostDate {
+  .Date {
+    font-size: 10px;
+    letter-spacing: 0.2px;
+    color: grey;
+    text-transform: uppercase;
+    padding-left: 5px;
+  }
+}
+
+.CommentDate {
+  display: flex;
+  .Date {
+    font-size: 12px;
+    letter-spacing: 0.2px;
+    color: grey;
+    height: auto;
+  }
+}

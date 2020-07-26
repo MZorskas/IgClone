@@ -91,7 +91,7 @@ export const fetchSinglePost = (postId) =>
 
 export const createComment = (postId, token, text) =>
   createAction({
-    endpoint: `http://localhost:3001/v1/post/postNewComment/${postId}`,
+    endpoint: `http://localhost:3001/v1/comment/postNewComment/${postId}`,
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -107,7 +107,7 @@ export const createComment = (postId, token, text) =>
 
 export const deleteComment = (commentId, token) =>
   createAction({
-    endpoint: `http://localhost:3001/v1/post/deleteComment/${commentId}`,
+    endpoint: `http://localhost:3001/v1/comment/deleteComment/${commentId}`,
     method: 'POST',
     headers: {
       'x-auth-IG': token,
@@ -116,6 +116,20 @@ export const deleteComment = (commentId, token) =>
       types.DELETE_COMMENT_REQUEST,
       types.DELETE_COMMENT_SUCCESS,
       types.DELETE_COMMENT_FAILURE,
+    ],
+  });
+
+export const toggleLikeComment = (commentId, token) =>
+  createAction({
+    endpoint: `http://localhost:3001/v1/comment/toggleLikeComment/${commentId}`,
+    method: 'POST',
+    headers: {
+      'x-auth-IG': token,
+    },
+    types: [
+      types.TOGGLE_LIKE_COMMENT_REQUEST,
+      types.TOGGLE_LIKE_COMMENT_SUCCESS,
+      types.TOGGLE_LIKE_COMMENT_FAILURE,
     ],
   });
 
@@ -135,7 +149,7 @@ export const deletePost = (postId, token) =>
 
 export const toggleSavePost = (postId, token) =>
   createAction({
-    endpoint: `http://localhost:3001/v1/post/toggleSave/${postId}`,
+    endpoint: `http://localhost:3001/v1/post/toggleSavePost/${postId}`,
     method: 'POST',
     headers: {
       'x-auth-IG': token,
@@ -149,7 +163,7 @@ export const toggleSavePost = (postId, token) =>
 
 export const toggleLikePost = (postId, token) =>
   createAction({
-    endpoint: `http://localhost:3001/v1/post/toggleLike/${postId}`,
+    endpoint: `http://localhost:3001/v1/post/toggleLikePost/${postId}`,
     method: 'POST',
     headers: {
       'x-auth-IG': token,

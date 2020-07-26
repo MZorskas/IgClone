@@ -1,8 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import './index.scss';
-import Header from '../Header';
-import Footer from '../Footer';
+import Header from './Header/index';
+import Footer from './Footer/index';
 
 function PageLayout({ children }) {
   const location = useLocation();

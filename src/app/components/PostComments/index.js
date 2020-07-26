@@ -10,7 +10,7 @@ function PostComments({ postId, block }) {
     feed.selectors.isPostFetched(state, postId)
   );
   const postBlock = block ? 'PostCommentsBlock' : 'PostComments';
-  // console.log('Post Comments', post);
+  console.log('Post Comments', post);
   return (
     <div className={postBlock}>
       {!!post.description && (
@@ -18,6 +18,7 @@ function PostComments({ postId, block }) {
           description
           username={post.user.username}
           placeHolder={post.user.profilePicture}
+          creationDate={post.creationDate}
         >
           {post.description}
         </Comment>
@@ -31,6 +32,10 @@ function PostComments({ postId, block }) {
               placeHolder={comment.user.profilePicture}
               commentId={comment._id}
               postUserId={comment.post.user}
+              postId={postId}
+              creationDate={comment.creationDate}
+              likes={comment.likes}
+              likesCount={comment.likesCount}
             >
               {comment.text}
             </Comment>

@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { Like, Unlike, Comment, SaveIcon24, SaveIconActive24 } from '../icons';
 import { useSelector, useDispatch } from 'react-redux';
 
+import Date from '../Date';
+
 //Modules
 import authentication from '../../../authentication';
 import feed from '../../../feed';
@@ -59,15 +61,11 @@ function PostNavigation({ postId }) {
       </div>
       <div className="PostLikes">
         <Link to="/p/:postId" className="Likes">
-          <span>{post.likeCount}</span>{' '}
+          <span>{post.likeCount}</span>
           {post.likeCount === 1 ? 'like' : 'likes'}
         </Link>
       </div>
-      <div className="PostDate">
-        <Link to="/p/:postId" className="Date">
-          Date
-        </Link>
-      </div>
+      <Date postId={postId} creationDate={post.creationDate} />
     </div>
   );
 }

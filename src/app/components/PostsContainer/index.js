@@ -5,7 +5,6 @@ import PostCard from '../PostCard';
 import { useParams } from 'react-router-dom';
 import feed from '../../../feed';
 import users from '../../../users';
-import authentication from '../../../authentication';
 
 function PostsContainer() {
   const { username } = useParams();
@@ -27,7 +26,6 @@ function PostsContainer() {
   const [currentPage, setCurrentPage] = useState(1);
   const [element, setElement] = useState(null);
   const [hasMore, setHasMore] = useState(true);
-  console.log(posts.length, postCount);
 
   const observer = useRef(
     new IntersectionObserver(
@@ -56,11 +54,14 @@ function PostsContainer() {
   }, [element]);
 
   useEffect(() => {
-    setHasMore(postCount > posts.length);
-    if (hasMore) {
+    dispatch(feed.actions.fetchAllUserPosts(username, currentPage));
+  }, []);
+
+  useEffect(() => {
+    if (postCount > posts.length) {
       dispatch(feed.actions.fetchAllUserPosts(username, currentPage));
     }
-  }, [feed, username, currentPage]);
+  }, [feed, currentPage]);
 
   return (
     <div className="PostsContainer">

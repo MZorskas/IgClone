@@ -1,10 +1,7 @@
-import feed from '.';
-// export const isCreatePostLoading = (state) => state.feed.posts.loading;
-// export const getCreatePostError = (state) => state.feed.posts.Error;
-
 export const getFeedError = (state) => state.feed.error;
 export const getFeedData = (state) => state.feed.data;
 export const isFeedLoading = (state) => state.feed.loading;
+export const getPostsCount = (state) => state.feed.postsCount;
 
 export const getPost = (state, postId) =>
   state.feed.data.find((post) => post._id === postId);
@@ -18,8 +15,6 @@ export const getComments = (state, postId) => {
 };
 
 export const getUserPosts = (state, username) => {
-  // console.log(username);
-  // console.log(state.feed.data);
   const data = state.feed.data.filter(
     (post) => post.user.username === username
   );
@@ -27,9 +22,6 @@ export const getUserPosts = (state, username) => {
 };
 
 export const getSavedPosts = (state, activeUserId) => {
-  // const data = state.feed.data.filter((post) =>
-  //   post.savedPosts.includes(post._id)
-  // );
   const data = state.feed.data.filter((post) =>
     post.saves.includes(activeUserId)
   );
@@ -54,11 +46,12 @@ export const getExploreData = (state, activeUserId) => {
   return data ? data : [];
 };
 
-// export const isPostSaved = (state, userId, postId) => {
-//   const post = state.feed.data.find((post) => post._id === postId);
-//   console.log('isPostSaved', post);
-//   // const post = state.feed.data.filter((post) => post.saves.includes(userId));
+// export const getComment = (state, commentId) => {
+//   console.log('xxx', { state, commentId });
+//   const post = state.feed.data.filter((post) =>
+//     post.comments.find((comment) => comment._id === commentId)
+//   );
+//   console.log('x', post[0]);
+//   const comment = post[0].comments.find((comment) => comment._id === commentId);
+//   return comment;
 // };
-
-// export const isPostLiked = (state, userId, postId) =>
-//   state.feed.data.filter((post) => post.likes.includes(userId));

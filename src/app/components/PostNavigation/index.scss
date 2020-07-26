@@ -21,18 +21,11 @@
       }
     }
   }
-  .PostLikes {
+  .Likes {
+    color: var(--black);
     font-weight: 600;
     font-size: 14px;
     line-height: 18px;
     padding-left: 5px;
-  }
-  .PostDate {
-    .Date {
-      font-size: 12px;
-      color: var(--grey);
-      text-transform: uppercase;
-      padding-left: 5px;
-    }
   }
 }

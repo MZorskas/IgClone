@@ -85,6 +85,7 @@ function HeaderSearch() {
                   placeHolder={user.profilePicture}
                   key={user._id}
                   setDisplay={setDisplay}
+                  setSearchInput={setSearchInput}
                 />
               );
             })

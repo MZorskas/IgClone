@@ -21,8 +21,12 @@ function ExploreGallery() {
     feed.selectors.getExploreData(state, _id)
   );
   const token = useSelector(authentication.selectors.token);
+  const postsCount = useSelector(feed.selectors.getPostsCount);
 
+  // InfiniteScroll
   const [currentPage, setCurrentPage] = useState(1);
+  const [element, setElement] = useState(null);
+  const [hasMore, setHasMore] = useState(true);
 
   const observer = useRef(
     new IntersectionObserver(
@@ -37,8 +41,6 @@ function ExploreGallery() {
     )
   );
 
-  const [element, setElement] = useState(null);
-
   useEffect(() => {
     const currentElement = element;
     const currentObserver = observer.current;
@@ -52,12 +54,29 @@ function ExploreGallery() {
     };
   }, [element]);
 
+  // Vyksta viena kart
   useEffect(() => {
     dispatch(feed.actions.fetchAllExplorePosts(token, currentPage));
-    console.log('Current Page', currentPage);
+  }, []);
+
+  useEffect(() => {
+    // console.log('Before useEffect', hasMore, postsCount);
+
+    if (postsCount > posts.length) {
+      console.log('Vykdau pakartotini partraukima');
+      console.log('Vykdau pakartotini partraukima');
+      console.log('Vykdau pakartotini partraukima');
+      console.log('Vykdau pakartotini partraukima');
+      console.log('Vykdau pakartotini partraukima');
+      console.log('Vykdau pakartotini partraukima');
+      dispatch(feed.actions.fetchAllExplorePosts(token, currentPage));
+    }
+    // console.log('After useEffect', hasMore, postsCount);
+
+    // console.log('Current Page', postsCount, posts.length);
   }, [feed, currentPage]);
 
-  console.log('ExploreGallery', posts);
+  // console.log('ExploreGallery', posts);
   console.log('ExploreGallery ELEMENT', element);
   return (
     <div className="ExploreGallery">

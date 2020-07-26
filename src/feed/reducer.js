@@ -4,11 +4,12 @@ const DEFAULT_FEED_STATE = {
   data: [],
   loading: false,
   error: false,
+  postsCount: null,
 };
 
 const addWithoutDuplicates = (data, action) => {
-  // console.log('addWithoutDuplicates data:', data);
-  const newData = action.payload;
+  console.log('addWithoutDuplicates data:', data, action);
+  const newData = action;
   // console.log('addWithoutDuplicates newData:', newData);
   const ids = new Set(newData.map((e) => e._id));
   // console.log('addWithoutDuplicates ids', ids);
@@ -31,7 +32,7 @@ function feed(state = DEFAULT_FEED_STATE, action) {
       return {
         ...state,
         loading: false,
-        data: [...state.data, action.payload.post],
+        data: [action.payload.post, ...state.data],
       };
     }
 
@@ -56,7 +57,7 @@ function feed(state = DEFAULT_FEED_STATE, action) {
       return {
         ...state,
         loading: false,
-        data: addWithoutDuplicates(state.data, action),
+        data: addWithoutDuplicates(state.data, action.payload),
       };
     }
 
@@ -69,7 +70,8 @@ function feed(state = DEFAULT_FEED_STATE, action) {
       };
     }
 
-    ///////////////////
+    // COMMENTS
+
     case types.CREATE_COMMENT_REQUEST: {
       return {
         ...state,
@@ -80,7 +82,7 @@ function feed(state = DEFAULT_FEED_STATE, action) {
 
     case types.CREATE_COMMENT_SUCCESS: {
       const postIndex = state.data.findIndex(
-        (post) => post._id === action.payload.post._id
+        (post) => post._id === action.payload.comment.post._id
       );
       return {
         ...state,
@@ -89,7 +91,10 @@ function feed(state = DEFAULT_FEED_STATE, action) {
           ...state.data.slice(0, postIndex),
           {
             ...state.data[postIndex],
-            comments: [...state.data[postIndex].comments, action.payload],
+            comments: [
+              ...state.data[postIndex].comments,
+              action.payload.comment,
+            ],
           },
           ...state.data.slice(postIndex + 1),
         ],
@@ -142,6 +147,81 @@ function feed(state = DEFAULT_FEED_STATE, action) {
       };
     }
 
+    case types.TOGGLE_LIKE_COMMENT_REQUEST: {
+      return {
+        ...state,
+        error: null,
+        loading: true,
+      };
+    }
+
+    case types.TOGGLE_LIKE_COMMENT_SUCCESS: {
+      const postIndex = state.data.findIndex(
+        (post) => post._id === action.payload.postId
+      );
+
+      const commentIndex = state.data[postIndex].comments.findIndex(
+        (comment) => comment._id === action.payload.commentId
+      );
+
+      return {
+        ...state,
+        loading: false,
+        data: state.data[postIndex].comments[commentIndex].likes.includes(
+          action.payload.userId
+        )
+          ? [
+              ...state.data.slice(0, postIndex),
+              {
+                ...state.data[postIndex],
+                comments: [
+                  ...state.data[postIndex].comments.slice(0, commentIndex),
+                  {
+                    ...state.data[postIndex].comments[commentIndex],
+                    likes: state.data[postIndex].comments[
+                      commentIndex
+                    ].likes.filter((user) => user !== action.payload.userId),
+                    likesCount:
+                      state.data[postIndex].comments[commentIndex].likesCount -
+                      1,
+                  },
+                  ...state.data[postIndex].comments.slice(commentIndex + 1),
+                ],
+              },
+              ...state.data.slice(postIndex + 1),
+            ]
+          : [
+              ...state.data.slice(0, postIndex),
+              {
+                ...state.data[postIndex],
+                comments: [
+                  ...state.data[postIndex].comments.slice(0, commentIndex),
+                  {
+                    ...state.data[postIndex].comments[commentIndex],
+                    likes: [
+                      ...state.data[postIndex].comments[commentIndex].likes,
+                      action.payload.userId,
+                    ],
+                    likesCount:
+                      state.data[postIndex].comments[commentIndex].likesCount +
+                      1,
+                  },
+                  ...state.data[postIndex].comments.slice(commentIndex + 1),
+                ],
+              },
+              ...state.data.slice(postIndex + 1),
+            ],
+      };
+    }
+
+    case types.TOGGLE_LIKE_COMMENT_FAILURE: {
+      return {
+        ...state,
+        loading: false,
+        error: action.payload.response,
+      };
+    }
+
     case types.DELETE_POST_REQUEST: {
       return {
         ...state,
@@ -180,7 +260,7 @@ function feed(state = DEFAULT_FEED_STATE, action) {
       return {
         ...state,
         loading: false,
-        data: addWithoutDuplicates(state.data, action),
+        data: addWithoutDuplicates(state.data, action.payload),
       };
     }
 
@@ -204,7 +284,8 @@ function feed(state = DEFAULT_FEED_STATE, action) {
       return {
         ...state,
         loading: false,
-        data: addWithoutDuplicates(state.data, action),
+        data: addWithoutDuplicates(state.data, action.payload.data),
+        postsCount: action.payload.count,
       };
     }
 
@@ -229,7 +310,7 @@ function feed(state = DEFAULT_FEED_STATE, action) {
       return {
         ...state,
         loading: false,
-        data: addWithoutDuplicates(state.data, action),
+        data: addWithoutDuplicates(state.data, action.payload),
       };
     }
 
