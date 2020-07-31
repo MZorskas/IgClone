@@ -1,7 +1,12 @@
 import users from '.';
 
-export const isSingleUserLoading = (state) => state.users.loading;
-export const getSingleUserError = (state) => state.users.error;
+export const isUsersLoading = (state) => state.users.loading;
+export const getUsersError = (state) => state.users.error;
+
+export const isToggleFollowUserLoading = (state) =>
+  state.users.toggleFollowUser.loading;
+export const getToggleFollowUserError = (state) =>
+  state.users.toggleFollowUser.error;
 
 export const isUserFetched = ({ users }, username) =>
   users.data.find((user) => user.username === username);

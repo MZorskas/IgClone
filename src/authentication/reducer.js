@@ -19,6 +19,7 @@ const DEFAULT_AUTHENTICATION_STATE = {
     savedPosts: [],
     posts: [],
     postCount: 0,
+    token: '',
   },
   login: {
     error: null,
@@ -30,6 +31,14 @@ const DEFAULT_AUTHENTICATION_STATE = {
     loading: false,
   },
   register: {
+    error: null,
+    loading: false,
+  },
+  addPhoneNumber: {
+    error: null,
+    loading: false,
+  },
+  addEmail: {
     error: null,
     loading: false,
   },
@@ -60,6 +69,7 @@ function authentication(state = DEFAULT_AUTHENTICATION_STATE, action) {
       return {
         ...state,
         activeUser: {
+          ...state.activeUser,
           _id: action.payload._id,
           email: action.payload.email,
           username: action.payload.username,
@@ -76,6 +86,7 @@ function authentication(state = DEFAULT_AUTHENTICATION_STATE, action) {
           posts: action.payload.posts,
           postCount: action.payload.postCount,
           savedPosts: [],
+          token: action.payload.token,
         },
         token: action.payload.tokens.slice(-1)[0].token,
         login: {
@@ -107,6 +118,7 @@ function authentication(state = DEFAULT_AUTHENTICATION_STATE, action) {
       return {
         ...state,
         activeUser: {
+          ...state.activeUser,
           _id: action.payload._id,
           email: action.payload.email,
           username: action.payload.username,
@@ -123,6 +135,7 @@ function authentication(state = DEFAULT_AUTHENTICATION_STATE, action) {
           posts: action.payload.posts,
           postCount: action.payload.postCount,
           savedPosts: action.payload.savedPosts,
+          token: action.payload.token,
         },
         token: action.payload.tokens.slice(-1)[0].token,
         login: {
@@ -131,6 +144,7 @@ function authentication(state = DEFAULT_AUTHENTICATION_STATE, action) {
         },
       };
     }
+
     case types.USER_LOGIN_STORAGE_FAILURE: {
       console.log(action);
       return {
@@ -140,6 +154,7 @@ function authentication(state = DEFAULT_AUTHENTICATION_STATE, action) {
         },
       };
     }
+
     case types.USER_LOGOUT_REQUEST: {
       return {
         ...state,
@@ -149,6 +164,7 @@ function authentication(state = DEFAULT_AUTHENTICATION_STATE, action) {
         },
       };
     }
+
     case types.USER_LOGOUT_FAILURE: {
       return {
         ...state,
@@ -158,6 +174,7 @@ function authentication(state = DEFAULT_AUTHENTICATION_STATE, action) {
         },
       };
     }
+
     case types.USER_LOGOUT_SUCCESS: {
       return {
         ...state,
@@ -182,6 +199,7 @@ function authentication(state = DEFAULT_AUTHENTICATION_STATE, action) {
         },
       };
     }
+
     case types.USER_REGISTER_REQUEST: {
       return {
         ...state,
@@ -191,6 +209,7 @@ function authentication(state = DEFAULT_AUTHENTICATION_STATE, action) {
         },
       };
     }
+
     case types.USER_REGISTER_FAILURE: {
       return {
         ...state,
@@ -200,6 +219,7 @@ function authentication(state = DEFAULT_AUTHENTICATION_STATE, action) {
         },
       };
     }
+
     case types.USER_REGISTER_SUCCESS: {
       return {
         ...state,
@@ -215,10 +235,79 @@ function authentication(state = DEFAULT_AUTHENTICATION_STATE, action) {
           profilePicture: action.payload.profilePicture,
           following: action.payload.following,
           followers: action.payload.followers,
+          token: action.payload.token,
         },
         token: action.payload.tokens.slice(-1)[0].token,
         register: {
           ...state.register,
+          loading: false,
+        },
+      };
+    }
+
+    case types.USER_ADD_EMAIL_REQUEST: {
+      return {
+        ...state,
+        addEmail: {
+          error: null,
+          loading: true,
+        },
+      };
+    }
+
+    case types.USER_ADD_EMAIL_FAILURE: {
+      return {
+        ...state,
+        addEmail: {
+          error: action.payload.response,
+          loading: false,
+        },
+      };
+    }
+
+    case types.USER_ADD_EMAIL_SUCCESS: {
+      return {
+        ...state,
+        activeUser: {
+          ...state.activeUser,
+          email: action.payload.email,
+        },
+        addEmail: {
+          ...state.addEmail,
+          loading: false,
+        },
+      };
+    }
+
+    case types.USER_ADD_PHONE_NUMBER_REQUEST: {
+      return {
+        ...state,
+        addPhoneNumber: {
+          error: null,
+          loading: true,
+        },
+      };
+    }
+
+    case types.USER_ADD_PHONE_NUMBER_FAILURE: {
+      return {
+        ...state,
+        addPhoneNumber: {
+          error: action.payload.response,
+          loading: false,
+        },
+      };
+    }
+
+    case types.USER_ADD_PHONE_NUMBER_SUCCESS: {
+      return {
+        ...state,
+        activeUser: {
+          ...state.activeUser,
+          phoneNumber: action.payload.phoneNumber,
+        },
+        addPhoneNumber: {
+          ...state.addEmail,
           loading: false,
         },
       };
@@ -234,6 +323,7 @@ function authentication(state = DEFAULT_AUTHENTICATION_STATE, action) {
         },
       };
     }
+
     case types.USER_CHANGE_PASSWORD_FAILURE: {
       return {
         ...state,
@@ -243,6 +333,7 @@ function authentication(state = DEFAULT_AUTHENTICATION_STATE, action) {
         },
       };
     }
+
     case types.USER_CHANGE_PASSWORD_SUCCESS: {
       return {
         ...state,
@@ -264,6 +355,7 @@ function authentication(state = DEFAULT_AUTHENTICATION_STATE, action) {
         },
       };
     }
+
     case types.USER_EDIT_INFO_FAILURE: {
       return {
         ...state,
@@ -273,6 +365,7 @@ function authentication(state = DEFAULT_AUTHENTICATION_STATE, action) {
         },
       };
     }
+
     case types.USER_EDIT_INFO_SUCCESS: {
       return {
         ...state,
@@ -292,11 +385,13 @@ function authentication(state = DEFAULT_AUTHENTICATION_STATE, action) {
     case types.USER_AVATAR_REQUEST: {
       return { ...state };
     }
+
     case types.USER_AVATAR_FAILURE: {
       return {
         ...state,
       };
     }
+
     case types.USER_AVATAR_SUCCESS: {
       return {
         ...state,
@@ -307,8 +402,6 @@ function authentication(state = DEFAULT_AUTHENTICATION_STATE, action) {
       };
     }
 
-    ////////////
-
     case types.ACTIVE_USER_REQUEST: {
       return {
         ...state,
@@ -318,6 +411,7 @@ function authentication(state = DEFAULT_AUTHENTICATION_STATE, action) {
         },
       };
     }
+
     case types.ACTIVE_USER_SUCCESS: {
       return {
         ...state,
@@ -346,6 +440,7 @@ function authentication(state = DEFAULT_AUTHENTICATION_STATE, action) {
         },
       };
     }
+
     case types.ACTIVE_USER_FAILURE: {
       console.log(action);
       return {

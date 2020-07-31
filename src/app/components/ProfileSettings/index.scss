@@ -5,6 +5,7 @@
   justify-content: flex-start;
   width: 100%;
   margin-bottom: 20px;
+
   .ProfileUsername {
     font-weight: 300;
     font-size: 28px;
@@ -14,9 +15,9 @@
   a {
     display: flex;
     justify-content: center;
-    margin-right: 20px;
   }
   .Settings {
     cursor: pointer;
+    margin-left: 20px;
   }
 }

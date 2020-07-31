@@ -61,6 +61,38 @@ export const registerUser = (body) =>
     ],
   });
 
+export const addPhoneNumber = (token, phoneNumber) =>
+  createAction({
+    endpoint: 'http://localhost:3001/v1/user/addPhoneNumber/',
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-auth-IG': token,
+    },
+    body: JSON.stringify({ phoneNumber }),
+    types: [
+      types.USER_ADD_PHONE_NUMBER_REQUEST,
+      types.USER_ADD_PHONE_NUMBER_SUCCESS,
+      types.USER_ADD_PHONE_NUMBER_FAILURE,
+    ],
+  });
+
+export const addEmail = (token, email) =>
+  createAction({
+    endpoint: 'http://localhost:3001/v1/user/addEmail/',
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-auth-IG': token,
+    },
+    body: JSON.stringify({ email }),
+    types: [
+      types.USER_ADD_EMAIL_REQUEST,
+      types.USER_ADD_EMAIL_SUCCESS,
+      types.USER_ADD_EMAIL_FAILURE,
+    ],
+  });
+
 export const editInfo = (body, token) =>
   createAction({
     endpoint: 'http://localhost:3001/v1/user/editInfo',

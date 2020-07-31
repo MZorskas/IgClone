@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Route, Switch, useLocation, Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import './index.scss';
 
@@ -12,6 +13,8 @@ import authentication from '../../../authentication';
 //Components
 import RegisterForm from '../../components/RegisterForm';
 import DateOfBirthForm from '../../components/DobForm';
+import PhoneNumberForm from '../../components/PhoneNumberForm';
+import EmailForm from '../../components/EmailForm';
 
 function Register({ regStep = 1 }) {
   const history = useHistory();
@@ -24,6 +27,9 @@ function Register({ regStep = 1 }) {
   );
   // Selectors
   const isAuthorized = useSelector(authentication.selectors.isAuthorized);
+  const { phoneNumber, email } = useSelector(
+    authentication.selectors.getActiveUser
+  );
   const error = useSelector(authentication.selectors.getRegisterError);
   const loading = useSelector(authentication.selectors.isRegisterLoading);
 
@@ -40,7 +46,6 @@ function Register({ regStep = 1 }) {
 
   // Request body state
   const [body, setBody] = useState({
-    email: '',
     fullName: '',
     username: '',
     password: '',
@@ -49,12 +54,14 @@ function Register({ regStep = 1 }) {
   });
 
   useEffect(() => {
-    if (isAuthorized) {
+    if (isAuthorized && phoneNumber && email) {
       history.replace('/');
     }
   }, [isAuthorized, history]);
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('Right before submit', body);
     registerUser(body);
   };
 
@@ -79,17 +86,29 @@ function Register({ regStep = 1 }) {
             setBody={setBody}
             handleSubmit={handleSubmit}
             error={error}
+            loading={loading}
           />
         );
+
       default:
         return;
     }
   };
 
   return (
-    <React.Fragment>
-      <div className="Register">{Registration(step)}</div>
-    </React.Fragment>
+    <div className="Register">
+      <Switch>
+        <Route exact path="/register">
+          {Registration(step)}
+        </Route>
+        <Route exact path="/register/phoneNumber/">
+          <PhoneNumberForm />
+        </Route>
+        <Route exact path="/register/email/">
+          <EmailForm />
+        </Route>
+      </Switch>
+    </div>
   );
 }
 

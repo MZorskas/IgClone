@@ -9,6 +9,10 @@ const DEFAULT_USERS_STATE = {
     error: null,
     loading: false,
   },
+  toggleFollowUser: {
+    error: null,
+    loading: false,
+  },
 };
 
 const addWithoutDuplicates = (data, action) => {
@@ -57,8 +61,10 @@ function users(state = DEFAULT_USERS_STATE, action) {
     case types.TOGGLE_FOLLOW_USER_REQUEST: {
       return {
         ...state,
-        error: null,
-        loading: true,
+        toggleFollowUser: {
+          error: null,
+          loading: true,
+        },
       };
     }
 
@@ -71,7 +77,10 @@ function users(state = DEFAULT_USERS_STATE, action) {
       );
       return {
         ...state,
-        loading: false,
+        toggleFollowUser: {
+          ...state.toggleFollowUser,
+          loading: false,
+        },
         data: user.followers.includes(action.payload.reqUserId)
           ? [
               ...state.data.slice(0, userIndex),
@@ -102,8 +111,10 @@ function users(state = DEFAULT_USERS_STATE, action) {
     case types.TOGGLE_FOLLOW_USER_FAILURE: {
       return {
         ...state,
-        loading: false,
-        error: action.payload.response,
+        toggleFollowUser: {
+          loading: false,
+          error: action.payload.response,
+        },
       };
     }
 
@@ -116,9 +127,9 @@ function users(state = DEFAULT_USERS_STATE, action) {
     }
 
     case types.FOLLOWERS_SUCCESS: {
-      const newData = action.payload;
-      const ids = new Set(state.data.map((e) => e._id));
-      const newState = newData.filter((a) => !ids.has(a.id)).concat(newData);
+      // const newData = action.payload;
+      // const ids = new Set(state.data.map((e) => e._id));
+      // const newState = newData.filter((a) => !ids.has(a.id)).concat(newData);
       return {
         ...state,
         loading: false,
@@ -143,9 +154,9 @@ function users(state = DEFAULT_USERS_STATE, action) {
     }
 
     case types.FOLLOWING_USERS_SUCCESS: {
-      const newData = action.payload;
-      const ids = new Set(state.data.map((e) => e._id));
-      const newState = newData.filter((a) => !ids.has(a.id)).concat(newData);
+      // const newData = action.payload;
+      // const ids = new Set(state.data.map((e) => e._id));
+      // const newState = newData.filter((a) => !ids.has(a.id)).concat(newData);
       return {
         ...state,
         loading: false,
@@ -171,9 +182,9 @@ function users(state = DEFAULT_USERS_STATE, action) {
     }
 
     case types.NOT_FOLLOWED_USERS_SUCCESS: {
-      const newData = action.payload;
-      const ids = new Set(state.data.map((e) => e._id));
-      const newState = newData.filter((a) => !ids.has(a.id)).concat(newData);
+      // const newData = action.payload;
+      // const ids = new Set(state.data.map((e) => e._id));
+      // const newState = newData.filter((a) => !ids.has(a.id)).concat(newData);
       return {
         ...state,
         loading: false,

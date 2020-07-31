@@ -24,8 +24,8 @@ function UsersContainer({
 
   // Selectors
   const activeUser = useSelector(authentication.selectors.getActiveUser);
-  const error = useSelector(feed.selectors.getFeedError);
-  const loading = useSelector(feed.selectors.isFeedLoading);
+  const error = useSelector(users.selectors.getUsersError);
+  const loading = useSelector(users.selectors.isUsersLoading);
   const token = useSelector(authentication.selectors.token);
 
   const profileUser = useSelector((state) =>
@@ -64,7 +64,7 @@ function UsersContainer({
     if (fetchFollowing) {
       dispatch(users.actions.fetchFollowingUsers(token, username));
     }
-  }, [feed, token, username, fetchAllUsers, fetchFollowers, fetchFollowing]);
+  }, [users, token, username, fetchAllUsers, fetchFollowers, fetchFollowing]);
 
   // console.log('UsersContainer', {
   //   fetchAllUsers,
@@ -72,7 +72,7 @@ function UsersContainer({
   //   fetchFollowing,
   // });
   return (
-    <div className="FollowersContainer">
+    <div className="UsersContainer">
       {fetchFollowers &&
         !!followersList &&
         followersList.map((user) => {

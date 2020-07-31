@@ -10,10 +10,14 @@ function PageLayout({ children }) {
     <React.Fragment>
       <div className="App">
         {location.pathname !== '/login' &&
-          location.pathname !== '/register' && <Header />}
+          location.pathname !== '/register' &&
+          location.pathname !== '/register/email/' &&
+          location.pathname !== '/register/phoneNumber/' && <Header />}
         <main className="main">{children}</main>
         {location.pathname !== '/login' &&
           location.pathname !== '/register' &&
+          location.pathname !== '/register/email/' &&
+          location.pathname !== '/register/phoneNumber/' &&
           location.pathname !== '/' &&
           location.pathname !== '/explore' && <Footer />}
       </div>

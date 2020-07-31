@@ -18,6 +18,18 @@ const authHandling = ({ dispatch, getState }) => (next) => (action) => {
     );
   }
 
+  if (action.type === authentication.types.USER_ADD_EMAIL_SUCCESS) {
+    history.replace(
+      history.location.state ? history.location.state.referrer.pathname : '/'
+    );
+  }
+
+  if (action.type === authentication.types.USER_ADD_PHONE_NUMBER_SUCCESS) {
+    history.replace(
+      history.location.state ? history.location.state.referrer.pathname : '/'
+    );
+  }
+
   if (action.type === authentication.types.USER_LOGIN_STORAGE_SUCCESS) {
     localStorage.setItem('x-auth-IG', action.payload.tokens.slice(-1)[0].token);
     //Laikinai, paskui bus su tokenu

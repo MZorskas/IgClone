@@ -2,14 +2,16 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import './index.scss';
+import Loader from '../../images/Loader.svg';
 
 // Components
 import Button from '../Button';
 
 // Modules
 import authentication from '../../../authentication';
+
 // Regular expressions
-import { fullNameRegEx } from '../../utils/regex';
+import { fullNameRegex } from '../../utils/regex';
 
 function EditInfoForm() {
   // Dispatch
@@ -40,7 +42,7 @@ function EditInfoForm() {
     }
 
     if (!!newFullName) {
-      if (fullNameRegEx.exec(newFullName) === null) {
+      if (fullNameRegex.exec(newFullName) === null) {
         return (
           setValidationError('Invalid full name. Try again'),
           console.log('Invalid full name. Try again')
@@ -101,7 +103,7 @@ function EditInfoForm() {
               !newBio && !newFullName ? 'btn--light--solid' : 'btn--blue--solid'
             }
           >
-            {loading ? 'Loading...' : 'Submit'}
+            {loading ? <img src={Loader} alt="loading..." /> : 'Submit'}
           </Button>
         </div>
       </form>

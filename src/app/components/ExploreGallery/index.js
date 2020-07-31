@@ -26,7 +26,7 @@ function ExploreGallery() {
   // InfiniteScroll
   const [currentPage, setCurrentPage] = useState(1);
   const [element, setElement] = useState(null);
-  const [hasMore, setHasMore] = useState(true);
+  // const [hasMore, setHasMore] = useState(true);
 
   const observer = useRef(
     new IntersectionObserver(
@@ -63,12 +63,6 @@ function ExploreGallery() {
     // console.log('Before useEffect', hasMore, postsCount);
 
     if (postsCount > posts.length) {
-      console.log('Vykdau pakartotini partraukima');
-      console.log('Vykdau pakartotini partraukima');
-      console.log('Vykdau pakartotini partraukima');
-      console.log('Vykdau pakartotini partraukima');
-      console.log('Vykdau pakartotini partraukima');
-      console.log('Vykdau pakartotini partraukima');
       dispatch(feed.actions.fetchAllExplorePosts(token, currentPage));
     }
     // console.log('After useEffect', hasMore, postsCount);

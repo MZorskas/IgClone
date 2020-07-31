@@ -1,4 +1,4 @@
-import React, { useEffect, setState, useState, useMemo } from 'react';
+import React, { useEffect, setState, useState, useRef } from 'react';
 import './index.scss';
 import { bindActionCreators } from 'redux';
 import { Link, useLocation, useParams } from 'react-router-dom';
@@ -18,6 +18,9 @@ import Modal from '../Modal';
 
 function ProfileHeader() {
   const { username } = useParams();
+  // const [element, setElement] = useState(null);
+  const element = useRef(null);
+  console.log(element);
   // Dispatch
   const dispatch = useDispatch();
 
@@ -38,8 +41,10 @@ function ProfileHeader() {
     setShowModal(false);
   };
 
-  const selectProfilePicture = (e) => {
-    document.getElementById('ProfilePictureInput').click();
+  const selectProfilePicture = () => {
+    // console.log(element.current);
+    // document.getElementById('ProfilePictureInput').click();
+    element.current.click();
   };
 
   const changeProfilePicture = (e) => {
@@ -50,7 +55,8 @@ function ProfileHeader() {
     formData.append('profilePicture', picture);
     console.log(formData);
     dispatch(authentication.actions.uploadProfilePicture(formData, token));
-    closePictureModal();
+    // closePictureModal();
+    setShowModal(false);
   };
 
   // console.log('ProfileHeader', profileUser);
@@ -83,12 +89,12 @@ function ProfileHeader() {
             )}
             <Modal closeModal={closePictureModal} showModal={showModal}>
               <input
-                id="ProfilePictureInput"
+                ref={element}
+                className="ProfilePictureInput"
                 type="file"
                 name="profilePicture"
                 onChange={changeProfilePicture}
               />
-
               <Button
                 type={'file'}
                 buttonStyle={'btn--white--solid'}
@@ -111,7 +117,12 @@ function ProfileHeader() {
             </Modal>
           </div>
           <div className="ProfileInfo">
-            <ProfileSettings />
+            <ProfileSettings
+              element={element}
+              selectProfilePicture={selectProfilePicture}
+              changeProfilePicture={changeProfilePicture}
+              show={showModal}
+            />
             <ProfileStats username={profileUser.username} />
             <ProfileBio fullName={profileUser.fullName} />
           </div>

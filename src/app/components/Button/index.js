@@ -50,14 +50,4 @@ function Button({
   );
 }
 
-// function Button({ center, contactType, children }) {
-//   const classes = center ? `ContactBlock center` : 'ContactBlock';
-//   return (
-//     <div className={classes}>
-//       <div className="Black-box">{contactType}</div>
-//       {children}
-//     </div>
-//   );
-// }
-
 export default Button;

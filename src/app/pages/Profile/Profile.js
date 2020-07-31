@@ -29,7 +29,7 @@ function Profile() {
   // );
   // const isAuthorized = useSelector(authentication.selectors.isAuthorized);
   // const token = useSelector(authentication.selectors.token);
-  const error = useSelector(users.selectors.getSingleUserError);
+  const error = useSelector(users.selectors.getUsersError);
 
   // useEffect(() => {
   //   if (!isAuthorized) {

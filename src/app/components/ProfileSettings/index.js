@@ -13,7 +13,11 @@ import users from '../../../users';
 import Button from '../Button';
 import Modal from '../Modal';
 
-function ProfileSettings() {
+function ProfileSettings({
+  selectProfilePicture,
+  changeProfilePicture,
+  element,
+}) {
   const { username } = useParams();
 
   // Dispatch
@@ -25,13 +29,18 @@ function ProfileSettings() {
     users.selectors.getProfileUser(state, username)
   );
 
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState();
 
   const openSettingsModal = () => {
     setShowModal(true);
   };
   const closeSettingsModal = () => {
     setShowModal(false);
+  };
+
+  const handleChangeProfilePicture = (file) => {
+    changeProfilePicture(file);
+    closeSettingsModal();
   };
 
   const toggleUserFollow = () => {
@@ -57,15 +66,35 @@ function ProfileSettings() {
             <SettingsIcon />
           </a>
           <Modal closeModal={closeSettingsModal} showModal={showModal}>
-            <Button buttonStyle={'btn--white--solid'} modal>
+            <input
+              className="ProfilePictureInput"
+              ref={element}
+              type="file"
+              name="profilePicture"
+              onChange={handleChangeProfilePicture}
+            />
+            <Button
+              buttonStyle={'btn--white--solid'}
+              onClick={() => selectProfilePicture()}
+              modal
+            >
               Change Profile Picture
             </Button>
-            <Button buttonStyle={'btn--white--solid'} modal>
+            <Button
+              to={`/accounts/password/change`}
+              buttonStyle={'btn--white--solid'}
+              modal
+            >
               Change Password
             </Button>
-            <Button buttonStyle={'btn--white--solid'} modal>
+            <Button
+              to={`/accounts/edit`}
+              buttonStyle={'btn--white--solid'}
+              modal
+            >
               Edit Bio
             </Button>
+
             <Button
               onClick={() => {
                 dispatch(authentication.actions.logoutUser(token));

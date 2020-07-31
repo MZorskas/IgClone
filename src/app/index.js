@@ -17,17 +17,33 @@ import Profile from './pages/Profile/Profile';
 import Explore from './pages/Explore/Explore';
 import Post from './pages/Post/Post';
 import Accounts from './pages/Accounts/Accounts';
+import history from './components/history';
 
 function App() {
   const dispatch = useDispatch();
-  const isAuthorized = useSelector(authentication.selectors.isAuthorized);
   const token = useSelector(authentication.selectors.token);
+  const isAuthorized = useSelector(authentication.selectors.isAuthorized);
+  const { phoneNumber, email } = useSelector(
+    authentication.selectors.getActiveUser
+  );
 
   useEffect(() => {
-    if (!isAuthorized) {
+    if (!isAuthorized && token) {
       dispatch(authentication.actions.loginUserWithStorage(token));
     }
   }, [isAuthorized, authentication, token]);
+
+  useEffect(() => {
+    console.log(phoneNumber);
+    if (isAuthorized && !phoneNumber) {
+      console.log('FIRST IF');
+      history.replace('/register/phoneNumber/');
+    }
+    if (isAuthorized && !email) {
+      console.log('SECOND IF');
+      history.replace('/register/email/');
+    }
+  }, [isAuthorized, phoneNumber, email]);
 
   return (
     <PageLayout>
@@ -39,6 +55,12 @@ function App() {
           <Login />
         </Route>
         <Route exact path="/register">
+          <Register />
+        </Route>
+        <Route exact path="/register/phoneNumber">
+          <Register />
+        </Route>
+        <Route exact path="/register/email">
           <Register />
         </Route>
         <PrivateRoute exact path="/explore">

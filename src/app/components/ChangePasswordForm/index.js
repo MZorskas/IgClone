@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import './index.scss';
+import Loader from '../../images/Loader.svg';
 
 // Components
 import Button from '../Button';
@@ -14,7 +15,7 @@ function ChangePasswordForm() {
   const dispatch = useDispatch();
 
   // // Selectors
-  const isAuthorized = useSelector(authentication.selectors.isAuthorized);
+  // const isAuthorized = useSelector(authentication.selectors.isAuthorized);
   const token = useSelector(authentication.selectors.token);
   const error = useSelector(authentication.selectors.getChangePasswordError);
   const loading = useSelector(authentication.selectors.isChangePasswordLoading);
@@ -37,22 +38,16 @@ function ChangePasswordForm() {
     e.preventDefault();
 
     if (!oldPassword || !newPassword || !repeatNewPassword) {
-      return (
-        setValidationError('Please fill in required fields'),
-        console.log('Please fill in required fields')
-      );
+      return setValidationError('Please fill in required fields');
+      // console.log('Please fill in required fields')
     }
     if (newPassword.length < 6) {
-      return (
-        setValidationError('New password is too short. Try again'),
-        console.log('New password is too short. Try again')
-      );
+      return setValidationError('New password is too short. Try again');
+      // console.log('New password is too short. Try again')
     }
     if (newPassword !== repeatNewPassword) {
-      return (
-        setValidationError("The passwords didn't match. Try again"),
-        console.log("The passwords didn't match. Try again")
-      );
+      return setValidationError("The passwords didn't match. Try again");
+      // console.log("The passwords didn't match. Try again")
     }
     body.oldPassword = oldPassword;
     body.newPassword = newPassword;
@@ -128,7 +123,11 @@ function ChangePasswordForm() {
                 : 'btn--blue--solid'
             }
           >
-            {loading ? 'Loading...' : 'Change Password'}
+            {loading ? (
+              <img src={Loader} alt="loading..." />
+            ) : (
+              'Change Password'
+            )}
           </Button>
         </div>
       </form>

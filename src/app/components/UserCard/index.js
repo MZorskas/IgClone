@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './index.scss';
 import { Link } from 'react-router-dom';
+import Loader from '../../images/Loader.svg';
 
 //Modules
 import authentication from '../../../authentication';
@@ -23,7 +24,8 @@ function UserCard({
   // Selectors
   const token = useSelector(authentication.selectors.token);
   const activeUser = useSelector(authentication.selectors.getActiveUser);
-
+  const loading = useSelector(users.selectors.isToggleFollowUserLoading);
+  const error = useSelector(users.selectors.getToggleFollowUserError);
   const { followers } = useSelector((state) =>
     users.selectors.getUserById(state, userId)
   );
@@ -34,7 +36,7 @@ function UserCard({
 
   // console.log("UserCard", closeModal);
   return (
-    <div className={`UserCard ${modal ? 'UserCard--modal' : null}`}>
+    <div className={`UserCard ${modal ? 'UserCard--modal' : ''}`}>
       <div className="AvatarContainer">
         <Link to={`/${username}`} onClick={closeModal}>
           <img src={placeHolder} alt="User Image" />
@@ -51,12 +53,12 @@ function UserCard({
         ) ? (
         <>
           <Button onClick={toggleUserFollow} buttonStyle="btn--white--outline">
-            Unfollow
+            {loading ? <img src={Loader} alt="loading..." /> : 'Following'}
           </Button>
         </>
       ) : (
         <Button onClick={toggleUserFollow} buttonStyle="btn--blue--outline">
-          Follow
+          {loading ? <img src={Loader} alt="loading..." /> : 'Follow'}
         </Button>
       )}
     </div>

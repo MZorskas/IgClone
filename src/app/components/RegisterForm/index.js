@@ -3,14 +3,19 @@ import { Link } from 'react-router-dom';
 import './index.scss';
 
 // Regular expressions
-import { emailRegex, fullNameRegEx, usernameRegEx } from '../../utils/regex';
+import {
+  emailRegex,
+  fullNameRegex,
+  usernameRegex,
+  phoneNumberRegex,
+} from '../../utils/regex';
 
 //Components
 import Button from '../Button';
 
-function RegisterForm({ nextStep, setBody, body, error, handleSubmit }) {
+function RegisterForm({ nextStep, setBody, body, error }) {
   // RegisterForm state
-  const [email, setEmail] = useState(body.email);
+  const [uniqueValue, setUniqueValue] = useState(body.uniqueValue);
   const [username, setUsername] = useState(body.username);
   const [fullName, setFullName] = useState(body.fullName);
   const [password, setPassword] = useState(body.password);
@@ -21,28 +26,45 @@ function RegisterForm({ nextStep, setBody, body, error, handleSubmit }) {
     e.preventDefault();
 
     // Input validation
-    if (!email || !username || !fullName || !password || !repeatPassword) {
+    if (
+      !uniqueValue ||
+      !username ||
+      !fullName ||
+      !password ||
+      !repeatPassword
+    ) {
       return (
         setValidationError('Please fill in required fields'),
         console.log('Please fill in required fields')
       );
     }
 
-    if (emailRegex.exec(email) === null) {
-      return (
-        setValidationError('Invalid email. Try again'),
-        console.log('Invalid email. Try again')
-      );
+    if (uniqueValue.includes('@')) {
+      if (emailRegex.exec(uniqueValue) === null) {
+        return (
+          setValidationError('Invalid email. Try again'),
+          console.log('Invalid email. Try again')
+        );
+      }
+      setBody({ ...body, email: uniqueValue });
+    } else {
+      if (phoneNumberRegex.exec(uniqueValue) === null) {
+        return (
+          setValidationError('Invalid Phone Number. Try again'),
+          console.log('Invalid Phone Number. Try again')
+        );
+      }
+      setBody({ ...body, phoneNumber: uniqueValue });
     }
 
-    if (usernameRegEx.exec(username) === null) {
+    if (usernameRegex.exec(username) === null) {
       return (
         setValidationError('Invalid username. Try again'),
         console.log('Invalid username. Try again')
       );
     }
 
-    if (fullNameRegEx.exec(fullName) === null) {
+    if (fullNameRegex.exec(fullName) === null) {
       return (
         setValidationError('Invalid full name. Try again'),
         console.log('Invalid full name. Try again')
@@ -62,19 +84,7 @@ function RegisterForm({ nextStep, setBody, body, error, handleSubmit }) {
         console.log("The passwords didn't match. Try again")
       );
     }
-
-    // Request body state
-    setBody({
-      email: email,
-      fullName: fullName,
-      username: username,
-      password: password,
-      repeatPassword: repeatPassword,
-      dateOfBirth: body.dateOfBirth,
-    });
-
-    if (body.dateOfBirth) return handleSubmit();
-
+    // if (body.dateOfBirth) return handleSubmit(e);
     nextStep();
   };
 
@@ -85,10 +95,9 @@ function RegisterForm({ nextStep, setBody, body, error, handleSubmit }) {
           <input
             type="text"
             placeholder="Phone number or email"
-            defaultValue={email}
+            defaultValue={uniqueValue}
             onChange={(event) => {
-              setBody({ ...body, email: event.target.value });
-              setEmail(event.target.value);
+              setUniqueValue(event.target.value);
             }}
             autoFocus
             required
@@ -129,28 +138,33 @@ function RegisterForm({ nextStep, setBody, body, error, handleSubmit }) {
             placeholder="Repeat Password"
             defaultValue={repeatPassword}
             onChange={(event) => {
+              setBody({ ...body, repeatPassword: event.target.value });
               setRepeatPassword(event.target.value);
             }}
           />
           <Button
             type="submit"
             buttonStyle={
-              !email || !username || !fullName || !password || !repeatPassword
+              !uniqueValue ||
+              !username ||
+              !fullName ||
+              !password ||
+              !repeatPassword
                 ? 'btn--light--solid'
                 : 'btn--blue--solid'
             }
             required={
-              !email ||
+              !uniqueValue ||
               !username ||
               !fullName ||
               !password ||
-              (!repeatPassword && true)
+              !repeatPassword
             }
           >
             Next
           </Button>
 
-          {validationError && <p style={{ color: 'red' }}>{error}</p>}
+          {validationError && <p style={{ color: 'red' }}>{validationError}</p>}
         </form>
       </div>
       <div className="LinkBox">

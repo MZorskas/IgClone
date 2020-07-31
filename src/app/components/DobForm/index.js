@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './index.scss';
 import DropdownDate from 'react-dropdown-date';
+import Loader from '../../images/Loader.svg';
 
 // Component
 import Button from '../../components/Button';
@@ -18,21 +19,19 @@ const formatDate = (date) => {
   return [year, month, day].join('-');
 };
 
-function DateOfBirthForm({ prevStep, body, setBody, handleSubmit, error }) {
+function DateOfBirthForm({
+  prevStep,
+  body,
+  setBody,
+  handleSubmit,
+  error,
+  loading,
+}) {
   //   const input1 = useRef(null);
   const [date, setDate] = useState(null);
   const [day, setDay] = useState(null);
   const [month, setMonth] = useState(null);
   const [year, setYear] = useState(null);
-
-  const updateForm = (e) => {
-    e.preventDefault();
-    if (!day || !month || !year) {
-      return;
-    }
-    setBody({ ...body, dateOfBirth: formatDate(date) });
-    handleSubmit();
-  };
 
   useEffect(() => {
     if (error) {
@@ -40,12 +39,13 @@ function DateOfBirthForm({ prevStep, body, setBody, handleSubmit, error }) {
     }
   }, [error, prevStep]);
 
+  console.log('dateOfBirth render', date);
   return (
     <React.Fragment>
       <div className="DateOfBirthFormBox">
         <h3>Add Your Birthday</h3>
         <h6>This won't be a part of your public profile.</h6>
-        <form className="DateOfBirthForm" onSubmit={updateForm}>
+        <form className="DateOfBirthForm" onSubmit={handleSubmit}>
           <DropdownDate
             order={
               // optional
@@ -67,8 +67,7 @@ function DateOfBirthForm({ prevStep, body, setBody, handleSubmit, error }) {
               setYear(year);
             }}
             onDateChange={(date) => {
-              // optional
-              console.log(date);
+              setBody({ ...body, dateOfBirth: formatDate(date) });
               setDate(date);
             }}
             classes={
@@ -108,17 +107,20 @@ function DateOfBirthForm({ prevStep, body, setBody, handleSubmit, error }) {
           <Button
             type="submit"
             buttonStyle={
-              !day || !month || !year ? 'btn--light--solid' : 'btn--blue--solid'
+              !day || day < 0 || !month || !year || year < 0
+                ? 'btn--light--solid'
+                : 'btn--blue--solid'
             }
-            required={!day || !month || (!year && true)}
+            required={!day || day < 0 || !month || !year || year < 0}
           >
-            Register
+            {loading ? <img src={Loader} alt="loading..." /> : 'Register'}
           </Button>
           <span
             onClick={() => {
               prevStep();
             }}
           >
+            {loading && 'Loading...'}
             Go Back
           </span>
         </form>

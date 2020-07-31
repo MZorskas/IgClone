@@ -7,9 +7,9 @@ const DEFAULT_FEED_STATE = {
   postsCount: null,
 };
 
-const addWithoutDuplicates = (data, action) => {
-  console.log('addWithoutDuplicates data:', data, action);
-  const newData = action;
+const addWithoutDuplicates = (data, payload) => {
+  console.log('addWithoutDuplicates data:', data, payload);
+  const newData = payload;
   // console.log('addWithoutDuplicates newData:', newData);
   const ids = new Set(newData.map((e) => e._id));
   // console.log('addWithoutDuplicates ids', ids);
