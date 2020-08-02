@@ -12,6 +12,21 @@ export const HomeFilledIcon = () => (
   </svg>
 );
 
+export const Logout = () => (
+  <svg
+    data-name="Layer 1"
+    id="Layer_1"
+    viewBox="0 0 48 48"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <defs></defs>
+    <title />
+    <rect class="cls-1" height="46" rx="4" ry="4" width="46" x="1" y="1" />
+    <line class="cls-1" x1="12" x2="36" y1="12" y2="36" />
+    <line class="cls-1" x1="12" x2="36" y1="36" y2="12" />
+  </svg>
+);
+
 export const HomeIcon = () => (
   <svg
     aria-label="Home"

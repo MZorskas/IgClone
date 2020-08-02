@@ -71,6 +71,14 @@ export const toggleFollowUser = (profileId, token) =>
     ],
   });
 
+export const incProfileUsersPostCount = (username) => {
+  return { type: types.INC_PROFILE_USER_POST_COUNT, username };
+};
+
+export const decProfileUsersPostCount = (username) => {
+  return { type: types.DEC_PROFILE_USER_POST_COUNT, username };
+};
+
 // export const searchUser = (input) =>
 //   createAction({
 //     endpoint: `http://localhost:3001/v1/user/searchUser`,

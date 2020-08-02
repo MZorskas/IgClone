@@ -14,3 +14,16 @@
     }
   }
 }
+.ModalContainer {
+  max-height: 400px;
+  min-height: 200px;
+  overflow: auto;
+  // &::-webkit-scrollbar {
+  //   width: 0px;
+  // }
+  // -ms-overflow-style: none; /* IE and Edge */
+  // scrollbar-width: none; /* Firefox */
+  // scrollbar-width: thin;
+
+  // scrollbar-width: none;
+}

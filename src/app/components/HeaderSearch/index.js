@@ -71,11 +71,13 @@ function HeaderSearch() {
           setSearchInput(event.target.value);
         }}
       />
+      {/* {loading && <p style={{ color: 'grey' }}>Loading...</p>} */}
       {display && searchInput !== '' && (
         <div className="autoCompleteContainer">
-          {loading && <p style={{ color: 'grey' }}>Loading...</p>}
           {!loading && options.length === 0 ? (
-            <p style={{ color: 'grey' }}>No results found.</p>
+            <p style={{ color: 'grey', marginTop: '20px' }}>
+              No results found.
+            </p>
           ) : (
             options.map((user, i) => {
               return (

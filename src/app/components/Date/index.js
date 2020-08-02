@@ -7,7 +7,6 @@ import {
 } from '../../utils/timeSince';
 
 function Date({ creationDate, postId, comment }) {
-  console.log(comment, creationDate, postId);
   return (
     <React.Fragment>
       {comment ? (

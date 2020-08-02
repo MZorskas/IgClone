@@ -4,4 +4,15 @@
   //   border: 1px solid var(--grey);
   width: 67%;
   padding-right: 25px;
+  .SuggestionsContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: space-around;
+    width: 100%;
+    border: 1px solid var(--grey);
+    margin-bottom: 45px;
+    height: 278px;
+    background-color: var(--white);
+  }
 }

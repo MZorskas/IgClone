@@ -18,10 +18,6 @@ function PrivateRoute(props) {
   const { username } = useSelector(authentication.selectors.getActiveUser);
   const location = useLocation();
 
-  console.log('PrivateRoute', isAuthorized);
-  console.log('PrivateRoute location', location.pathname);
-  console.log('PrivateRoute props', props.path);
-
   if (
     props.path === '/:username/saved/' &&
     location.pathname !== `/${username}/saved`
@@ -33,10 +29,6 @@ function PrivateRoute(props) {
     // console.log('Proceed');
     return <Route {...props} />;
   }
-
-  // if (location.pathname === `/${username}/saved`) {
-  //   return <Route {...props} />;
-  // }
 
   console.log('Will redirect');
 

@@ -2,12 +2,12 @@ import React from 'react';
 import './index.scss';
 
 function Modal({ showModal, children, post, title }) {
-  const modalClass = post ? 'content ModalPost' : 'content';
+  const modalClass = post ? 'Content ModalPost' : 'Content';
   return (
     <React.Fragment>
       {showModal ? (
         <>
-          <div className="modal" id="modal">
+          <div className="Modal" id="modal">
             <div className="ModalMain">
               <div className={modalClass}>
                 {title ? <h2 className="ModalTitle">{title}</h2> : null}

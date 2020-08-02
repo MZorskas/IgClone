@@ -71,7 +71,7 @@ function Login() {
             <form onSubmit={handleSubmit}>
               <input
                 type="text"
-                placeholder="Email or username"
+                placeholder="Phone number, email or username"
                 value={UniqueValue}
                 onChange={(event) => {
                   setUniqueValue(event.target.value);

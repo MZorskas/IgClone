@@ -55,7 +55,7 @@ function PostsContainer() {
 
   useEffect(() => {
     dispatch(feed.actions.fetchAllUserPosts(username, currentPage));
-  }, []);
+  }, [username]);
 
   useEffect(() => {
     if (postCount > posts.length) {

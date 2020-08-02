@@ -33,7 +33,6 @@ export const timeSincePostCreation = (timestamp) => {
 
 export const timeSinceCommentCreation = (timestamp) => {
   const seconds = Math.floor((new Date() - new Date(timestamp)) / 1000);
-  console.log(timestamp);
   let interval = Math.floor(seconds / 604800);
   if (interval >= 1) {
     return interval + 'w';

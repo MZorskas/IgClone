@@ -37,19 +37,23 @@ const authHandling = ({ dispatch, getState }) => (next) => (action) => {
   }
   if (action.type === authentication.types.USER_LOGOUT_SUCCESS) {
     localStorage.removeItem('x-auth-IG');
-    history.replace('/');
+    history.replace('/login');
   }
+
   if (action.type === authentication.types.USER_REGISTER_SUCCESS) {
     localStorage.setItem('x-auth-IG', action.payload.tokens.slice(-1)[0].token);
     history.replace('/');
   }
 
   if (action.type === feed.types.CREATE_POST_SUCCESS) {
+    history.location.pathname === `/${activeUser.username}` &&
+      dispatch(users.actions.incProfileUsersPostCount(action.payload.user));
     history.location.pathname !== `/${action.payload.user}` &&
       history.push(`/${action.payload.user}`);
   }
 
   if (action.type === feed.types.DELETE_POST_SUCCESS) {
+    dispatch(users.actions.decProfileUsersPostCount(action.payload.user));
     history.replace(`/${action.payload.user}`);
   }
 

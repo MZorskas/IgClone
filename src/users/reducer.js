@@ -68,6 +68,46 @@ function users(state = DEFAULT_USERS_STATE, action) {
       };
     }
 
+    // case types.TOGGLE_FOLLOW_USER_SUCCESS: {
+    //   const userIndex = state.data.findIndex(
+    //     (user) => user._id === action.payload.targetUserId
+    //   );
+    //   const user = state.data.find(
+    //     (user) => user._id === action.payload.targetUserId
+    //   );
+    //   return {
+    //     ...state,
+    //     toggleFollowUser: {
+    //       ...state.toggleFollowUser,
+    //       loading: false,
+    //     },
+    //     data: user.followers.includes(action.payload.reqUserId)
+    //       ? [
+    //           ...state.data.slice(0, userIndex),
+    //           {
+    //             ...state.data[userIndex],
+    //             followers: state.data[userIndex].followers.filter(
+    //               (user) => user !== action.payload.reqUserId
+    //             ),
+    //             followersCount: state.data[userIndex].followersCount - 1,
+    //           },
+    //           ...state.data.slice(userIndex + 1),
+    //         ]
+    //       : [
+    //           ...state.data.slice(0, userIndex),
+    //           {
+    //             ...state.data[userIndex],
+    //             followers: [
+    //               ...state.data[userIndex].followers,
+    //               action.payload.reqUserId,
+    //             ],
+    //             followersCount: state.data[userIndex].followersCount + 1,
+    //           },
+    //           ...state.data.slice(userIndex + 1),
+    //         ],
+    //   };
+    // }
+
     case types.TOGGLE_FOLLOW_USER_SUCCESS: {
       const userIndex = state.data.findIndex(
         (user) => user._id === action.payload.targetUserId
@@ -232,6 +272,44 @@ function users(state = DEFAULT_USERS_STATE, action) {
           loading: false,
           error: action.payload,
         },
+      };
+    }
+
+    case types.INC_PROFILE_USER_POST_COUNT: {
+      console.log('x', action);
+      const userIndex = state.data.findIndex(
+        (user) => user.username === action.username
+      );
+      console.log('x', userIndex);
+      return {
+        ...state,
+        data: [
+          ...state.data.slice(0, userIndex),
+          {
+            ...state.data[userIndex],
+
+            postCount: state.data[userIndex].postCount + 1,
+          },
+          ...state.data.slice(userIndex + 1),
+        ],
+      };
+    }
+
+    case types.DEC_PROFILE_USER_POST_COUNT: {
+      const userIndex = state.data.findIndex(
+        (user) => user.username === action.username
+      );
+      return {
+        ...state,
+        data: [
+          ...state.data.slice(0, userIndex),
+          {
+            ...state.data[userIndex],
+
+            postCount: state.data[userIndex].postCount - 1,
+          },
+          ...state.data.slice(userIndex + 1),
+        ],
       };
     }
 

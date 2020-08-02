@@ -31,6 +31,10 @@ export const getNotFollowedUsers = (state, activeUser) =>
   // state.users.data.filter((user) => !user.followers.includes(activeUser._id));
   state.users.data.filter((user) => !activeUser.following.includes(user._id));
 
+export const getAllFollowingUsers = (state, activeUser) =>
+  // state.users.data.filter((user) => !user.followers.includes(activeUser._id));
+  state.users.data.filter((user) => activeUser.following.includes(user._id));
+
 export const getSearchData = (state) => state.users.search.data;
 export const getSearchError = (state) => state.users.search.error;
 export const isSearchLoading = (state) => state.users.search.loading;

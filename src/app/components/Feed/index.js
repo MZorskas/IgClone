@@ -8,6 +8,7 @@ import feed from '../../../feed';
 
 // Components
 import PostBlock from '../../components/PostBlock';
+import Suggestions from '../Suggestions';
 
 function Feed() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -17,7 +18,9 @@ function Feed() {
   // Selectors
   const error = useSelector(feed.selectors.getFeedError);
   const loading = useSelector(feed.selectors.isFeedLoading);
-  const { _id } = useSelector(authentication.selectors.getActiveUser);
+  const { _id, following } = useSelector(
+    authentication.selectors.getActiveUser
+  );
   const posts = useSelector((state) =>
     feed.selectors.getFollowingUsersPosts(state, _id)
   );
@@ -55,9 +58,6 @@ function Feed() {
     dispatch(feed.actions.fetchFollowingUsersPosts(token, currentPage));
   }, [feed, currentPage]);
 
-  console.log('FEEED', posts);
-  console.log('FEEED', currentPage);
-
   return (
     <div className="Feed">
       {posts &&
@@ -74,6 +74,11 @@ function Feed() {
             return <PostBlock key={post._id} postId={post._id}></PostBlock>;
           }
         })}
+      {following.length === 0 && (
+        <div className="SuggestionsContainer">
+          <Suggestions feed />
+        </div>
+      )}
     </div>
   );
 }

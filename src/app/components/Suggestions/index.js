@@ -1,15 +1,24 @@
 import React from 'react';
 import './index.scss';
+import { Link } from 'react-router-dom';
 
 // Components
 import UsersContainer from '../UsersContainer';
 
-function Suggestions() {
+function Suggestions({ feed, length, closeModal }) {
   return (
-    <div className="Suggestions">
-      <span className="SuggestionsTitle">Suggestions For You</span>
-      <UsersContainer fetchAllUsers />
-    </div>
+    <React.Fragment>
+      <div className="SuggestionsNavigation">
+        <span className="SuggestionsTitle">Suggestions For You</span>
+        <Link to="/explore/people/suggested">See All</Link>
+      </div>
+      <UsersContainer
+        length={length}
+        feed={feed ? true : false}
+        fetchAllUsers
+        closeModal={closeModal}
+      />
+    </React.Fragment>
   );
 }
 

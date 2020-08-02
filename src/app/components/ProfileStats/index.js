@@ -9,6 +9,7 @@ import users from '../../../users';
 import Button from '../Button';
 import Modal from '../Modal';
 import UsersContainer from '../UsersContainer';
+import Suggestions from '../Suggestions';
 
 function ProfileStats({ username }) {
   const profileUser = useSelector((state) =>
@@ -30,7 +31,6 @@ function ProfileStats({ username }) {
     setShowFollowingModal(true);
   };
 
-  console.log('ProfileStats', profileUser);
   return (
     <div className="ProfileStats">
       <ul>
@@ -70,7 +70,14 @@ function ProfileStats({ username }) {
           closeModal={closeModal}
           showModal={showFollowingModal}
         >
-          <UsersContainer fetchFollowing closeModal={closeModal} />
+          <div className="ModalContainer">
+            <UsersContainer
+              fetchFollowing
+              length="long"
+              closeModal={closeModal}
+            />
+            <Suggestions closeModal={closeModal} length="long" />
+          </div>
           <Button buttonStyle={'btn--white--solid'} onClick={closeModal} modal>
             Cancel
           </Button>

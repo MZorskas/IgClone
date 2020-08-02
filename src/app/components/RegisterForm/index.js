@@ -13,9 +13,11 @@ import {
 //Components
 import Button from '../Button';
 
-function RegisterForm({ nextStep, setBody, body, error }) {
+function RegisterForm({ nextStep, setBody, body, error, handleSubmit }) {
   // RegisterForm state
-  const [uniqueValue, setUniqueValue] = useState(body.uniqueValue);
+  const [uniqueValue, setUniqueValue] = useState(
+    body.email ? body.email : body.phoneNumber
+  );
   const [username, setUsername] = useState(body.username);
   const [fullName, setFullName] = useState(body.fullName);
   const [password, setPassword] = useState(body.password);
@@ -84,7 +86,7 @@ function RegisterForm({ nextStep, setBody, body, error }) {
         console.log("The passwords didn't match. Try again")
       );
     }
-    // if (body.dateOfBirth) return handleSubmit(e);
+    if (body.dateOfBirth) return handleSubmit(e);
     nextStep();
   };
 

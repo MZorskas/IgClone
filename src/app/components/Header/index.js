@@ -9,7 +9,7 @@ import {
   ExploreIcon,
 } from '../icons';
 import { useSelector, useDispatch } from 'react-redux';
-
+import logout from '../../images/logout.png';
 //Modules
 import authentication from '../../../authentication';
 import feed from '../../../feed';
@@ -71,6 +71,7 @@ function Header() {
     console.log(formData);
     dispatch(feed.actions.createPost(formData, token));
     setFile(null);
+    setImagePreview(null);
     setDescription('');
     setShowModal(false);
   };
@@ -196,7 +197,8 @@ function Header() {
                 />
               </Link>
               <Link to="/" className="NavIcon" onClick={handleLogout}>
-                <NewPost />
+                {/* <NewPost /> */}
+                <img src={logout} alt="logout" />
               </Link>
             </>
           )}

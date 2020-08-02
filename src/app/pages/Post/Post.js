@@ -22,7 +22,7 @@ function Post() {
   // Selectors
   // const isAuthorized = useSelector(authentication.selectors.isAuthorized);
   // const token = useSelector(authentication.selectors.token);
-  const error = useSelector(users.selectors.getSingleUserError);
+  const error = useSelector(users.selectors.getUsersError);
   const post = useSelector((state) =>
     feed.selectors.isPostFetched(state, postId)
   );

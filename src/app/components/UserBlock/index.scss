@@ -1,20 +1,17 @@
-.UserCard {
+.UserBlock {
   display: flex;
-  justify-content: space-evenly;
-  flex-direction: column;
-  height: 208px;
-  width: 174px;
-  border: 1px solid var(--grey);
-  padding: 20px;
-  margin: 0px 16px;
-
+  justify-content: flex-start;
+  align-items: center;
+  height: 63px;
+  width: 100%;
+  //   border-bottom: 1px solid var(--grey);
+  padding: 8px 16px;
   .AvatarContainer {
-    display: flex;
-    justify-content: center;
+    margin-right: 12px;
     img {
       border-radius: 50%;
-      height: 54px;
-      width: 54px;
+      height: 44px;
+      width: 44px;
       border: 1px solid var(--grey);
       object-fit: cover;
     }
@@ -23,8 +20,7 @@
     display: flex;
     flex-direction: column;
     height: auto;
-    align-items: center;
-    width: 134px;
+    align-items: flex-start;
     .UserUsername {
       font-weight: 600;
       font-size: 14px;
@@ -36,4 +32,11 @@
       color: grey;
     }
   }
+  Button {
+    margin-left: auto;
+  }
+}
+
+.UserBlockModal {
+  border-bottom: 1px solid var(--grey);
 }

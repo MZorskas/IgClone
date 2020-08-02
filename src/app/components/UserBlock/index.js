@@ -11,7 +11,14 @@ import users from '../../../users';
 //Components
 import Button from '../Button';
 
-function UserCard({ userId, username, fullName, placeHolder, closeModal }) {
+function UserBlock({
+  userId,
+  username,
+  fullName,
+  placeHolder,
+  modal,
+  closeModal,
+}) {
   // Dispatch
   const dispatch = useDispatch();
   // Selectors
@@ -27,8 +34,9 @@ function UserCard({ userId, username, fullName, placeHolder, closeModal }) {
     dispatch(users.actions.toggleFollowUser(userId, token));
   };
 
+  // console.log("UserCard", closeModal);
   return (
-    <div className="UserCard">
+    <div className={`UserBlock ${modal ? 'UserBlockModal' : ''}`}>
       <div className="AvatarContainer">
         <Link to={`/${username}`} onClick={closeModal}>
           <img src={placeHolder} alt="User Image" />
@@ -49,7 +57,7 @@ function UserCard({ userId, username, fullName, placeHolder, closeModal }) {
           </Button>
         </>
       ) : (
-        <Button onClick={toggleUserFollow} buttonStyle="btn--blue--solid">
+        <Button onClick={toggleUserFollow} buttonStyle="btn--blue--outline">
           Follow
         </Button>
       )}
@@ -57,4 +65,4 @@ function UserCard({ userId, username, fullName, placeHolder, closeModal }) {
   );
 }
 
-export default UserCard;
+export default UserBlock;

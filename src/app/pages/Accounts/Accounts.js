@@ -21,22 +21,7 @@ function Accounts() {
   const dispatch = useDispatch();
   // Selectors
   const activeUser = useSelector(authentication.selectors.getActiveUser);
-  // const profileUser = useSelector((state) =>
-  //   users.selectors.getProfileUser(state, username)
-  // );
-  // const isAuthorized = useSelector(authentication.selectors.isAuthorized);
-  // const token = useSelector(authentication.selectors.token);
-  const error = useSelector(users.selectors.getSingleUserError);
-
-  // useEffect(() => {
-  //   if (!isAuthorized) {
-  //     dispatch(authentication.actions.loginUserWithStorage(token));
-  //   }
-  // }, [isAuthorized, authentication, token]);
-
-  //   useEffect(() => {
-  //     dispatch(users.actions.fetchSingleUser(username));
-  //   }, [username, users]);
+  const error = useSelector(users.selectors.getUsersError);
 
   return (
     <React.Fragment>

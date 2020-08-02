@@ -10,6 +10,7 @@ import authentication from '../../../authentication';
 import users from '../../../users';
 
 //Components
+import UserBlock from '../UserBlock';
 import UserCard from '../UserCard';
 
 function UsersContainer({
@@ -17,7 +18,11 @@ function UsersContainer({
   fetchFollowers,
   fetchFollowing,
   closeModal,
+  feed,
+  length,
 }) {
+  const containerLength =
+    length == 'long' ? 'UsersContainerLong' : 'UsersContainerShort';
   const { username } = useParams();
   // Dispatch
   const dispatch = useDispatch();
@@ -48,8 +53,12 @@ function UsersContainer({
     users.selectors.getFollowers(state, followers)
   );
 
+  // const followingList = useSelector((state) =>
+  //   users.selectors.getFollowingUsers(state, following)
+  // );
+
   const followingList = useSelector((state) =>
-    users.selectors.getFollowingUsers(state, following)
+    users.selectors.getAllFollowingUsers(state, activeUser)
   );
 
   useEffect(() => {
@@ -70,54 +79,77 @@ function UsersContainer({
   //   fetchAllUsers,
   //   fetchFollowers,
   //   fetchFollowing,
-  // });
+  // });^
+
   return (
-    <div className="UsersContainer">
-      {fetchFollowers &&
-        !!followersList &&
-        followersList.map((user) => {
-          return (
-            <UserCard
-              key={user._id}
-              username={user.username}
-              placeHolder={user.profilePicture}
-              fullName={user.fullName}
-              userId={user._id}
-              closeModal={closeModal}
-              modal
-            ></UserCard>
-          );
-        })}
-      {fetchAllUsers &&
-        !!allUsersList &&
-        allUsersList.map((user) => {
-          if (user.username !== activeUser.username)
-            return (
-              <UserCard
-                key={user._id}
-                username={user.username}
-                placeHolder={user.profilePicture}
-                fullName={user.fullName}
-                userId={user._id}
-              ></UserCard>
-            );
-        })}
-      {fetchFollowing &&
-        !!followingList &&
-        followingList.map((user) => {
-          return (
-            <UserCard
-              key={user._id}
-              username={user.username}
-              placeHolder={user.profilePicture}
-              fullName={user.fullName}
-              userId={user._id}
-              closeModal={closeModal}
-              modal
-            ></UserCard>
-          );
-        })}
-    </div>
+    <React.Fragment>
+      {feed ? (
+        <div className={`UsersContainerFeed ${containerLength}`}>
+          {fetchAllUsers &&
+            !!allUsersList &&
+            allUsersList.map((user) => {
+              if (user.username !== activeUser.username)
+                return (
+                  <UserCard
+                    key={user._id}
+                    username={user.username}
+                    placeHolder={user.profilePicture}
+                    fullName={user.fullName}
+                    userId={user._id}
+                  ></UserCard>
+                );
+            })}
+        </div>
+      ) : (
+        <div className={`UsersContainer ${containerLength}`}>
+          {fetchFollowers &&
+            !!followersList &&
+            followersList.map((user) => {
+              return (
+                <UserBlock
+                  key={user._id}
+                  username={user.username}
+                  placeHolder={user.profilePicture}
+                  fullName={user.fullName}
+                  userId={user._id}
+                  closeModal={closeModal}
+                  modal
+                ></UserBlock>
+              );
+            })}
+          {fetchAllUsers &&
+            !!allUsersList &&
+            allUsersList.map((user) => {
+              if (user.username !== activeUser.username)
+                return (
+                  <UserBlock
+                    key={user._id}
+                    username={user.username}
+                    placeHolder={user.profilePicture}
+                    fullName={user.fullName}
+                    closeModal={closeModal}
+                    userId={user._id}
+                  ></UserBlock>
+                );
+            })}
+          {fetchFollowing &&
+            !!followingList &&
+            followingList.map((user) => {
+              return (
+                <UserBlock
+                  key={user._id}
+                  username={user.username}
+                  placeHolder={user.profilePicture}
+                  fullName={user.fullName}
+                  userId={user._id}
+                  closeModal={closeModal}
+                  modal
+                ></UserBlock>
+              );
+            })}
+        </div>
+      )}
+    </React.Fragment>
   );
 }
 

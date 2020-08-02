@@ -18,14 +18,14 @@
   .autoCompleteContainer {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     position: absolute;
     z-index: 9;
     top: 50px;
     background-color: var(--white);
-    min-height: 55px;
-    max-height: 272px;
+    height: 272px;
+    // max-height: 272px;
     width: 100%;
     border: 1px solid var(--grey);
     overflow: auto;

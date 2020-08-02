@@ -19,7 +19,6 @@ function Home() {
   );
   const isAuthorized = useSelector(authentication.selectors.isAuthorized);
   const history = useHistory();
-  console.log('HOME', isAuthorized);
 
   return (
     <React.Fragment>

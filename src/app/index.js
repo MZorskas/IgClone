@@ -66,6 +66,9 @@ function App() {
         <PrivateRoute exact path="/explore">
           <Explore />
         </PrivateRoute>
+        <PrivateRoute exact path="/explore/people/suggested">
+          <Explore />
+        </PrivateRoute>
         <Route exact path="/:username">
           <Profile />
         </Route>

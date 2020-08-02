@@ -175,29 +175,12 @@ function authentication(state = DEFAULT_AUTHENTICATION_STATE, action) {
       };
     }
 
+    // case types.USER_LOGOUT_SUCCESS: {
+    //   return { token: null, ...DEFAULT_AUTHENTICATION_STATE, token: null };
+    // }
+
     case types.USER_LOGOUT_SUCCESS: {
-      return {
-        ...state,
-        token: null,
-        activeUser: {
-          _id: null,
-          email: '',
-          username: '',
-          fullName: '',
-          phoneNumber: '',
-          dateOfBirth: '',
-          bio: '',
-          createdAt: '',
-          profilePicture: '',
-          following: [],
-          followers: [],
-          savedPosts: [],
-        },
-        logout: {
-          ...state.logout,
-          loading: false,
-        },
-      };
+      return { ...DEFAULT_AUTHENTICATION_STATE, token: null };
     }
 
     case types.USER_REGISTER_REQUEST: {
