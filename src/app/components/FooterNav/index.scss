@@ -1,71 +1,42 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+@import '../../scss/functions';
+
 .FooterNav {
-  display: flex;
-  flex-wrap: wrap;
-  height: 100%;
+  @include flex-content(row, space-between);
   width: 100%;
-  max-width: 975px;
-  margin: auto;
-  justify-content: space-between;
+  max-width: $footer-nav-container-width;
   .NavigationLinks {
     display: flex;
     flex-wrap: wrap;
-    list-style: none;
-    li {
+    a {
+      @include footer-font($primary-color);
+      text-transform: uppercase;
       margin-right: 15px;
-      a {
-        color: var(--blue);
-        font-weight: 600;
-        font-size: 12px;
-        text-transform: uppercase;
-        text-decoration: none;
-      }
     }
   }
   .Copyright {
-    display: inline-flex;
-    align-items: center;
-    height: 21px;
-    text-align: center;
+    @include footer-font(darken($tertiary-font-color, 15%));
     text-transform: uppercase;
-    font-weight: 600;
-    font-size: 12px;
-    color: grey;
   }
 }
 
 .HomeNav {
-  display: flex;
-  flex-wrap: wrap;
-  height: 100%;
+  @include flex(column);
   width: 100%;
-  max-width: 975px;
-  margin-top: 20px;
-  justify-content: space-between;
-  padding: 5px;
+  max-width: $footer-nav-container-width;
+  padding: 20px;
   .NavigationLinks {
     display: flex;
     flex-wrap: wrap;
-    list-style: none;
-
-    li {
+    a {
+      @include footer-font($tertiary-font-color, regular);
       margin-right: 5px;
-      a {
-        color: var(--grey);
-        font-weight: 400;
-        font-size: 11px;
-        text-decoration: none;
-      }
     }
   }
   .Copyright {
-    display: inline-flex;
-    align-items: center;
-    height: 21px;
-    text-align: center;
-    text-transform: uppercase;
-    font-weight: 400;
-    font-size: 11px;
+    @include footer-font($tertiary-font-color, regular);
     margin-top: 20px;
-    color: var(--grey);
+    text-transform: uppercase;
   }
 }

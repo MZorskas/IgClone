@@ -1,0 +1,27 @@
+@function weight($weight-name) {
+  @return map-get($font-weights, $weight-name);
+}
+
+@function radius($radius-name) {
+  @return map-get($border-default-radius, $radius-name);
+}
+
+@function avatar-size($size) {
+  @return map-get($avatar-sizes, $size);
+}
+
+@function icon-size($size) {
+  @return map-get($icon-sizes, $size);
+}
+
+@function font-size($size) {
+  @return map-get($font-sizes, $size);
+}
+
+@function comments-height($type) {
+  @return map-get($post-comments-container-height, $type);
+}
+
+@function btn-padding($size) {
+  @return map-get($btn-paddings, $size);
+}

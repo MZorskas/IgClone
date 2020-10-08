@@ -1,39 +1,28 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+@import '../../scss/functions';
+
 .UserCard {
-  display: flex;
-  justify-content: space-evenly;
-  flex-direction: column;
+  @include flex-content(column, space-evenly);
   height: 208px;
-  width: 174px;
-  border: 1px solid var(--grey);
+  width: 168px;
+  @include border-default($primary-border-color);
   padding: 20px;
   margin: 0px 16px;
-
   .AvatarContainer {
-    display: flex;
-    justify-content: center;
+    @include flex-content(row, center);
     img {
-      border-radius: 50%;
-      height: 54px;
-      width: 54px;
-      border: 1px solid var(--grey);
-      object-fit: cover;
+      @include avatar(large);
     }
   }
   .UserInfoContainer {
-    display: flex;
-    flex-direction: column;
-    height: auto;
-    align-items: center;
-    width: 134px;
+    @include flex-content-items(column, center, center);
+    width: 126px;
     .UserUsername {
-      font-weight: 600;
-      font-size: 14px;
-      text-decoration: none;
-      color: var(--black);
+      @include font-username(regular, bold);
     }
     .UserFullName {
-      font-size: 14px;
-      color: grey;
+      @include font-tertiary-size-weight();
     }
   }
 }

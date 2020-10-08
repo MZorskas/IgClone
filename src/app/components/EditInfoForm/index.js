@@ -107,13 +107,9 @@ function EditInfoForm() {
           </Button>
         </div>
       </form>
-      {validationError && (
-        <p style={{ color: 'red', marginLeft: '235px' }}>{validationError}</p>
-      )}
-      {error && <p style={{ color: 'red', marginLeft: '235px' }}>{error}</p>}
-      {success && (
-        <p style={{ color: 'green', marginLeft: '235px' }}>{success}</p>
-      )}
+      {validationError && <p style={{ color: 'red' }}>{validationError}</p>}
+      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {success && <p style={{ color: 'green' }}>{success}</p>}
     </div>
   );
 }

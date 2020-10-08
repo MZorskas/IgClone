@@ -1,45 +1,33 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+@import '../../scss/functions';
+
 .UserTag {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  height: auto;
+  @include flex-content-items(row, flex-start, center);
   width: 100%;
-  //   border-bottom: 1px solid var(--grey);
   padding: 8px 16px;
   .UserAvatar {
     margin-right: 12px;
     .Avatar {
-      border-radius: 50%;
-      border: 1px solid var(--grey);
-      object-fit: cover;
+      @include avatar();
     }
     .Avatar--small {
-      height: 32px;
-      width: 32px;
+      @include avatar-size-properties(small);
     }
     .Avatar--medium {
-      height: 44px;
-      width: 44px;
+      @include avatar-size-properties(medium);
     }
     .Avatar--large {
-      height: 56px;
-      width: 56px;
+      @include avatar-size-properties(large);
     }
   }
   .UserInfo {
-    display: flex;
-    flex-direction: column;
-    height: auto;
-    align-items: flex-start;
+    @include flex-content-items(column, flex-start, flex-start);
     .Username {
-      font-weight: 600;
-      font-size: 14px;
-      text-decoration: none;
-      color: var(--black);
+      @include font-primary-size-weight(regular, bold);
     }
     .FullName {
-      font-size: 14px;
-      color: grey;
+      @include font-tertiary-size-weight();
     }
   }
 }

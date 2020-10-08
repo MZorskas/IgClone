@@ -1,12 +1,13 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+@import '../../scss/functions';
+
 .ProfileStats {
   margin-bottom: 20px;
   ul {
-    list-style: none;
-    justify-content: flex-start;
-    padding: 0;
-    display: flex;
+    @include flex-content(row, flex-start);
     li {
-      font-size: 16px;
+      @include font-primary-size-weight(large);
       margin-right: 40px;
     }
     .StatsLink {
@@ -17,13 +18,8 @@
 .ModalContainer {
   max-height: 400px;
   min-height: 200px;
+  padding: 0px 12px;
+  width: 100%;
   overflow: auto;
-  // &::-webkit-scrollbar {
-  //   width: 0px;
-  // }
-  // -ms-overflow-style: none; /* IE and Edge */
-  // scrollbar-width: none; /* Firefox */
-  // scrollbar-width: thin;
-
-  // scrollbar-width: none;
+  // @include scrollbar();
 }

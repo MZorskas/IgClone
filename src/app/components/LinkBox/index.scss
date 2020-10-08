@@ -1,0 +1,21 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+@import '../../scss/functions';
+
+.LinkBox {
+  @include flex-content-items(column);
+  width: $auth-form-width;
+  height: $auth-link-box-height;
+  background-color: $primary-paper-color;
+  @include border-default($primary-border-color);
+  .link {
+    @include font-custom-size-weight(large, bold);
+    padding: 0px 5px;
+    &:focus {
+      outline: 1px solid $primary-color;
+    }
+  }
+  p {
+    @include font-primary-size-weight(large);
+  }
+}

@@ -61,7 +61,7 @@ function Comment({
         </Link>
       </div>
       <div className="CommentContent">
-        <span>{username}</span>
+        <span className="CommentUsername">{username}</span>
         <p className="CommentText">{children}</p>
         <div className="CommentNavigation">
           <Date postId={postId} creationDate={creationDate} comment />

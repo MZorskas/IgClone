@@ -1,19 +1,15 @@
-.PostDate {
-  .Date {
-    font-size: 10px;
-    letter-spacing: 0.2px;
-    color: grey;
+@import '../../scss/variables';
+@import '../../scss/mixins';
+@import '../../scss/functions';
+
+.Date {
+  display: flex;
+  .CommentDate {
+    @include font-tertiary-size-weight(small);
+  }
+  .PostDate {
+    @include font-tertiary-size-weight(tiny);
     text-transform: uppercase;
     padding-left: 5px;
-  }
-}
-
-.CommentDate {
-  display: flex;
-  .Date {
-    font-size: 12px;
-    letter-spacing: 0.2px;
-    color: grey;
-    height: auto;
   }
 }

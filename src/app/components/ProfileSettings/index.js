@@ -54,7 +54,7 @@ function ProfileSettings({
       </h1>
       {username === activeUser.username ? (
         <>
-          <Button to="/Accounts/edit/" buttonStyle="btn--white--outline">
+          <Button to="/Accounts/edit/" buttonStyle="btn--secondary--outline">
             Edit Profile
           </Button>
           <a
@@ -66,6 +66,13 @@ function ProfileSettings({
             <SettingsIcon />
           </a>
           <Modal closeModal={closeSettingsModal} showModal={showModal}>
+            <Button
+              buttonStyle={'btn--secondary--solid'}
+              onClick={() => selectProfilePicture()}
+              modal
+            >
+              Change Profile Picture
+            </Button>
             <input
               className="ProfilePictureInput"
               ref={element}
@@ -74,22 +81,15 @@ function ProfileSettings({
               onChange={handleChangeProfilePicture}
             />
             <Button
-              buttonStyle={'btn--white--solid'}
-              onClick={() => selectProfilePicture()}
-              modal
-            >
-              Change Profile Picture
-            </Button>
-            <Button
               to={`/accounts/password/change`}
-              buttonStyle={'btn--white--solid'}
+              buttonStyle={'btn--secondary--solid'}
               modal
             >
               Change Password
             </Button>
             <Button
               to={`/accounts/edit`}
-              buttonStyle={'btn--white--solid'}
+              buttonStyle={'btn--secondary--solid'}
               modal
             >
               Edit Bio
@@ -99,13 +99,13 @@ function ProfileSettings({
               onClick={() => {
                 dispatch(authentication.actions.logoutUser(token));
               }}
-              buttonStyle={'btn--white--solid'}
+              buttonStyle={'btn--secondary--solid'}
               modal
             >
               Log Out
             </Button>
             <Button
-              buttonStyle={'btn--white--solid'}
+              buttonStyle={'btn--secondary--solid'}
               onClick={closeSettingsModal}
               modal
             >
@@ -115,19 +115,19 @@ function ProfileSettings({
         </>
       ) : followers.includes(activeUser._id) ? (
         <>
-          <Button marginRight buttonStyle="btn--white--outline">
+          <Button marginRight buttonStyle="btn--secondary--outline">
             Message
           </Button>
           <Button
             onClick={toggleUserFollow}
             marginRight
-            buttonStyle="btn--white--outline"
+            buttonStyle="btn--secondary--outline"
           >
             Unfollow
           </Button>
         </>
       ) : (
-        <Button onClick={toggleUserFollow} buttonStyle="btn--blue--outline">
+        <Button onClick={toggleUserFollow} buttonStyle="btn--primary--outline">
           Follow
         </Button>
       )}

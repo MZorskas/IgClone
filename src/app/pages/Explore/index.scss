@@ -1,31 +1,15 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+@import '../../scss/functions';
+
 .Explore {
-  display: flex;
-  flex-direction: column;
-  // border-left: 1px solid var(--grey);
-  // border-right: 1px solid var(--grey);
-  justify-content: flex-start;
-  align-items: center;
-  width: 975px;
-  height: 100%;
-  margin: auto;
-  padding: 40px 20px;
-  flex-grow: 1;
-  margin-top: 56px;
-  h1 {
-    text-align: center;
-    font-weight: 400;
-    width: 100%;
-    border-bottom: 1px solid var(--grey);
-    margin-bottom: 56px;
-  }
+  @include page-layout(column, flex-start, center, $header-height);
   .Suggested {
     width: 600px;
     h4 {
       margin: 12px 0px;
       padding: 0px 16px;
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--black);
+      @include font-primary-size-weight(regular, bold);
     }
   }
 }

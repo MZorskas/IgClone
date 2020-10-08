@@ -1,22 +1,6 @@
-// .modal {
-//   position: absolute;
-//   width: 100%;
-//   height: 100%;
-//   background: var(--white);
-//   border: 1px solid var(--grey);
-//   transition: 1.1s ease-out;
-//   filter: blur(0);
-//   //   transform: scale(2);
-//   opacity: 1;
-//   visibility: visible;
-// }
-// .modal.off {
-//   opacity: 0;
-//   visibility: hidden;
-//   filter: blur(8px);
-
-//   box-shadow: 500px 0 0 rgba(0, 0, 0, 0.2);
-// }
+@import '../../scss/variables';
+@import '../../scss/mixins';
+@import '../../scss/functions';
 
 .Modal {
   position: fixed;
@@ -30,38 +14,28 @@
 
 .ModalMain {
   position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: var(--white);
-  width: 400px;
-  height: auto;
+  @include flex-content-items(row, center, center);
+  background-color: $primary-paper-color;
+  width: $modal-width;
   top: 50%;
   left: 50%;
-  border-radius: 8px;
-  transform: translate(-50%, -50.1%);
-
-  // transform: perspective(1px) translateZ(0);
+  @include border-radius();
+  // transform: translate(-50%, -50.1%);
+  transform: translate(-50%, -50%);
   .Content {
-    display: flex;
-    flex-direction: column;
+    @include flex-content-items(column, center, center);
     width: 100%;
-    justify-content: center;
-    text-align: center;
     .ModalTitle {
-      font-weight: 600;
-      font-size: 16px;
+      @include font-primary-size-weight(larger, bold);
       padding: 15px;
-      border-bottom: 1px solid var(--grey);
+      line-height: 20px;
     }
     .ImagePreview {
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      @include flex-content-items(row, center, center);
       width: 100%;
       min-height: 200px;
-      border-bottom: 1px solid var(--grey);
-      border-top: 1px solid var(--grey);
+      @include border(bottom, 1px, solid, $primary-border-color);
+      @include border(top, 1px, solid, $primary-border-color);
       .ImagePreviewContainer {
         object-fit: cover;
         width: 100%;
@@ -70,24 +44,34 @@
       }
     }
     .NewPostForm {
-      border-bottom: 1px solid var(--grey);
-      display: flex;
-      flex-direction: column;
+      @include border(bottom, 1px, solid, $primary-border-color);
+      width: 100%;
+      padding-bottom: 10px;
+      @include flex-content-items(column, center, center);
       margin: auto;
       height: 110px;
-      font-size: 14px;
+      @include font-primary-size-weight();
       line-height: 18px;
       .FormTextarea {
-        border: 1px solid var(--grey);
+        @include border-default($primary-border-color);
         resize: none;
         width: 350px;
-        height: 100px;
+        height: 70px;
+        @include border-radius(medium);
+        &:focus {
+          outline: none;
+          border: 1px solid $primary-color;
+          border-radius: radius(medium);
+        }
+      }
+      h4 {
+        @include font-primary-size-weight(regular, bold);
+        padding-bottom: 5px;
       }
     }
   }
   .ModalPost {
-    display: flex;
-    flex-direction: column;
+    @include flex(column);
   }
   .ProfilePictureInput {
     display: none;

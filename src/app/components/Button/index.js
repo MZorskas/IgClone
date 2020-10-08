@@ -3,11 +3,11 @@ import './index.scss';
 import { Link } from 'react-router-dom';
 
 const STYLES = [
-  'btn--blue--solid',
+  'btn--primary--solid',
   'btn--light--solid',
-  'btn--white--solid',
-  'btn--white--outline',
-  'btn--white--solid--required',
+  'btn--secondary--solid',
+  'btn--secondary--outline',
+  'btn--secondary--solid--required',
 ];
 
 const SIZES = ['btn--small', 'btn--medium', 'btn--large'];

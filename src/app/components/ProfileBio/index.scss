@@ -1,6 +1,9 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+@import '../../scss/functions';
+
 .ProfileBio {
   #ProfileFullName {
-    font-weight: 600;
-    font-size: 16px;
+    @include font-primary-size-weight(large, bold);
   }
 }

@@ -46,6 +46,11 @@ export const getExploreData = (state, activeUserId) => {
   return data ? data : [];
 };
 
+export const getPostCommentsCount = (state, postId) => {
+  const data = state.feed.data.find((post) => post._id === postId);
+  return data ? data.commentsCount : null;
+};
+
 // export const getComment = (state, commentId) => {
 //   console.log('xxx', { state, commentId });
 //   const post = state.feed.data.filter((post) =>

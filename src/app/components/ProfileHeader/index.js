@@ -88,6 +88,14 @@ function ProfileHeader() {
               />
             )}
             <Modal closeModal={closePictureModal} showModal={showModal}>
+              <Button
+                type={'file'}
+                buttonStyle={'btn--secondary--solid'}
+                onClick={selectProfilePicture}
+                modal
+              >
+                Change Profile Picture
+              </Button>
               <input
                 ref={element}
                 className="ProfilePictureInput"
@@ -95,20 +103,11 @@ function ProfileHeader() {
                 name="profilePicture"
                 onChange={changeProfilePicture}
               />
-              <Button
-                type={'file'}
-                buttonStyle={'btn--white--solid'}
-                onClick={selectProfilePicture}
-                modal
-              >
-                Change Profile Picture
-              </Button>
-
-              <Button buttonStyle={'btn--white--solid'} modal>
+              <Button buttonStyle={'btn--secondary--solid'} modal>
                 Remove Current Picture
               </Button>
               <Button
-                buttonStyle={'btn--white--solid'}
+                buttonStyle={'btn--secondary--solid'}
                 onClick={closePictureModal}
                 modal
               >

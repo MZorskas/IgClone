@@ -1,33 +1,31 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+@import '../../scss/functions';
+
 .searchContainer {
-  width: 250px;
+  width: $search-container-width;
   position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include flex-content-items();
   input {
     width: 200px;
-    background-color: rgba(232, 230, 230, 0.3);
-    border: 1px solid rgb(200, 200, 200);
-    border-radius: 4px;
-    height: 24px;
+    height: 28px;
+    @include border-default($primary-border-color);
+    @include border-radius(radius(small));
     text-align: center;
     &:focus {
-      outline: 1px solid rgb(0, 149, 246);
+      @include outline-input();
     }
   }
   .autoCompleteContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
     position: absolute;
-    z-index: 9;
+    z-index: 3;
     top: 50px;
-    background-color: var(--white);
-    height: 272px;
-    // max-height: 272px;
+    @include flex-content-items(column, flex-start, center);
+    @include border-default($primary-border-color);
+    background-color: $primary-paper-color;
+    min-height: $search-container-min-height;
+    max-height: $search-container-max-height;
     width: 100%;
-    border: 1px solid var(--grey);
     overflow: auto;
   }
 }

@@ -10,14 +10,14 @@ function Date({ creationDate, postId, comment }) {
   return (
     <React.Fragment>
       {comment ? (
-        <div className="CommentDate">
-          <a className="Date">
+        <div className="Date">
+          <a className="CommentDate">
             <span>{timeSinceCommentCreation(creationDate)}</span>
           </a>
         </div>
       ) : (
-        <div className="PostDate">
-          <Link to={`/p/${postId}`} className="Date">
+        <div className="Date">
+          <Link to={`/p/${postId}`} className="PostDate">
             <span>{timeSincePostCreation(creationDate)}</span>
           </Link>
         </div>

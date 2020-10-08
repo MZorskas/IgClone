@@ -1,0 +1,229 @@
+@import './variables';
+@import './functions';
+
+// Flex
+
+@mixin flex($direction: row) {
+  display: flex;
+  flex-direction: $direction;
+}
+
+@mixin flex-content($direction: row, $justify-content: center) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify-content;
+}
+
+@mixin flex-content-items(
+  $direction: row,
+  $justify-content: center,
+  $align-items: center
+) {
+  display: flex;
+  justify-content: $justify-content;
+  align-items: $align-items;
+  flex-direction: $direction;
+}
+
+@mixin flex-inline-content-items(
+  $justify-content: center,
+  $align-items: center
+) {
+  display: inline-flex;
+  justify-content: $justify-content;
+  align-items: $align-items;
+}
+
+//Borders
+@mixin border($direction, $width, $style, $color) {
+  border-#{$direction}: $width $style $color;
+}
+
+@mixin border-default($color: $primary-border-color) {
+  border: 1px solid $color;
+}
+
+@mixin border-radius($radius: medium) {
+  border-radius: radius($radius);
+}
+
+@mixin border-corner-radius(
+  $direction1: top,
+  $direction2: left,
+  $radius: medium
+) {
+  border-#{$direction1}-#{$direction2}-radius: radius($radius);
+}
+
+@mixin box-shadow() {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+// Avatars & Icons
+
+@mixin avatar($size: small, $color: $primary-border-color, $radius: circle) {
+  @include avatar-size-properties($size);
+  border: 1px solid $color;
+  @include border-radius($radius);
+  object-fit: cover;
+}
+
+@mixin avatar-size-properties($size: medium) {
+  width: avatar-size($size);
+  height: avatar-size($size);
+}
+
+@mixin icon-size-properties($size: medium) {
+  width: icon-size($size);
+  height: icon-size($size);
+}
+
+@mixin icon($size: medium) {
+  @include icon-size-properties($size);
+  cursor: pointer;
+  &:focus {
+    @include outline();
+  }
+}
+
+//Focus outline
+
+@mixin outline-input($color: $primary-color, $radius: radius(small)) {
+  outline: none;
+  border: 1px solid $color;
+  border-radius: radius($radius);
+}
+
+@mixin outline($color: $primary-color) {
+  outline-color: $color;
+}
+
+// Forms
+
+@mixin form-input(
+  $background: $primary-background-color,
+  $radius: radius(small)
+) {
+  background-color: $primary-background-color;
+  border: 1px solid $primary-border-color;
+  border-radius: $radius;
+  margin-bottom: 10px;
+  height: 36px;
+  padding-left: 10px;
+  &:focus {
+    outline: none;
+    border: 1px solid $primary-color;
+    border-radius: radius($radius);
+  }
+}
+
+@mixin auth-form() {
+  width: $auth-form-width;
+  height: $auth-form-height;
+  margin-bottom: $auth-form-margin;
+  background-color: $primary-paper-color;
+}
+
+// Page & Container layouts
+@mixin page-layout(
+  $direction: column,
+  $justify-content: flex-start,
+  $align-items: flex-start,
+  $header-height: 0
+) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify-content;
+  align-items: $align-items;
+  width: $page-container-width;
+  flex: 1;
+  padding: 40px 20px;
+  margin-top: $header-height;
+}
+
+@mixin posts-container-layout() {
+  display: grid;
+  width: $gallery-container-width;
+  grid-template-columns: repeat(auto-fit, 301px);
+  grid-auto-rows: 301px;
+  grid-gap: 16px;
+}
+
+@mixin explore-container-layout() {
+  display: grid;
+  width: 935px;
+  grid-template-columns: repeat(auto-fit, 301px);
+  grid-auto-rows: 301px;
+  grid-gap: 16px;
+  .PostCard:nth-child(12n + 2) {
+    grid-column-end: span 2;
+    grid-row-end: span 2;
+  }
+}
+
+// Fonts
+
+@mixin btn-font() {
+  font-size: font-size(regular);
+  line-height: 18px;
+}
+
+@mixin font-custom-size-weight(
+  $font-size: regular,
+  $weight: regular,
+  $color: $primary-color
+) {
+  font-weight: weight($weight);
+  font-size: font-size($font-size);
+  color: $color;
+}
+
+@mixin font-primary-size-weight($font-size: regular, $weight: regular) {
+  color: $primary-font-color;
+  font-weight: weight($weight);
+  font-size: font-size($font-size);
+}
+
+@mixin font-secondary-size-weight($font-size: regular, $weight: regular) {
+  color: $secondary-font-color;
+  font-weight: weight($weight);
+  font-size: font-size($font-size);
+}
+
+@mixin font-tertiary-size-weight($font-size: regular, $weight: regular) {
+  color: $tertiary-font-color;
+  font-weight: weight($weight);
+  font-size: font-size($font-size);
+}
+
+@mixin footer-font($color: $primary-color, $weight: bold) {
+  color: $color;
+  font-weight: weight($weight);
+  font-size: font-size(small);
+  line-height: 21px;
+}
+
+@mixin font-username($size: regular, $weight: bold) {
+  color: $primary-font-color;
+  font-size: font-size($size);
+  font-weight: weight($weight);
+}
+
+@mixin font-profile-username($font-weight: light) {
+  color: $primary-font-color;
+  font-size: 28px;
+  font-weight: weight($font-weight);
+  line-height: 32px;
+}
+
+//Common
+
+@mixin scrollbar() {
+  &::-webkit-scrollbar {
+    width: 0px;
+  }
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  scrollbar-width: thin;
+}

@@ -1,31 +1,25 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+@import '../../scss/functions';
+
 .PostNavigation {
-  border-bottom: 1px solid var(--grey);
-  height: 90px;
+  height: $post-navigation-height;
   padding: 0px 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  background-color: var(--white);
-  a {
-    text-decoration: none;
-  }
+  @include flex-content-items(column, center, flex-start);
+  @include border(bottom, 1px, solid, $primary-border-color);
   .PostActions {
     width: 100%;
     display: flex;
-
     .PostIcon {
       padding: 0px 5px;
+      cursor: pointer;
       &:last-child {
         margin-left: auto;
       }
     }
   }
   .Likes {
-    color: var(--black);
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 18px;
+    @include font-primary-size-weight(regular, bold);
     padding-left: 5px;
   }
 }

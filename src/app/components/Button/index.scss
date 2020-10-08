@@ -1,16 +1,16 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+@import '../../scss/functions';
+
 .btn {
-  color: var(--white);
+  color: $secondary-font-color;
   display: inline-flex;
-  align-items: center;
   justify-content: center;
-  font-weight: 400;
-  box-sizing: border-box;
-  border-radius: 4px;
+  align-items: center;
+  font-weight: weight(regular);
+  border-radius: radius(small);
   cursor: pointer;
-  font-size: 14px;
-  line-height: 18px;
-  // z-index: 2;
-  text-decoration: none;
+  @include btn-font();
   &:focus {
     outline: none;
   }
@@ -18,73 +18,71 @@
 
 /* Button Styles and Sizes */
 
-.btn--blue--solid {
-  border: 1px solid var(--blue);
-  background-color: var(--blue);
-}
-.btn--light--solid {
-  border: 1px solid var(--blue);
-  background-color: var(--blue);
-  opacity: 0.4;
-}
-.btn--white--solid {
-  border: 1px solid var(--white);
-  background-color: var(--white);
-  color: var(--blue);
+.btn--primary--solid {
+  @include border-default($primary-color);
+  background-color: $primary-color;
 }
 
-.btn--white--solid--required {
-  border: 1px solid var(--white);
-  background-color: var(--white);
-  color: var(--blue);
+.btn--light--solid {
+  @include border-default($primary-color);
+  background-color: $primary-color;
+  opacity: 0.4;
+}
+
+.btn--secondary--solid {
+  @include border-default($primary-paper-color);
+  background-color: $primary-paper-color;
+  color: $primary-color;
+}
+
+.btn--secondary--solid--required {
+  @include border-default($primary-paper-color);
+  background-color: $primary-paper-color;
+  color: $primary-color;
   cursor: not-allowed;
   opacity: 0.4;
 }
 
-.btn--white--outline {
-  border: 1px solid var(--grey);
-  background-color: var(--white);
-  color: var(--black);
+.btn--secondary--outline {
+  @include border-default($primary-border-color);
+  background-color: $primary-paper-color;
+  color: $primary-font-color;
   &:focus {
-    border: 1px solid var(--white);
-    color: var(--grey);
+    @include border-default($primary-paper-color);
+    color: $tertiary-font-color;
   }
 }
 
 .btn--required {
   cursor: not-allowed;
 }
-.btn--primary--outline {
-  border: 1px solid var(--red);
-  background-color: Transparent;
-  color: var(--white);
-}
 
 .btn--medium {
-  padding: 5px 18px;
+  padding: btn-padding(medium);
 }
 
 .btn--small {
-  padding: 5px 9px;
+  padding: btn-padding(small);
 }
 
 .btn--modal {
-  padding: 0px;
+  width: 100%;
   height: 50px;
-  color: black;
-  border-bottom: 1px solid var(--grey);
+  color: $primary-font-color;
+  @include border(bottom, 1px, solid, $primary-border-color);
+  border-radius: 0px;
   &:first-child {
     border-top: none;
-    border-top-left-radius: 12px;
-    border-top-right-radius: 12px;
+    @include border-corner-radius(top, left, large);
+    @include border-corner-radius(top, right, large);
   }
   &:last-child {
     border-bottom: none;
-    border-bottom-left-radius: 12px;
-    border-bottom-right-radius: 12px;
+    @include border-corner-radius(bottom, left, large);
+    @include border-corner-radius(bottom, right, large);
   }
   &:focus {
-    background-color: var(--grey);
+    background-color: darken($primary-paper-color, 15%);
   }
 }
 
@@ -93,5 +91,5 @@
 }
 
 .btn--danger {
-  color: red;
+  color: $danger;
 }

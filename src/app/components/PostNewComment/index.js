@@ -39,7 +39,9 @@ function PostNewComment({ postId }) {
         <Button
           onClick={PostComment}
           buttonStyle={
-            comment ? 'btn--white--solid' : 'btn--white--solid--required'
+            comment
+              ? 'btn--secondary--solid'
+              : 'btn--secondary--solid--required'
           }
         >
           Post

@@ -1,24 +1,23 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+@import '../../scss/functions';
+
 .PostHeader {
-  height: 75px;
-  // border-bottom: 1px solid var(--grey);
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
+  height: $post-header-height;
+  @include flex-content-items(row, flex-start, center);
+  @include border(bottom, 1px, solid, $primary-border-color);
   padding: 10px 5px;
-  background-color: var(--white);
   .PostAvatar {
-    display: flex;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
+    @include flex-content();
+    width: avatar-size(small);
+    height: avatar-size(small);
     margin: 0px 10px;
   }
   .PostUser {
-    font-weight: 600;
+    @include font-username(large);
   }
   .Options {
-    display: flex;
-    justify-content: center;
+    @include flex-content-items();
     padding: 10px;
     cursor: pointer;
     &:last-child {
@@ -26,10 +25,6 @@
     }
   }
   img {
-    border-radius: 50%;
-    height: 32px;
-    width: 32px;
-    object-fit: cover;
-    border: 1px solid var(--grey);
+    @include avatar(small, $primary-border-color, circle);
   }
 }

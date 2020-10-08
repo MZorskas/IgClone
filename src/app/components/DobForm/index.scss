@@ -1,50 +1,42 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+@import '../../scss/functions';
+
 .DateOfBirthFormBox {
-  width: 350px;
-  height: 380px;
-  background-color: var(--white);
-  justify-content: center;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 10px;
-  border: 1px solid var(--grey);
+  width: $auth-form-width;
+  height: $auth-form-height;
+  background-color: $primary-paper-color;
+  @include flex-content-items(column);
+  @include border-default($primary-border-color);
   text-align: center;
   h3 {
-    font-size: 20px;
-    font-weight: 600;
+    @include font-primary-size-weight(larger, bold);
     margin: 10px;
   }
   h6 {
-    font-size: 14px;
-    font-weight: 400;
+    @include font-primary-size-weight();
   }
   span {
-    color: var(--blue);
-    font-size: 14px;
-    font-weight: 600;
+    @include font-primary-size-weight(regular, bold);
     margin: 10px;
     cursor: pointer;
   }
   .DateOfBirthForm {
-    justify-content: center;
-    display: flex;
-    flex-direction: column;
+    @include flex-content-items(column, center, stretch);
     margin: 0px 40px;
     .dateContainer {
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      @include flex-content-items();
       height: 80px;
-      margin: 6px 40px;
+      margin: 0px 40px;
       .dateSelect {
-        width: 60px;
-        background-color: var(--white);
-        border: 1px solid var(--grey);
-        height: 30px;
-        border-radius: 5px;
-        color: rgb(100, 100, 100);
+        background-color: $primary-paper-color;
+        @include border-default($primary-border-color);
+        height: 36px;
+        @include border-radius(radius(small));
+        color: $tertiary-font-color;
         margin: 5px;
         &:focus {
-          outline: 1px solid var(--blue);
+          outline: 1px solid $primary-color;
         }
       }
     }

@@ -1,11 +1,10 @@
-.SavedPostsContainer {
-  display: flex;
+@import '../../scss/variables';
+@import '../../scss/mixins';
+@import '../../scss/functions';
 
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+.SavedPostsContainer {
+  @include flex-content-items(column, center, center);
   width: 100%;
-  //   background-color: var(--blue);
   h4 {
     padding: 10px;
   }

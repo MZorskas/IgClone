@@ -1,41 +1,33 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+@import '../../scss/functions';
+
 .ProfileHeader {
-  box-sizing: border-box;
-  width: 935px;
-  height: 160px;
-  // border: 1px solid rgb(200, 200, 200);
-  display: flex;
-  flex-direction: row;
+  width: $page-container-width;
+  height: $profile-header-height;
+  @include flex();
   margin-bottom: 40px;
   .ProfileUser {
-    display: flex;
-    height: 100%;
-    width: 100%;
+    @include flex();
     .ProfileAvatarContainer {
-      box-sizing: border-box;
       width: 300px;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      // border-right: 1px solid rgb(200, 200, 200);
-      margin-right: 25px;
+      @include flex-content-items(row, center, flex-start);
+      margin-right: 40px;
       label {
-        height: 100%;
-        width: 150px;
+        height: $profile-header-height;
+        width: $profile-header-height;
         cursor: pointer;
       }
       img {
-        border-radius: 50%;
-        height: 150px;
-        width: 150px;
-        border: 1px solid var(--grey);
+        @include border-radius(circle);
+        height: $profile-header-height;
+        width: $profile-header-height;
+        @include border-default($primary-border-color);
         object-fit: cover;
       }
     }
     .ProfileInfo {
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
+      @include flex-content(column, flex-start);
     }
   }
 }

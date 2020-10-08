@@ -1,18 +1,16 @@
-.Feed {
-  display: flex;
-  flex-direction: column;
-  //   border: 1px solid var(--grey);
-  width: 67%;
+@import '../../scss/variables';
+@import '../../scss/mixins';
+@import '../../scss/functions';
+
+.FeedContainer {
+  @include flex(column);
+  min-width: 67%;
+  flex: 2;
   padding-right: 25px;
   .SuggestionsContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: space-around;
-    width: 100%;
-    border: 1px solid var(--grey);
+    @include flex-content-items(column, center, space-around);
+    @include box-shadow();
     margin-bottom: 45px;
-    height: 278px;
-    background-color: var(--white);
+    background-color: $primary-paper-color;
   }
 }

@@ -2,7 +2,6 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './index.scss';
 import { Link } from 'react-router-dom';
-import Loader from '../../images/Loader.svg';
 
 //Modules
 import authentication from '../../../authentication';
@@ -44,12 +43,15 @@ function UserCard({ userId, username, fullName, placeHolder, closeModal }) {
           activeUser._id
         ) ? (
         <>
-          <Button onClick={toggleUserFollow} buttonStyle="btn--white--outline">
+          <Button
+            onClick={toggleUserFollow}
+            buttonStyle="btn--secondary--outline"
+          >
             Following
           </Button>
         </>
       ) : (
-        <Button onClick={toggleUserFollow} buttonStyle="btn--blue--solid">
+        <Button onClick={toggleUserFollow} buttonStyle="btn--primary--solid">
           Follow
         </Button>
       )}

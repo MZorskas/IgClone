@@ -1,4 +1,10 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+@import '../../scss/functions';
+
 .PostBlock {
-  border: 1px solid var(--grey);
-  margin-bottom: 45px;
+  @include border-default($primary-border-color);
+  margin-bottom: 40px;
+  background-color: $primary-paper-color;
+  @include box-shadow();
 }

@@ -52,12 +52,15 @@ function UserBlock({
           activeUser._id
         ) ? (
         <>
-          <Button onClick={toggleUserFollow} buttonStyle="btn--white--outline">
+          <Button
+            onClick={toggleUserFollow}
+            buttonStyle="btn--secondary--outline"
+          >
             Following
           </Button>
         </>
       ) : (
-        <Button onClick={toggleUserFollow} buttonStyle="btn--blue--outline">
+        <Button onClick={toggleUserFollow} buttonStyle="btn--primary--outline">
           Follow
         </Button>
       )}

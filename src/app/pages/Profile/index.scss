@@ -1,14 +1,7 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+@import '../../scss/functions';
+
 .Profile {
-  display: flex;
-  flex-direction: column;
-  // border-left: 1px solid var(--grey);
-  // border-right: 1px solid var(--grey);
-  justify-content: flex-start;
-  align-items: center;
-  width: 975px;
-  height: 100%;
-  margin: auto;
-  padding: 40px 20px;
-  flex-grow: 1;
-  margin-top: 56px;
+  @include page-layout(column, flex-start, center, $header-height);
 }

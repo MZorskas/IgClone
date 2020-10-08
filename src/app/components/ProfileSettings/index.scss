@@ -1,20 +1,17 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+@import '../../scss/functions';
+
 .ProfileSettings {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
+  @include flex-content-items(row, flex-start, center);
   width: 100%;
   margin-bottom: 20px;
-
   .ProfileUsername {
-    font-weight: 300;
-    font-size: 28px;
-    line-height: 32px;
+    @include font-profile-username();
     margin-right: 20px;
   }
   a {
-    display: flex;
-    justify-content: center;
+    @include flex-content(row, center);
   }
   .Settings {
     cursor: pointer;

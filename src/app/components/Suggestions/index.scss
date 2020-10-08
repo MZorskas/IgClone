@@ -1,37 +1,15 @@
-// .Suggestions {
-//   .SuggestionsNavigation {
-//     display: flex;
-//     align-items: center;
-//     flex-direction: row;
-//     justify-content: space-between;
-//     .SuggestionsTitle {
-//       font-size: 14px;
-//       font-weight: 600;
-//       color: grey;
-//       padding: 0px 16px;
-//     }
-//     display: flex;
-//     flex-direction: column;
-//     //   border: 1px solid var(--grey);
-//     max-height: 400px;
-//   }
-// }
+@import '../../scss/variables';
+@import '../../scss/mixins';
+@import '../../scss/functions';
 
 .SuggestionsNavigation {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
+  @include flex-content-items(row, space-between, center);
   margin: 0px 16px;
   padding: 12px 0px;
   .SuggestionsTitle {
-    font-size: 14px;
-    font-weight: 600;
-    color: grey;
+    @include font-tertiary-size-weight(regular, bold);
   }
   a {
-    text-decoration: none;
-    color: var(--blue);
-    font-size: 14px;
+    @include font-custom-size-weight();
   }
 }

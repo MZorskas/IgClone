@@ -75,7 +75,7 @@ function HeaderSearch() {
       {display && searchInput !== '' && (
         <div className="autoCompleteContainer">
           {!loading && options.length === 0 ? (
-            <p style={{ color: 'grey', marginTop: '20px' }}>
+            <p style={{ color: 'grey', marginTop: '18px' }}>
               No results found.
             </p>
           ) : (

@@ -1,29 +1,19 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+@import '../../scss/functions';
+
 .Post {
-  display: flex;
-  flex-direction: column;
-  // border-left: 1px solid var(--grey);
-  // border-right: 1px solid var(--grey);
-  justify-content: flex-start;
-  align-items: center;
-  width: 975px;
-  height: 100%;
-  margin: auto;
-  padding: 40px 20px;
-  flex-grow: 1;
-  margin-top: 56px;
+  @include page-layout(row, flex-start, flex-start, $header-height);
   .PostContainer {
-    height: 600px;
-    //TEMP HEIGHT
-    display: flex;
-    // width: 816px;
-    width: 100%;
+    height: $post-single-height;
+    @include flex();
+    @include box-shadow();
     .PostInfoContainer {
-      background-color: var(--white);
-      min-width: 335px;
+      background-color: $primary-paper-color;
+      min-width: $post-single-width;
       height: 100%;
-      display: flex;
-      flex-direction: column;
-      border: 1px solid var(--grey);
+      @include flex(column);
+      @include border-default($primary-border-color);
     }
   }
 }

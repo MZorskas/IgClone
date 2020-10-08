@@ -59,7 +59,7 @@ function Feed() {
   }, [feed, currentPage]);
 
   return (
-    <div className="Feed">
+    <div className="FeedContainer">
       {posts &&
         posts.map((post, index) => {
           if (posts.length === index + 1) {

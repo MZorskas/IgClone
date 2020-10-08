@@ -1,6 +1,7 @@
 import React from 'react';
-
 import './index.scss';
+
+// Components
 import PostNavigation from '../PostNavigation';
 import PostHeader from '../PostHeader';
 import PostNewComment from '../PostNewComment';

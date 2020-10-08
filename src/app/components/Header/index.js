@@ -10,12 +10,10 @@ import {
 } from '../icons';
 import { useSelector, useDispatch } from 'react-redux';
 import logout from '../../images/logout.png';
+
 //Modules
 import authentication from '../../../authentication';
 import feed from '../../../feed';
-
-//image
-import UserAvatar from '../../images/user.png';
 
 //Components
 import Modal from '../../components/Modal';
@@ -101,12 +99,12 @@ function Header() {
             <>
               <Button
                 to={{ pathname: '/login', state: { referrer: location } }}
-                buttonStyle={'btn--blue--solid'}
+                buttonStyle={'btn--primary--solid'}
               >
                 Log In
               </Button>
 
-              <Button to={'/register'} buttonStyle={'btn--white--solid'}>
+              <Button to={'/register'} buttonStyle={'btn--secondary--solid'}>
                 Sign Up
               </Button>
             </>
@@ -117,14 +115,20 @@ function Header() {
               </Link>
               <a
                 className="NavIcon"
+                // tabindex="4"
+                href="javascript:;"
                 onClick={() => {
                   openNewPostModal();
                 }}
               >
                 <NewPost />
               </a>
-              <Modal post closeModal={closeNewPostModal} showModal={showModal}>
-                <h1>New Post</h1>
+              <Modal
+                post
+                title="New Post"
+                closeModal={closeNewPostModal}
+                showModal={showModal}
+              >
                 <div className="ImagePreview" id="ImagePreview">
                   {imagePreview ? (
                     <img
@@ -143,12 +147,16 @@ function Header() {
                   onChange={selectPicture}
                   ref={inputRef}
                 />
-                <Button buttonStyle={'btn--white--solid'} onClick={selectInput}>
+                <Button
+                  buttonStyle={'btn--secondary--solid'}
+                  onClick={selectInput}
+                >
                   Choose File
                 </Button>
                 <form className="NewPostForm">
                   <h4>Description</h4>
                   <textarea
+                    maxLength="150"
                     className="FormTextarea"
                     value={description}
                     onChange={selectDescription}
@@ -157,13 +165,13 @@ function Header() {
                 <div className=""></div>
                 <Button
                   onClick={handleCreatePost}
-                  buttonStyle={'btn--white--solid'}
+                  buttonStyle={'btn--secondary--solid'}
                   modal
                 >
                   Create Post
                 </Button>
                 <Button
-                  buttonStyle={'btn--white--solid'}
+                  buttonStyle={'btn--secondary--solid'}
                   onClick={closeNewPostModal}
                   modal
                 >
@@ -189,9 +197,8 @@ function Header() {
                   }
                   alt="userAvatar"
                   className={
-                    location.pathname === `/${username}`
-                      ? 'userAvatarNavbar userAvatarNavbar--active'
-                      : 'userAvatarNavbar'
+                    location.pathname === `/${username}` &&
+                    'userAvatarNavbarActive'
                   }
                   id="userAvatarNavbar"
                 />

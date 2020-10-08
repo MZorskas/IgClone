@@ -14,7 +14,6 @@ function Explore() {
       <div className="Explore">
         <Switch>
           <Route exact path="/explore">
-            <h1>EXPLORE</h1>
             <ExploreGallery />
           </Route>
           <Route exact path="/explore/people/suggested">

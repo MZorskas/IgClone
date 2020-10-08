@@ -12,6 +12,7 @@ import {
 
 //Components
 import Button from '../Button';
+import LinkBox from '../../components/LinkBox';
 
 function RegisterForm({ nextStep, setBody, body, error, handleSubmit }) {
   // RegisterForm state
@@ -169,14 +170,7 @@ function RegisterForm({ nextStep, setBody, body, error, handleSubmit }) {
           {validationError && <p style={{ color: 'red' }}>{validationError}</p>}
         </form>
       </div>
-      <div className="LinkBox">
-        <p>
-          Have an account?
-          <Link className="link" to="/login">
-            Log in
-          </Link>
-        </p>
-      </div>
+      <LinkBox />
     </React.Fragment>
   );
 }

@@ -1,0 +1,19 @@
+@import './resets';
+@import './variables';
+@import './mixins';
+
+.App {
+  @include flex(column);
+  width: 100%;
+  min-height: 100vh;
+  .Main {
+    // @include flex(column);
+    @include flex-content-items(column, center, center);
+    flex-grow: 1;
+    background-color: $primary-background-color;
+  }
+}
+
+// p {
+//   font-size: 14px;
+// }

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import './index.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import Loader from '../../images/Loader.svg';

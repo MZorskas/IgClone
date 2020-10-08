@@ -1,21 +1,7 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+@import '../../scss/functions';
+
 .Home {
-  display: flex;
-  flex-direction: row;
-  // border-left: 1px solid var(--grey);
-  // border-right: 1px solid var(--grey);
-  width: 975px;
-  height: 100%;
-  margin: auto;
-  flex-grow: 1;
-  background-color: var(--background);
-  padding: 30px 0px;
-  margin-top: 56px;
-  .ActiveUser {
-    width: 33%;
-    height: 100%;
-    // padding: 18px 0px;
-    position: -webkit-sticky;
-    position: sticky;
-    top: 86px;
-  }
+  @include page-layout(row, flex-start, flex-start, $header-height);
 }

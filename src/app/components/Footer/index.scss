@@ -1,6 +1,10 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+@import '../../scss/functions';
+
 .Footer {
-  height: 70px;
+  @include flex-content-items(row, center, flex-start);
+  height: $footer-height;
   width: 100%;
-  background-color: var(--background);
-  // border-top: 1px solid rgb(200, 200, 200);
+  background-color: $primary-background-color;
 }

@@ -13,7 +13,7 @@ function PageLayout({ children }) {
           location.pathname !== '/register' &&
           location.pathname !== '/register/email/' &&
           location.pathname !== '/register/phoneNumber/' && <Header />}
-        <main className="main">{children}</main>
+        <main className="Main">{children}</main>
         {location.pathname !== '/login' &&
           location.pathname !== '/register' &&
           location.pathname !== '/register/email/' &&

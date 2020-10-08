@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import './index.scss';
+import './scss/main.scss';
 import { Route, Switch } from 'react-router-dom';
 
 //Modules

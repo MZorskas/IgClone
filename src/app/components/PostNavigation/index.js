@@ -62,7 +62,7 @@ function PostNavigation({ postId }) {
       <div className="PostLikes">
         <Link to="/p/:postId" className="Likes">
           <span>{post.likeCount}</span>
-          {post.likeCount === 1 ? 'like' : 'likes'}
+          {post.likeCount === 1 ? ' like' : ' likes'}
         </Link>
       </div>
       <Date postId={postId} creationDate={post.creationDate} />

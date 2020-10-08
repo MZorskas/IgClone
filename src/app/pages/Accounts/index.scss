@@ -1,57 +1,42 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+@import '../../scss/functions';
+
 .Accounts {
-  display: flex;
-  flex-direction: column;
-  // border-left: 1px solid var(--grey);
-  // border-right: 1px solid var(--grey);
-  justify-content: flex-start;
-  align-items: center;
-  width: 975px;
-  height: 100%;
-  margin: auto;
-  padding: 40px 20px;
-  flex-grow: 1;
-  margin-top: 56px;
+  @include page-layout(column, flex-start, center, $header-height);
   .AccountsContainer {
-    border: 1px solid var(--grey);
-    width: 935px;
-    height: 750px;
     display: flex;
+    flex-grow: 1;
+    width: $page-container-width;
+    @include border-default($primary-border-color);
     .AccountsNavigation {
       width: 25%;
-      height: 100%;
-      border-right: 1px solid var(--grey);
+      @include border(right, 1px, solid, $primary-border-color);
       .NavigationList {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-        height: 100%;
-        overflow: auto;
         li {
           display: block;
           padding: 16px 16px 16px 30px;
-          text-decoration: none;
-          border-bottom: 1px solid var(--grey);
-          //   &:hover {
-          //     border-left: 2px solid var(--grey);
-          //     padding-left: 28px;
-          //   }
-
+          @include border(bottom, 1px, solid, $primary-border-color);
           a {
-            text-decoration: none;
-            font-size: 16px;
-            color: var(--black);
+            @include font-primary-size-weight();
           }
         }
+
         .active {
-          border-left: 3px solid var(--black);
+          @include border(left, 3px, solid, $primary-color);
           padding-left: 27px;
         }
       }
     }
+
     .AccountsInfo {
       width: 75%;
       height: 100%;
-      border-right: 1px solid var(--grey);
+      padding: 20px;
     }
   }
+}
+
+*:focus {
+  outline: 1px solid $primary-color;
 }

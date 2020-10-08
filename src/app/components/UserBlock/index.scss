@@ -1,42 +1,28 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+@import '../../scss/functions';
+
 .UserBlock {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
+  @include flex-content-items(row, flex-start, center);
   height: 63px;
   width: 100%;
-  //   border-bottom: 1px solid var(--grey);
   padding: 8px 16px;
   .AvatarContainer {
     margin-right: 12px;
     img {
-      border-radius: 50%;
-      height: 44px;
-      width: 44px;
-      border: 1px solid var(--grey);
-      object-fit: cover;
+      @include avatar(medium);
     }
   }
   .UserInfoContainer {
-    display: flex;
-    flex-direction: column;
-    height: auto;
-    align-items: flex-start;
+    @include flex-content-items(column, flex-start, flex-start);
     .UserUsername {
-      font-weight: 600;
-      font-size: 14px;
-      text-decoration: none;
-      color: var(--black);
+      @include font-username();
     }
     .UserFullName {
-      font-size: 14px;
-      color: grey;
+      @include font-tertiary-size-weight();
     }
   }
   Button {
     margin-left: auto;
   }
-}
-
-.UserBlockModal {
-  border-bottom: 1px solid var(--grey);
 }

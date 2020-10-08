@@ -53,7 +53,11 @@ function ProfileStats({ username }) {
           showModal={showFollowersModal}
         >
           <UsersContainer fetchFollowers closeModal={closeModal} />
-          <Button buttonStyle={'btn--white--solid'} onClick={closeModal} modal>
+          <Button
+            buttonStyle={'btn--secondary--solid'}
+            onClick={closeModal}
+            modal
+          >
             Cancel
           </Button>
         </Modal>
@@ -78,7 +82,11 @@ function ProfileStats({ username }) {
             />
             <Suggestions closeModal={closeModal} length="long" />
           </div>
-          <Button buttonStyle={'btn--white--solid'} onClick={closeModal} modal>
+          <Button
+            buttonStyle={'btn--secondary--solid'}
+            onClick={closeModal}
+            modal
+          >
             Cancel
           </Button>
         </Modal>

@@ -43,10 +43,10 @@ function Profile() {
 
   return (
     <React.Fragment>
-      <div className="Profile">
-        {!!error ? (
-          <NotFound />
-        ) : (
+      {!!error ? (
+        <NotFound />
+      ) : (
+        <div className="Profile">
           <>
             <ProfileHeader />
             <ProfileNavigation />
@@ -59,8 +59,8 @@ function Profile() {
               </Route>
             </Switch>
           </>
-        )}
-      </div>
+        </div>
+      )}
     </React.Fragment>
   );
 }

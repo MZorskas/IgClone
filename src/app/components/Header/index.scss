@@ -1,62 +1,42 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+@import '../../scss/functions';
+
 .Header {
   position: fixed;
-  height: 54px;
+  height: $header-height;
   width: 100%;
-  background-color: var(--white);
-  border-bottom: 1px solid rgb(200, 200, 200);
+  background-color: $primary-paper-color;
+  @include border(bottom, 1px, solid, $grey);
+  @include box-shadow();
+  @include flex-content-items(row, center, center);
   z-index: 2;
   .Navbar {
-    margin: auto;
-    // background-color: green;
-    max-width: 975px;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    //Temp
-    // border-left: 1px solid rgb(200, 200, 200);
-    // border-right: 1px solid rgb(200, 200, 200);
+    width: $page-container-width;
+    @include flex-content-items(row, space-between, center);
     .Logo {
-      text-decoration: none;
-      font-weight: 600;
-      color: var(--black);
-      margin: 0;
-      padding: 0;
-      font-size: 24px;
-      line-height: 100%;
+      @include font-primary-size-weight(huge, bold);
       &:focus {
-        outline: 1px solid var(--blue);
+        @include outline();
       }
     }
-
     .NavigationLinks {
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      @include flex-content-items();
       .NavIcon {
         margin-left: 20px;
-        height: 24px;
-        width: 24px;
-        cursor: pointer;
-      }
-      .NavIcon--active {
-        margin-left: 20px;
-        height: 24px;
-        width: 24px;
+        @include icon(medium);
       }
     }
   }
 }
 
 #userAvatarNavbar {
-  box-sizing: border-box;
-  height: 24px;
-  width: 24px;
-  border-radius: 50%;
+  @include icon-size-properties(medium);
+  @include border-radius(circle);
   cursor: pointer;
   object-fit: cover;
 }
 
-.userAvatarNavbar--active {
-  border: 1px solid rgba(19, 19, 19, 0.856);
+.userAvatarNavbarActive {
+  @include border-default($primary-border-color);
 }

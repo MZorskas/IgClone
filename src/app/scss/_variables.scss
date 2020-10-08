@@ -1,0 +1,114 @@
+//Colors#c8c8c8
+$grey: #c8c8c8;
+$white: #fafafa;
+$black: #000000;
+$dark-grey: #585858;
+$danger: #d22f27;
+$success: #00c800;
+
+$primary-color: #0095f6;
+$primary-paper-color: #fafafa;
+$primary-background-color: #ebebeb;
+$primary-border-color: $grey;
+$secondary-border-color: $black;
+$primary-font-color: $black;
+$secondary-font-color: $white;
+// $tertiary-font-color: #8a8a8a;
+$tertiary-font-color: #646464;
+// $secondaryColor: #f7ce68;
+// $secondaryPaperColor: #333;
+// $secondaryBackgroundColor: #121212;
+
+//Borders
+$border-default-radius: (
+  'small': 4px,
+  'medium': 8px,
+  'large': 12px,
+  'circle': 50%,
+);
+
+$font-weights: (
+  'light': 300,
+  'regular': 400,
+  'medium': 500,
+  'bold': 600,
+);
+
+$btn-paddings: (
+  'small': 5px 9px,
+  'medium': 5px 18px,
+  'large': 5px 27px,
+);
+
+$font-sizes: (
+  'tiny': 10px,
+  'small': 12px,
+  'regular': 14px,
+  'large': 16px,
+  'larger': 20px,
+  'huge': 24px,
+);
+
+$avatar-sizes: (
+  'small': 32px,
+  'medium': 44px,
+  'large': 54px,
+);
+
+$icon-sizes: (
+  'small': 12px,
+  'medium': 24px,
+  'large': 36px,
+);
+
+//Common
+$page-container-width: 975px;
+$gallery-container-width: 935px;
+
+//Header
+$header-height: 56px;
+$header-nav-container-width: $page-container-width;
+
+//Footer
+$footer-height: 70px;
+$footer-nav-container-width: $page-container-width;
+
+//Posts
+$post-container-width: $page-container-width;
+$post-single-height: 600px;
+$post-single-width: 335px;
+$post-block-max-height: 600px;
+$post-header-height: 75px;
+$post-navigation-height: 90px;
+$post-new-comment-height: 55px;
+$post-comments-container-height: (
+  'block': 180px,
+  'single': $post-single-height - $post-header-height - $post-navigation-height -
+    $post-new-comment-height,
+);
+
+//Search
+$search-container-width: 250px;
+$search-container-max-height: 272px;
+$search-container-min-height: 55px;
+
+//Auth forms
+$auth-form-width: 350px;
+$auth-form-height: 380px;
+$auth-form-margin: 10px;
+$auth-link-box-height: 70px;
+$auth-form-input-heigth: 36px;
+$auth-form-padding: 0 40px;
+
+//Edit bio forms
+$edit-form-height: 380px;
+$edit-form-margin: 10px;
+$edit-form-input-height: 36px;
+$edit-field-value-width: 250px;
+
+//Profile
+$profile-navigation-height: 50px;
+$profile-header-height: 160px;
+
+//Modal
+$modal-width: 400px;

@@ -1,38 +1,25 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+@import '../../scss/functions';
+
 .EmailFormBox {
-  width: 350px;
-  height: 380px;
-  background-color: var(--white);
-  justify-content: center;
-  display: flex;
-  flex-direction: column;
+  width: $auth-form-width;
+  height: $auth-form-height;
+  background-color: $white;
+  @include flex-content-items(column, center, stretch);
   margin-bottom: 10px;
-  border: 1px solid var(--grey);
+  @include border-default($grey);
   text-align: center;
   h3 {
-    font-size: 20px;
-    font-weight: 600;
+    @include font-primary-size-weight(larger, bold);
     margin: 0px 40px;
     padding-bottom: 40px;
   }
   .EmailForm {
-    justify-content: center;
-    display: flex;
-    flex-direction: column;
+    @include flex-content-items(column, center, stretch);
     margin: 0px 40px;
     input {
-      background-color: rgba(232, 230, 230, 0.3);
-      border: 1px solid var(--grey);
-      border-radius: 4px;
-      margin-bottom: 6px;
-      height: 36px;
-      transition: border-color 0.5s ease-out;
-      padding-left: 10px;
-      &:focus {
-        outline: 1px solid var(--blue);
-      }
-    }
-    p {
-      padding-top: 20px;
+      @include form-input();
     }
   }
 }
